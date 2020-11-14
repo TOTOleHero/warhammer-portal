@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GameSystem index{% endblock %}
+
+{% block body %}
+    <h1>GameSystem index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for game_system in game_systems %}
+            <tr>
+                <td>{{ game_system.id }}</td>
+                <td>{{ game_system.name }}</td>
+                <td>{{ game_system.code }}</td>
+                <td>
+                    <a href="{{ path('game_system_show', {'id': game_system.id}) }}">show</a>
+                    <a href="{{ path('game_system_edit', {'id': game_system.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('game_system_new') }}">Create new</a>
+{% endblock %}

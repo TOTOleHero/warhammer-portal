@@ -4,7 +4,8 @@ namespace App\Entity;
 
 use App\Repository\OptionRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
+use Symfony\Component\Uid\Uuid;
 /**
  * @ORM\Entity(repositoryClass=OptionRepository::class)
  * @ORM\Table(name="`option`")
@@ -13,8 +14,9 @@ class Option
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
      */
     private $id;
 
@@ -24,7 +26,7 @@ class Option
      */
     private $type;
 
-    public function getId(): ?int
+    public function getId(): ?Uuid
     {
         return $this->id;
     }
