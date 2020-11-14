@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\GameSystem;
-use App\Form\GameSystem1Type;
+use App\Form\GameSystemType;
 use App\Repository\GameSystemRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,11 +43,12 @@ class GameSystemController extends AbstractFOSRestController
     public function new(Request $request): Response
     {
         $gameSystem = new GameSystem();
-        $form = $this->createForm(GameSystem1Type::class, $gameSystem);
+        $form = $this->createForm(GameSystemType::class, $gameSystem);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
             $entityManager->persist($gameSystem);
             $entityManager->flush();
 
@@ -88,7 +89,7 @@ class GameSystemController extends AbstractFOSRestController
      */
     public function edit(Request $request, GameSystem $gameSystem): Response
     {
-        $form = $this->createForm(GameSystem1Type::class, $gameSystem);
+        $form = $this->createForm(GameSystemType::class, $gameSystem);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

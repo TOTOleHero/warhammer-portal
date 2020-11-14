@@ -1,9 +1,14 @@
 # This file is the entry point to configure your own services.
 # Files in the packages/ subdirectory configure your dependencies.
 
+imports:
+    - { resource: doctrine_extensions.yaml }
+
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    # array/collection parameters
+    app.supported_locales: ['en', 'es', 'fr']
 
 services:
     # default configuration for services in *this* file
@@ -29,3 +34,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # App\EventSubscriber\UserLocaleSubscriber:
+    #     arguments: ['%kernel.default_locale%']
+    #     # uncomment the next line if you are not using autoconfigure
+    #     # tags: [kernel.event_subscriber]
+
+    # App\EventSubscriber\LocaleSubscriber:
+    #     arguments: ['%kernel.default_locale%']
+    #     # uncomment the next line if you are not using autoconfigure
+    #     # tags: [kernel.event_subscriber]
+        

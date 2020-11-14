@@ -1,4 +1,7 @@
 {
+    "behat/transliterator": {
+        "version": "v1.3.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
@@ -92,6 +95,9 @@
         "files": [
             "config/packages/fos_rest.yaml"
         ]
+    },
+    "gedmo/doctrine-extensions": {
+        "version": "v3.0.0"
     },
     "jms/metadata": {
         "version": "2.3.0"
@@ -539,6 +545,21 @@
     },
     "webmozart/assert": {
         "version": "1.9.1"
+    },
+    "willdurand/hateoas": {
+        "version": "3.6.0"
+    },
+    "willdurand/hateoas-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "34df072c6edaa61ae19afb2f3a239f272fecab87"
+        },
+        "files": [
+            "config/packages/bazinga_hateoas.yaml"
+        ]
     },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"

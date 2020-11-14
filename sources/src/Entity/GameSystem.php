@@ -6,11 +6,23 @@ use App\Repository\GameSystemRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
+use Hateoas\Configuration\Annotation as Hateoas;
+
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
+ * @Gedmo\TranslationEntity(class="App\Entity\GameSystemTranslation")
  * @ORM\Entity(repositoryClass=GameSystemRepository::class)
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_game_system_show",
+ *          parameters = { "id" = "expr(object.getId())" }
+ *      )
+ * )
  */
-class GameSystem
+class GameSystem implements Translatable
 {
     /**
      * @ORM\Id
@@ -21,6 +33,7 @@ class GameSystem
     private $id;
 
     /**
+     * @Gedmo\Translatable      
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -29,6 +42,27 @@ class GameSystem
      * @ORM\Column(type="string", length=255)
      */
     private $code;
+
+
+    /**
+     * Post locale
+     * Used locale to override Translation listener's locale
+     *
+     * @Gedmo\Locale
+     */
+    protected $locale;
+
+    /**
+     * Sets translatable locale
+     *
+     * @param string $locale
+     */
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
 
     public function getId(): ?Uuid
     {
