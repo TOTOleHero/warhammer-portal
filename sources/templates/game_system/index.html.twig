@@ -10,7 +10,6 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Code</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,7 +18,6 @@
             <tr>
                 <td>{{ game_system.id }}</td>
                 <td>{{ game_system.name }}</td>
-                <td>{{ game_system.code }}</td>
                 <td>
                     <a href="{{ path('game_system_show', {'id': game_system.id}) }}">show</a>
                     <a href="{{ path('game_system_edit', {'id': game_system.id}) }}">edit</a>

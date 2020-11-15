@@ -4,8 +4,7 @@ namespace App\Entity;
 
 use App\Repository\GameSystemRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
-use Symfony\Component\Uid\Uuid;
+
 use Hateoas\Configuration\Annotation as Hateoas;
 
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -24,13 +23,6 @@ use Gedmo\Translatable\Translatable;
  */
 class GameSystem implements Translatable
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
-     */
-    private $id;
 
     /**
      * @Gedmo\Translatable      
@@ -39,9 +31,11 @@ class GameSystem implements Translatable
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $code;
+    private $id;
 
 
     /**
@@ -64,11 +58,6 @@ class GameSystem implements Translatable
         return $this;
     }
 
-    public function getId(): ?Uuid
-    {
-        return $this->id;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
@@ -81,14 +70,14 @@ class GameSystem implements Translatable
         return $this;
     }
 
-    public function getCode(): ?string
+    public function getId(): ?string
     {
-        return $this->code;
+        return $this->id;
     }
 
-    public function setCode(string $code): self
+    public function setId(string $id): self
     {
-        $this->code = $code;
+        $this->id = $id;
 
         return $this;
     }

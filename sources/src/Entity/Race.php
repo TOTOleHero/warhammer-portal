@@ -6,45 +6,81 @@ use App\Repository\RaceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
-use Symfony\Component\Uid\Uuid;
+use Hateoas\Configuration\Annotation as Hateoas;
+
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+
 /**
  * @ORM\Entity(repositoryClass=RaceRepository::class)
+ * @Gedmo\TranslationEntity(class="App\Entity\RaceTranslation")
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_race_show",
+ *          parameters = { "id" = "expr(object.getId())" }
+ *      )
+ * )
+* @Hateoas\Relation(
+ *      "allRace",
+ *      href = @Hateoas\Route(
+ *          "api_race_index"
+ *      )
+ * )
  */
 class Race
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
-     */
-    private $id;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
+ 
     /**
-     * @ORM\OneToMany(targetEntity=Unit::class, mappedBy="race")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $units;
+    private $id;
+
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * Post locale
+     * Used locale to override Translation listener's locale
+     *
+     * @Gedmo\Locale
      */
-    private $code;
+    protected $locale;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Nation::class, mappedBy="race")
+     */
+    private $nations;
+
+    /**
+     * Sets translatable locale
+     *
+     * @param string $locale
+     */
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+
+    public function __toString()
+    {
+        return $this->getId() . ' - '.$this->getName();
+    }
 
     public function __construct()
     {
         $this->units = new ArrayCollection();
+        $this->nations = new ArrayCollection();
     }
 
-    public function getId(): ?Uuid
-    {
-        return $this->id;
-    }
 
     public function getName(): ?string
     {
@@ -58,44 +94,46 @@ class Race
         return $this;
     }
 
-    /**
-     * @return Collection|Unit[]
-     */
-    public function getUnits(): Collection
+
+
+    public function getId(): ?string
     {
-        return $this->units;
+        return $this->id;
     }
 
-    public function addUnit(Unit $unit): self
+    public function setId(string $id): self
     {
-        if (!$this->units->contains($unit)) {
-            $this->units[] = $unit;
-            $unit->setRace($this);
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Nation[]
+     */
+    public function getNations(): Collection
+    {
+        return $this->nations;
+    }
+
+    public function addNation(Nation $nation): self
+    {
+        if (!$this->nations->contains($nation)) {
+            $this->nations[] = $nation;
+            $nation->setRace($this);
         }
 
         return $this;
     }
 
-    public function removeUnit(Unit $unit): self
+    public function removeNation(Nation $nation): self
     {
-        if ($this->units->removeElement($unit)) {
+        if ($this->nations->removeElement($nation)) {
             // set the owning side to null (unless already changed)
-            if ($unit->getRace() === $this) {
-                $unit->setRace(null);
+            if ($nation->getRace() === $this) {
+                $nation->setRace(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(string $code): self
-    {
-        $this->code = $code;
 
         return $this;
     }

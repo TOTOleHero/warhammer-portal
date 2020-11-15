@@ -8,6 +8,8 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
 /**
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"profileWFB12" = "ProfileWFB12","profileWFB9" = "ProfileWFB9", "profileAOS4" = "PofileAOS4"})
  */
 class Profile
 {

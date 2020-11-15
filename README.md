@@ -12,5 +12,7 @@ GRANT ALL ON warhammer_portal.* TO 'warhammer_portal' IDENTIFIED BY 'warhammer_p
 
 
 
+## init
 
+bin/console doctrine:fixtures:load
 

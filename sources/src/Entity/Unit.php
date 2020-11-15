@@ -28,10 +28,10 @@ class Unit
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Race::class, inversedBy="units")
+     * @ORM\ManyToOne(targetEntity=Nation::class, inversedBy="units")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $race;
+    private $nation;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class)
@@ -72,14 +72,14 @@ class Unit
         return $this;
     }
 
-    public function getRace(): ?Race
+    public function getNation(): ?Nation
     {
-        return $this->race;
+        return $this->nation;
     }
 
-    public function setRace(?Race $race): self
+    public function setNation(?Nation $nation): self
     {
-        $this->race = $race;
+        $this->nation = $nation;
 
         return $this;
     }

@@ -38,10 +38,11 @@ class GameSystemController extends AbstractFOSRestController
 
 
     /**
-     * @Route("/game-system/new", name="game_system_new", methods={"GET","POST"})
+     * @Route("/contribute/game-system/new", name="game_system_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
+ 
         $gameSystem = new GameSystem();
         $form = $this->createForm(GameSystemType::class, $gameSystem);
         $form->handleRequest($request);
@@ -85,7 +86,7 @@ class GameSystemController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/game-system/{id}/edit", name="game_system_edit", methods={"GET","POST"})
+     * @Route("/contribute/game-system/{id}/edit", name="game_system_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, GameSystem $gameSystem): Response
     {
@@ -105,7 +106,7 @@ class GameSystemController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/game-system/{id}", name="game_system_delete", methods={"DELETE"})
+     * @Route("/contribute/game-system/{id}", name="game_system_delete", methods={"DELETE"})
      */
     public function delete(Request $request, GameSystem $gameSystem): Response
     {

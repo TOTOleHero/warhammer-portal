@@ -13,7 +13,8 @@ class GameSystemType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('code')
+            ->add('id')
+
         ;
     }
 
