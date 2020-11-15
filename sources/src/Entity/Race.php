@@ -52,10 +52,6 @@ class Race
      */
     protected $locale;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Nation::class, mappedBy="race")
-     */
-    private $nations;
 
     /**
      * Sets translatable locale
@@ -108,33 +104,5 @@ class Race
         return $this;
     }
 
-    /**
-     * @return Collection|Nation[]
-     */
-    public function getNations(): Collection
-    {
-        return $this->nations;
-    }
-
-    public function addNation(Nation $nation): self
-    {
-        if (!$this->nations->contains($nation)) {
-            $this->nations[] = $nation;
-            $nation->setRace($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNation(Nation $nation): self
-    {
-        if ($this->nations->removeElement($nation)) {
-            // set the owning side to null (unless already changed)
-            if ($nation->getRace() === $this) {
-                $nation->setRace(null);
-            }
-        }
-
-        return $this;
-    }
+  
 }

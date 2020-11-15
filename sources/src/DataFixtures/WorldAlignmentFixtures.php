@@ -4,35 +4,28 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\Race;
-use App\Entity\Nation;
 use App\Entity\WorldAlignment;
 
-class NationFixtures extends Fixture 
+class WorldAlignmentFixtures extends Fixture
 {
 
     protected $data = [
-        ['HIGH_ELVES','en','High elves'],
-        ['WOOD_ELVES','en','Wood elves'],
-        ['DARK_ELVES','en','Dark elves'],
-    ];
+        ['ORDER', 'en', 'Order'],
+        ['DESTRUCTION', 'en', 'Destruction'],
+        ['DEATH', 'en', 'Death'],
+        ['CHAOS', 'en', 'Chaos'],
+     ];
 
     public function load(ObjectManager $manager)
     {
-        
-        $worldAlignmentRepository = $manager->getRepository(WorldAlignment::class);
 
-
-        foreach ($this->data as $data)
-        {
-            $object = new Nation();
+        foreach ($this->data as $data) {
+            $object = new WorldAlignment();
             $object->setId($data[0]);
             $object->setTranslatableLocale($data[1]);
             $object->setName($data[2]);
-
             $manager->persist($object);
         }
         $manager->flush();
     }
-
 }

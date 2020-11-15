@@ -11,6 +11,12 @@ use Symfony\Component\Uid\Uuid;
  */
 class ProfileAOS4 extends Profile
 {
+
+
+    
+
+
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -30,6 +36,12 @@ class ProfileAOS4 extends Profile
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $save;
+
+
+    public function getProfileType(): ?string
+    {
+        return self::PROFILE_TYPE_AOS4;
+    }
 
     public function getMovement(): ?string
     {

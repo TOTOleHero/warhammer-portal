@@ -9,8 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 
-class ProfileController extends AbstractController
+class ProfileController extends AbstractFOSRestController
 {
     /**
      * @Route("/profile/", name="profile_index", methods={"GET"})
@@ -63,6 +64,18 @@ class ProfileController extends AbstractController
         return $this->render('profile/show.html.twig', [
             'profile' => $profile,
         ]);
+    }
+
+
+
+    /**
+     * @Route("/api/profile/{id}", name="api_profile_show", methods={"GET"})
+     */
+    public function apiShow(Profile $profile): Response
+    {
+        $view = $this->view($profile, 200);
+
+        return $this->handleView($view);
     }
 
     /**

@@ -72,6 +72,13 @@ class ProfileWFB12 extends Profile
      */
     private $willPower;
 
+
+    public function getProfileType(): ?string
+    {
+        return self::PROFILE_TYPE_WFB12;
+    }
+
+
     public function getMovement(): ?string
     {
         return $this->movement;

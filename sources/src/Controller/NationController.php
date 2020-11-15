@@ -10,7 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class NationController extends AbstractController
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+
+class NationController extends AbstractFOSRestController
 {
     /**
      * @Route("/nation/", name="nation_index", methods={"GET"})
@@ -71,7 +73,7 @@ class NationController extends AbstractController
      */
     public function apiShow(Nation $nation): Response
     {
-        $view = $this->view($race, 200);
+        $view = $this->view($nation, 200);
 
         return $this->handleView($view);
     }

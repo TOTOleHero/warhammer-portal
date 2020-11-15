@@ -51,12 +51,7 @@ class Nation
      */
     protected $locale;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Race::class, inversedBy="nations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $race;
-
+  
     /**
      * Sets translatable locale
      *
@@ -72,6 +67,10 @@ class Nation
     public function __construct()
     {
         $this->units = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->getId() . ' - '.$this->getName();
     }
 
     public function getId(): ?string
@@ -129,15 +128,5 @@ class Nation
         return $this;
     }
 
-    public function getRace(): ?Race
-    {
-        return $this->race;
-    }
 
-    public function setRace(?Race $race): self
-    {
-        $this->race = $race;
-
-        return $this;
-    }
 }

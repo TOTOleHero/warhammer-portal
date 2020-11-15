@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProfileType{% endblock %}
+
+{% block body %}
+    <h1>ProfileType</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ profile_type.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('profile_type_index') }}">back to list</a>
+
+    <a href="{{ path('profile_type_edit', {'id': profile_type.id}) }}">edit</a>
+
+    {{ include('profile_type/_delete_form.html.twig') }}
+{% endblock %}

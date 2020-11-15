@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProfileAOS4 index{% endblock %}
+
+{% block body %}
+    <h1>ProfileAOS4 index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Movement</th>
+                <th>Wounds</th>
+                <th>Bravery</th>
+                <th>Save</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for profile_aos4 in profile_aos4s|filter(p => p.profileType == 'profileAOS4') %}
+            <tr>
+                <td>{{ profile_aos4.id }}</td>
+                <td>{{ profile_aos4.movement }}</td>
+                <td>{{ profile_aos4.wounds }}</td>
+                <td>{{ profile_aos4.bravery }}</td>
+                <td>{{ profile_aos4.save }}</td>
+                <td>
+                    <a href="{{ path('profile_aos4_show', {'id': profile_aos4.id}) }}">show</a>
+                    <a href="{{ path('profile_aos4_edit', {'id': profile_aos4.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('profile_aos4_new') }}">Create new</a>
+{% endblock %}

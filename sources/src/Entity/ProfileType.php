@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProfileTypeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,11 +20,24 @@ class ProfileType
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity=GameSystem::class, mappedBy="profileType")
      */
-    private $name;
+    private $gameSystems;
 
-    public function getId(): ?int
+    public function __construct()
+    {
+        $this->gameSystems = new ArrayCollection();
+    }
+
+
+    public function __toString()
+    {
+        return  implode(',', $this->getGameSystems()->map(function ($gs) {
+            return $gs->getid();
+        })->toArray());
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -42,6 +57,36 @@ class ProfileType
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|GameSystem[]
+     */
+    public function getGameSystems(): Collection
+    {
+        return $this->gameSystems;
+    }
+
+    public function addGameSystem(GameSystem $gameSystem): self
+    {
+        if (!$this->gameSystems->contains($gameSystem)) {
+            $this->gameSystems[] = $gameSystem;
+            $gameSystem->setProfileType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGameSystem(GameSystem $gameSystem): self
+    {
+        if ($this->gameSystems->removeElement($gameSystem)) {
+            // set the owning side to null (unless already changed)
+            if ($gameSystem->getProfileType() === $this) {
+                $gameSystem->setProfileType(null);
+            }
+        }
 
         return $this;
     }

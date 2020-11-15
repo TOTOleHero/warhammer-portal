@@ -5,12 +5,12 @@ namespace App\Controller;
 use App\Entity\GameSystem;
 use App\Form\GameSystemType;
 use App\Repository\GameSystemRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
 
 class GameSystemController extends AbstractFOSRestController
 {
@@ -86,7 +86,7 @@ class GameSystemController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/contribute/game-system/{id}/edit", name="game_system_edit", methods={"GET","POST"})
+     * @Route("/game-system/{id}/edit", name="game_system_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, GameSystem $gameSystem): Response
     {

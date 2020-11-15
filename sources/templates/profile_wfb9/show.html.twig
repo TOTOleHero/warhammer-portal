@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProfileWFB9{% endblock %}
+
+{% block body %}
+    <h1>ProfileWFB9</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ profile_wfb9.id }}</td>
+            </tr>
+            <tr>
+                <th>Movement</th>
+                <td>{{ profile_wfb9.movement }}</td>
+            </tr>
+            <tr>
+                <th>WeaponSkill</th>
+                <td>{{ profile_wfb9.weaponSkill }}</td>
+            </tr>
+            <tr>
+                <th>BallisticSkill</th>
+                <td>{{ profile_wfb9.ballisticSkill }}</td>
+            </tr>
+            <tr>
+                <th>Strength</th>
+                <td>{{ profile_wfb9.strength }}</td>
+            </tr>
+            <tr>
+                <th>Toughness</th>
+                <td>{{ profile_wfb9.toughness }}</td>
+            </tr>
+            <tr>
+                <th>Wounds</th>
+                <td>{{ profile_wfb9.wounds }}</td>
+            </tr>
+            <tr>
+                <th>Initiative</th>
+                <td>{{ profile_wfb9.initiative }}</td>
+            </tr>
+            <tr>
+                <th>Attacks</th>
+                <td>{{ profile_wfb9.attacks }}</td>
+            </tr>
+            <tr>
+                <th>Leadership</th>
+                <td>{{ profile_wfb9.leadership }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('profile_wfb9_index') }}">back to list</a>
+
+    <a href="{{ path('profile_wfb9_edit', {'id': profile_wfb9.id}) }}">edit</a>
+
+    {{ include('profile_wfb9/_delete_form.html.twig') }}
+{% endblock %}

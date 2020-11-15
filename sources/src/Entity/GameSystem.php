@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GameSystemRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Hateoas\Configuration\Annotation as Hateoas;
@@ -47,6 +49,24 @@ class GameSystem implements Translatable
     protected $locale;
 
     /**
+     * @ORM\ManyToOne(targetEntity=ProfileType::class, inversedBy="gameSystems")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $profileType;
+
+
+
+    public function __construct()
+    {
+    }
+
+    public function __toString()
+    {
+        return $this->getId() . ' - ' . $this->getName();
+    }
+
+
+    /**
      * Sets translatable locale
      *
      * @param string $locale
@@ -78,6 +98,18 @@ class GameSystem implements Translatable
     public function setId(string $id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getProfileType(): ?ProfileType
+    {
+        return $this->profileType;
+    }
+
+    public function setProfileType(?ProfileType $profileType): self
+    {
+        $this->profileType = $profileType;
 
         return $this;
     }

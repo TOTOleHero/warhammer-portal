@@ -57,7 +57,10 @@ class ProfileWFB9 extends Profile
      */
     private $leadership;
 
- 
+    public function getProfileType(): ?string
+    {
+        return self::PROFILE_TYPE_WFB9;
+    }
 
     public function getMovement(): ?string
     {

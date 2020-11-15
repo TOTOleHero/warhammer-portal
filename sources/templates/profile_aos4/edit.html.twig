@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ProfileAOS4{% endblock %}
+
+{% block body %}
+    <h1>Edit ProfileAOS4</h1>
+
+    {{ include('profile_aos4/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('profile_aos4_index') }}">back to list</a>
+
+    {{ include('profile_aos4/_delete_form.html.twig') }}
+{% endblock %}

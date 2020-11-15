@@ -8,26 +8,50 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
+use JMS\Serializer\Annotation as JMS;
+use Hateoas\Configuration\Annotation as Hateoas;
+
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
+ * @Gedmo\TranslationEntity(class="App\Entity\UnitTranslation")
  * @ORM\Entity(repositoryClass=UnitRepository::class)
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_unit_show",
+ *          parameters = { "id" = "expr(object.getId())" }
+ *      )
+ * )
+  * @Hateoas\Relation(
+ *      "nation",
+ *      href = @Hateoas\Route(
+ *          "api_nation_show",
+ *          parameters = { "id" = "expr(object.getNation().getId())" }
+ *      )
+ * )
  */
 class Unit
 {
     /**
      * @ORM\Id
+     * @JMS\Type("string")
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
+
      */
     private $id;
 
     /**
+     * @Gedmo\Translatable 
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @JMS\Type("string")
      * @ORM\ManyToOne(targetEntity=Nation::class, inversedBy="units")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -53,6 +77,12 @@ class Unit
         $this->tags = new ArrayCollection();
         $this->profiles = new ArrayCollection();
         $this->options = new ArrayCollection();
+    }
+
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     public function getId(): ?Uuid
