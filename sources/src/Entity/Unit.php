@@ -48,7 +48,7 @@ class Unit
      * @Gedmo\Translatable 
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $baseName;
 
     /**
      * @JMS\Type("string")
@@ -82,7 +82,7 @@ class Unit
 
     public function __toString()
     {
-        return $this->getName();
+        return $this->getBaseName();
     }
 
     public function getId(): ?Uuid
@@ -90,14 +90,14 @@ class Unit
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getBaseName(): ?string
     {
-        return $this->name;
+        return $this->baseName;
     }
 
-    public function setName(string $name): self
+    public function setBaseName(string $baseName): self
     {
-        $this->name = $name;
+        $this->baseName = $baseName;
 
         return $this;
     }

@@ -1,0 +1,11 @@
+
+<div class="dropdown-menu">
+{% for race in races %}
+          <a class="dropdown-item" href="{{ path('race_show', {'id': race.id}) }}">{{ race.name }}</a>
+{#          <div class="dropdown-divider"></div> 
+          <a class="dropdown-item" href="#">Separated link</a>
+#}
+{% else %}
+    <a class="dropdown-item" href="#">No data</a>
+{% endfor %}          
+</div>

@@ -70,6 +70,11 @@ abstract class Profile
      */
     private $gameSystem;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
     abstract public function getProfileType(): ?string;
 
     public function getId(): ?Uuid
@@ -97,6 +102,18 @@ abstract class Profile
     public function setGameSystem(?GameSystem $gameSystem): self
     {
         $this->gameSystem = $gameSystem;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

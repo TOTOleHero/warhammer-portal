@@ -16,8 +16,22 @@ class RaceController extends AbstractFOSRestController
     /**
      * @Route("/race/", name="race_index", methods={"GET"})
      */
-    public function index(RaceRepository $raceRepository): Response
+    public function index(RaceRepository $raceRepository,Request $request,$embedType = false): Response
     {
+        if($embedType == "groupListContainer")
+        {
+            return $this->render('race/list_group.html.twig', [
+                'races' => $raceRepository->findAll(),
+            ]);
+        }
+
+        if($embedType == "dropdownList")
+        {
+            return $this->render('race/dropdown.html.twig', [
+                'races' => $raceRepository->findAll(),
+            ]);
+        }
+
         return $this->render('race/index.html.twig', [
             'races' => $raceRepository->findAll(),
         ]);

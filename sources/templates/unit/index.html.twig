@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>base_name</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -17,7 +17,7 @@
         {% for unit in units %}
             <tr>
                 <td>{{ unit.id }}</td>
-                <td>{{ unit.name }}</td>
+                <td>{{ unit.base_name }}</td>
                 <td>
                     <a href="{{ path('unit_show', {'id': unit.id}) }}">show</a>
                     <a href="{{ path('unit_edit', {'id': unit.id}) }}">edit</a>
