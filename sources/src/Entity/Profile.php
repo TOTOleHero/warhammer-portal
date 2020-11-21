@@ -15,7 +15,10 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * @ORM\InheritanceType("JOINED")
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"profileWFB12" = "ProfileWFB12","profileWFB9" = "ProfileWFB9", "profileAOS4" = "ProfileAOS4"})
+ * @ORM\DiscriminatorMap({"profileWFB12" = "ProfileWFB12",
+ *                          "profileWFB9" = "ProfileWFB9", 
+ *                          "profileAOS4" = "ProfileAOS4",
+ *                          "profileWHQ" = "ProfileWHQ"})
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -44,6 +47,8 @@ abstract class Profile
     protected const PROFILE_TYPE_WFB12 = "profileWFB12";
     protected const PROFILE_TYPE_WFB9 = "profileWFB9";
     protected const PROFILE_TYPE_AOS4 = "profileAOS4";
+    protected const PROFILE_TYPE_WHQ = "profileWHQ";
+    
 
 
     /**

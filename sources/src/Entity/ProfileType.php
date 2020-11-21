@@ -24,6 +24,11 @@ class ProfileType
      */
     private $gameSystems;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $profileClassName;
+
     public function __construct()
     {
         $this->gameSystems = new ArrayCollection();
@@ -87,6 +92,18 @@ class ProfileType
                 $gameSystem->setProfileType(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProfileClassName(): ?string
+    {
+        return $this->profileClassName;
+    }
+
+    public function setProfileClassName(string $profileClassName): self
+    {
+        $this->profileClassName = $profileClassName;
 
         return $this;
     }

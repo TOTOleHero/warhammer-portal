@@ -17,9 +17,31 @@ class GameSystemController extends AbstractFOSRestController
     /**
      * @Route("/game-system/", name="game_system_index", methods={"GET"})
      */
-    public function index(GameSystemRepository $gameSystemRepository): Response
+    public function index(GameSystemRepository $gameSystemRepository,$embedType = false): Response
     {
-        return $this->render('game_system/index.html.twig', [
+        
+        $templateBase = 'game_system/';
+        $template = 'index.html.twig';  
+        switch($embedType)
+        {
+            case 'groupListContainer' :
+                $template ='list_group.html.twig';
+                break;  
+            case 'dropdownList' :
+                $template ='dropdown.html.twig';
+                break;
+            case false:
+                break;  
+            default:
+                return $this->render('embedTypeNotFound.html.twig', [
+                    'embedType' => $embedType,
+                    'method' => __METHOD__,
+                    'class' => __CLASS__,
+
+                ]);
+        }
+
+        return $this->render($templateBase.$template, [
             'game_systems' => $gameSystemRepository->findAll(),
         ]);
     }

@@ -13,8 +13,27 @@
             </tr>
             <tr>
                 <th>base_name</th>
-                <td>{{ unit.base_name }}</td>
+                <td>{{ unit.baseName }}</td>
             </tr>
+
+          
+            {% for gameSystem,profiles in unit.profilesByGameSystems %}
+                <tr>
+                     <td colspan="2">
+                        {{ gameSystem }}
+                    </td>
+                </tr>
+                {% for profile in profiles %}
+                <tr> 
+                    <td colspan="2">
+                        {% if  profile.profileType == 'profileWFB9'%}
+                                {% include 'profile_wfb9/line.html.twig' with {'profile_wfb9': profile}  %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            {% endfor %}
+           
         </tbody>
     </table>
 

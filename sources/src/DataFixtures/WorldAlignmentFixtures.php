@@ -10,10 +10,10 @@ class WorldAlignmentFixtures extends Fixture
 {
 
     protected $data = [
-        ['ORDER', 'en', 'Order'],
-        ['DESTRUCTION', 'en', 'Destruction'],
-        ['DEATH', 'en', 'Death'],
-        ['CHAOS', 'en', 'Chaos'],
+        ['ORDER','en_US', 'Order'],
+        ['DESTRUCTION','en_US', 'Destruction'],
+        ['DEATH','en_US', 'Death'],
+        ['CHAOS','en_US', 'Chaos'],
      ];
 
     public function load(ObjectManager $manager)
@@ -22,7 +22,7 @@ class WorldAlignmentFixtures extends Fixture
         foreach ($this->data as $data) {
             $object = new WorldAlignment();
             $object->setId($data[0]);
-            $object->setTranslatableLocale($data[1]);
+
             $object->setName($data[2]);
             $manager->persist($object);
         }

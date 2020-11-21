@@ -1,0 +1,81 @@
+{% block body %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+ {#               <th>Id</th> #}
+               
+            
+                <th>Name</th>
+               
+            
+                <th>Movement</th>
+                
+            
+                <th>WeaponSkill</th>
+              
+            
+                <th>BallisticSkill</th>
+            
+            
+                <th>Strength</th>
+               
+            
+                <th>Toughness</th>
+               
+            
+                <th>Wounds</th>
+               
+            
+                <th>Initiative</th>
+                
+            
+                <th>Attacks</th>
+               
+            
+                <th>Leadership</th>
+                
+            </tr>
+
+
+
+
+<tr>
+                
+ {#               <td>{{ profile_wfb9.id }}</td> #}
+            
+                
+                <td>{{ profile_wfb9.name }}</td>
+            
+               
+                <td>{{ profile_wfb9.movement }}</td>
+            
+               
+                <td>{{ profile_wfb9.weaponSkill }}</td>
+            
+             
+                <td>{{ profile_wfb9.ballisticSkill }}</td>
+            
+              
+                <td>{{ profile_wfb9.strength }}</td>
+            
+               
+                <td>{{ profile_wfb9.toughness }}</td>
+            
+              
+                <td>{{ profile_wfb9.wounds }}</td>
+            
+              
+                <td>{{ profile_wfb9.initiative }}</td>
+            
+               
+                <td>{{ profile_wfb9.attacks }}</td>
+            
+               
+                <td>{{ profile_wfb9.leadership }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+{% endblock %}

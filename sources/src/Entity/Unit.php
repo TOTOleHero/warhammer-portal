@@ -63,6 +63,7 @@ class Unit
     private $tags;
 
     /**
+     * @var Collection|Profile[]
      * @ORM\OneToMany(targetEntity=Profile::class, mappedBy="unit", orphanRemoval=true)
      */
     private $profiles;
@@ -78,6 +79,31 @@ class Unit
         $this->profiles = new ArrayCollection();
         $this->options = new ArrayCollection();
     }
+
+
+    /**
+     * @return Collection|Profile[]
+     */
+    public function getProfilesByGameSystems(): array
+    {
+        $profilesByGameSystems = [];
+        foreach($this->profiles as $profile)
+        {
+           
+            $gameSystemId = $profile->getGameSystem()->getId();
+           
+            if( ! array_key_exists($gameSystemId,$profilesByGameSystems))
+            {
+                $profilesByGameSystems[$gameSystemId]=[];
+            }
+            $profilesByGameSystems[$gameSystemId][]=$profile;
+           
+        }
+     
+        return $profilesByGameSystems;
+        
+    }
+
 
 
     public function __toString()

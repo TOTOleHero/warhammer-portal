@@ -12,9 +12,9 @@ class NationFixtures extends Fixture
 {
 
     protected $data = [
-        ['HIGH_ELVES','en','High elves'],
-        ['WOOD_ELVES','en','Wood elves'],
-        ['DARK_ELVES','en','Dark elves'],
+        ['HIGH_ELVES','en_US','High elves'],
+        ['WOOD_ELVES','en_US','Wood elves'],
+        ['DARK_ELVES','en_US','Dark elves'],
     ];
 
     public function load(ObjectManager $manager)
@@ -27,7 +27,6 @@ class NationFixtures extends Fixture
         {
             $object = new Nation();
             $object->setId($data[0]);
-            $object->setTranslatableLocale($data[1]);
             $object->setName($data[2]);
 
             $manager->persist($object);

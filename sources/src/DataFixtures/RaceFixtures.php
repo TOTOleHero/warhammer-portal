@@ -10,9 +10,9 @@ class RaceFixtures extends Fixture
 {
 
     protected $data = [
-        ['ELVES','en','Elves'],
-        ['DWARFS','en','Dwarfs'],
-        ['HUMANS','en','Humans'],
+        ['ELVES','en_US','Elves'],
+        ['DWARFS','en_US','Dwarfs'],
+        ['HUMANS','en_US','Humans'],
     ];
 
     public function load(ObjectManager $manager)
@@ -22,7 +22,6 @@ class RaceFixtures extends Fixture
         {
             $object = new Race();
             $object->setId($data[0]);
-            $object->setTranslatableLocale($data[1]);
             $object->setName($data[2]);
             $manager->persist($object);
         }

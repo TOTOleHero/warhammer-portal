@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    {% for route in routesController %}
+    <div class="row">
+        <h1>{{ route }} :: groupListContainer</h1>
+        <div class="col-md-3">
+                {{ render(controller(
+                        route ~ '::index',
+                        { 'embedType': 'groupListContainer' }
+                    )) }}
+        </div>
+    </div>
+    <div class="row">
+        <h1>{{ route }} :: dropdownList</h1>
+        <div class="col-md-3">
+                {{ render(controller(
+                        route ~ '::index',
+                        { 'embedType': 'dropdownList' }
+                    )) }}
+        </div>
+    </div>
+    {% endfor %} 
+</div>
+
+{% endblock %}

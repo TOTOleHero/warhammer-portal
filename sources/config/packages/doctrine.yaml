@@ -20,6 +20,6 @@ doctrine:
                 is_bundle: false
                 type: annotation
                 alias: Gedmo
-                prefix: Gedmo\Translatable\Entity
+                prefix: 'Gedmo\Translatable\Entity'
                 # make sure vendor library location is correct
-                dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Translatable/Entity"
+                dir: '%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Translatable/Entity'

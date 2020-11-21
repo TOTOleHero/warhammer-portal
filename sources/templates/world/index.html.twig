@@ -1,26 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Unit index{% endblock %}
+{% block title %}World index{% endblock %}
 
 {% block body %}
-    <h1>Unit index</h1>
+    <h1>World index</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>base_name</th>
+                <th>Name</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for unit in units %}
+        {% for world in worlds %}
             <tr>
-                <td>{{ unit.id }}</td>
-                <td>{{ unit.baseName }}</td>
+                <td>{{ world.id }}</td>
+                <td>{{ world.name }}</td>
                 <td>
-                    <a href="{{ path('unit_show', {'id': unit.id}) }}">show</a>
-                    <a href="{{ path('unit_edit', {'id': unit.id}) }}">edit</a>
+                    <a href="{{ path('world_show', {'id': world.id}) }}">show</a>
+                    <a href="{{ path('world_edit', {'id': world.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('unit_new') }}">Create new</a>
+    <a href="{{ path('world_new') }}">Create new</a>
 {% endblock %}
