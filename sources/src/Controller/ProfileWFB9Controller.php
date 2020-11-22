@@ -14,17 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileWFB9Controller extends AbstractController
 {
     /**
-     * @Route("/profileWFB9/", name="profile_wfb9_index", methods={"GET"})
+     * @Route("/profileWFB9/", name="profileWFB9_index", methods={"GET"})
      */
     public function index(ProfileRepository $profileRepository): Response
     {
-        return $this->render('profile_wfb9/index.html.twig', [
-            'profile_wfb9s' => $profileRepository->findAll(),
+        return $this->render('profileWFB9/index.html.twig', [
+            'profileWFB9s' => $profileRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/profileWFB9/new", name="profile_wfb9_new", methods={"GET","POST"})
+     * @Route("/profileWFB9/new", name="profileWFB9_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -37,27 +37,27 @@ class ProfileWFB9Controller extends AbstractController
             $entityManager->persist($profileWFB9);
             $entityManager->flush();
 
-            return $this->redirectToRoute('profile_wfb9_index');
+            return $this->redirectToRoute('profileWFB9_index');
         }
 
-        return $this->render('profile_wfb9/new.html.twig', [
-            'profile_wfb9' => $profileWFB9,
+        return $this->render('profileWFB9/new.html.twig', [
+            'profileWFB9' => $profileWFB9,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/profileWFB9/{id}", name="profile_wfb9_show", methods={"GET"})
+     * @Route("/profileWFB9/{id}", name="profileWFB9_show", methods={"GET"})
      */
     public function show(ProfileWFB9 $profileWFB9): Response
     {
-        return $this->render('profile_wfb9/show.html.twig', [
-            'profile_wfb9' => $profileWFB9,
+        return $this->render('profileWFB9/show.html.twig', [
+            'profileWFB9' => $profileWFB9,
         ]);
     }
 
     /**
-     * @Route("/profileWFB9/{id}/edit", name="profile_wfb9_edit", methods={"GET","POST"})
+     * @Route("/profileWFB9/{id}/edit", name="profileWFB9_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, ProfileWFB9 $profileWFB9): Response
     {
@@ -67,17 +67,17 @@ class ProfileWFB9Controller extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('profile_wfb9_index');
+            return $this->redirectToRoute('profileWFB9_index');
         }
 
-        return $this->render('profile_wfb9/edit.html.twig', [
-            'profile_wfb9' => $profileWFB9,
+        return $this->render('profileWFB9/edit.html.twig', [
+            'profileWFB9' => $profileWFB9,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/profileWFB9/{id}", name="profile_wfb9_delete", methods={"DELETE"})
+     * @Route("/profileWFB9/{id}", name="profileWFB9_delete", methods={"DELETE"})
      */
     public function delete(Request $request, ProfileWFB9 $profileWFB9): Response
     {
@@ -87,6 +87,6 @@ class ProfileWFB9Controller extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('profile_wfb9_index');
+        return $this->redirectToRoute('profileWFB9_index');
     }
 }

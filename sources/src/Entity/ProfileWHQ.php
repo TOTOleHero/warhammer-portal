@@ -244,29 +244,7 @@ class ProfileWHQ extends Profile
         return $this;
     }
 
-    public function getLeadership(): ?string
-    {
-        return $this->leadership;
-    }
 
-    public function setLeadership(?string $leadership): self
-    {
-        $this->leadership = $leadership;
-
-        return $this;
-    }
-
-    public function getIntelligence(): ?string
-    {
-        return $this->intelligence;
-    }
-
-    public function setIntelligence(?string $intelligence): self
-    {
-        $this->intelligence = $intelligence;
-
-        return $this;
-    }
 
 
     public function getGold(): ?string
@@ -274,24 +252,14 @@ class ProfileWHQ extends Profile
         return $this->gold;
     }
 
-    public function setGoldl(?string $gold): self
+    public function setGold(?string $gold): self
     {
         $this->gold = $gold;
 
         return $this;
     }
 
-    public function getCool(): ?string
-    {
-        return $this->cool;
-    }
 
-    public function setCool(?string $cool): self
-    {
-        $this->cool = $cool;
-
-        return $this;
-    }
 
     public function getWillPower(): ?string
     {

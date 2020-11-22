@@ -13,7 +13,7 @@ class GameSystemFixtures extends Fixture implements DependentFixtureInterface
 {
 
     protected $data = [
-        ['WHQ','en_US', 'Warhammer Quest V1','profileWHQ'],
+        ['WHQV1','en_US', 'Warhammer Quest V1','profileWHQ'],
         ['WFBV3','en_US', 'Warhammer Fantasy Battle V3','profileWFB12'],
         ['WFBV4','en_US', 'Warhammer Fantasy Battle V4','profileWFB9'],
         ['WFBV5','en_US', 'Warhammer Fantasy Battle V5','profileWFB9'],
