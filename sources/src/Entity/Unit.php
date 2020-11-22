@@ -73,6 +73,11 @@ class Unit
      */
     private $options;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Race::class)
+     */
+    private $race;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -214,6 +219,18 @@ class Unit
     public function removeOption(Option $option): self
     {
         $this->options->removeElement($option);
+
+        return $this;
+    }
+
+    public function getRace(): ?Race
+    {
+        return $this->race;
+    }
+
+    public function setRace(?Race $race): self
+    {
+        $this->race = $race;
 
         return $this;
     }

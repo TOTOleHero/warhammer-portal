@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Race;
+use App\Entity\Unit;
 use App\Form\RaceType;
 use App\Repository\RaceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -83,8 +84,10 @@ class RaceController extends AbstractFOSRestController
      */
     public function show(Race $race): Response
     {
+        $unitRepository = $this->get('doctrine')->getRepository(Unit::class);
         return $this->render('race/show.html.twig', [
             'race' => $race,
+            'units' => $unitRepository->findByRace($race)
         ]);
     }
 

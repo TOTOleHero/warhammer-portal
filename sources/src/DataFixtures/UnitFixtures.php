@@ -7,6 +7,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\WorldAlignment;
 use App\Entity\Unit;
 use App\Entity\Nation;
+use App\Entity\Race;
 use App\Entity\GameSystem;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
@@ -23,6 +24,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
 
         'High elf warrior / citizen / militia' =>
         [
+            'race' => 'ELVES',
             'nation' => 'HIGH_ELVES',
             'profiles' => [
                 'WFBV3' =>
@@ -79,11 +81,13 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
 
         $gameSystemRepository = $manager->getRepository(GameSystem::class);
         $nationRepository = $manager->getRepository(Nation::class);
+        $raceRepository = $manager->getRepository(Race::class);
 
         foreach ($this->data as $unitName => $unitData) {
             $object = new Unit();
             $object->setBaseName($unitName);
             $object->setNation($nationRepository->find($unitData['nation']));
+            $object->setRace($raceRepository->find($unitData['race']));
             foreach ($unitData['profiles'] as $gameSystemCode => $profiles) {
 
 
@@ -99,9 +103,6 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
                     $profile = $this->createProfileByGameSystem($gameSystem, $profileData);
                     $manager->persist($profile);
                     $object->addProfile($profile);
-
-
-
                     $manager->persist($object);
                 }
             }
@@ -174,6 +175,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
         return array(
             GameSystemFixtures::class,
             NationFixtures::class,
+            RaceFixtures::class,
         );
     }
 }
