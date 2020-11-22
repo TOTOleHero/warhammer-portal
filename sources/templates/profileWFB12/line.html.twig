@@ -1,0 +1,44 @@
+{% block body %}
+
+{% if startTable is not defined or startTable  %}
+<table class="table">
+    <tbody>
+        <tr class="table-primary">
+            {# <th title="Id" ></th> #}
+            <th title="Name">Name</th>
+            <th title="Movement">M</th>
+            <th title="WeaponSkill">WS</th>
+            <th title="BallisticSkill">BS</th>
+            <th title="Strength">S</th>
+            <th title="Toughness">T</th>
+            <th title="Wounds">W</th>
+            <th title="Initiative">I</th>
+            <th title="Attacks">A</th>
+            <th title="Leadership">L</th>
+            <th title="Intelligence">I</th>
+            <th title="Cool">C</th>
+            <th title="WillPower">WP</th>
+        </tr>
+        {% endif %}
+        <tr>
+            {#<td>{{ profileWFB12.id }}</td> #}
+            <td scope="row" class="table-secondary">{{ profileWFB12.name }}</td>
+            <td>{{ profileWFB12.movement }}</td>
+            <td>{{ profileWFB12.weaponSkill }}</td>
+            <td>{{ profileWFB12.ballisticSkill }}</td>
+            <td>{{ profileWFB12.strength }}</td>
+            <td>{{ profileWFB12.toughness }}</td>
+            <td>{{ profileWFB12.wounds }}</td>
+            <td>{{ profileWFB12.initiative }}</td>
+            <td>{{ profileWFB12.attacks }}</td>
+            <td>{{ profileWFB12.leadership }}</td>
+            <td>{{ profileWFB12.intelligence }}</td>
+            <td>{{ profileWFB12.cool }}</td>
+            <td>{{ profileWFB12.willPower }}</td>
+
+        </tr>
+        {% if endTable is not defined or endTable  %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

@@ -92,7 +92,7 @@ class ProfileWHQ extends Profile
 
     public function getProfileType(): ?string
     {
-        return self::PROFILE_TYPE_WFB12;
+        return self::PROFILE_TYPE_WHQ;
     }
 
 

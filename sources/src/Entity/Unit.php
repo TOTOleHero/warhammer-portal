@@ -87,22 +87,39 @@ class Unit
 
 
     /**
-     * @return Collection|Profile[]
+     * @return Collection|GameSystem[]
      */
-    public function getProfilesByGameSystems(): array
+    public function getGameSystems(): array
     {
-        $profilesByGameSystems = [];
+        $gameSystems = [];
         foreach($this->profiles as $profile)
         {
            
             $gameSystemId = $profile->getGameSystem()->getId();
            
-            if( ! array_key_exists($gameSystemId,$profilesByGameSystems))
+            if( ! array_key_exists($gameSystemId,$gameSystems))
             {
-                $profilesByGameSystems[$gameSystemId]=[];
+                $gameSystems[$gameSystemId]=[];
             }
-            $profilesByGameSystems[$gameSystemId][]=$profile;
-           
+            $gameSystems[$gameSystemId]=$profile->getGameSystem();
+            ksort($gameSystems);
+        }
+     
+        return $gameSystems;
+        
+    }
+
+    /**
+     * @return Collection|Profile[]
+     */
+    public function getProfilesByGameSystems(): array
+    {
+        //flat gamesystem array
+        $profilesByGameSystems = array_map(function($value) { return []; },$this->getGameSystems());
+       
+        foreach($this->profiles as $profile)
+        {
+            $profilesByGameSystems[$profile->getGameSystem()->getId()][]=$profile;
         }
      
         return $profilesByGameSystems;

@@ -6,7 +6,11 @@
       <small>3 days ago</small>
     </div>
     <p class="mb-1">Description</p>
-    <small>Game system : </small>
+    <small>Game system : 
+    {% for gameSystem in unit.gameSystems %}
+      {% if not loop.first %}, {% endif %}{{ gameSystem.name }}
+    {% endfor %}
+    </small>
   </a>
 
 {% else %}

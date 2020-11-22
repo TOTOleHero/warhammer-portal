@@ -1,0 +1,65 @@
+{% block body %}
+
+
+{% if startTable is not defined or startTable %}
+<table class="table">
+    <tbody>
+        <tr class="table-primary">
+            {#               <th title="Id" ></th> #}
+
+
+            <th title="Name">Name</th>
+            <th title="BattleLevel">Level</th>
+            <th title="Gold">Gold</th>
+            <th title="Movement">M</th>
+            <th title="WeaponSkill">WS</th>
+            <th title="BallisticSkill">BS</th>
+            <th title="Strength">S</th>
+            <th title="DamageDice">DD</th>
+            <th title="Toughness">T</th>
+            <th title="Wounds">W</th>
+            <th title="Initiative">I</th>
+            <th title="Attacks">A</th>
+            <th title="Luck">L</th>
+            <th title="WillPower">WP</th>
+            <th title="Skills">S</th>
+            <th title="EscapePinning">P</th>
+
+
+
+        </tr>
+
+        {% endif %}
+
+
+        <tr>
+
+            {#               <td>{{ profileWHQ.id }}</td> #}
+
+
+
+
+            <td scope="row" class="table-secondary">{{ profileWHQ.name }}</td>
+            <td>{{ profileWHQ.battleLevel }}</td>
+            <td>{{ profileWHQ.gold }}</td>
+            <td>{{ profileWHQ.movement }}</td>
+            <td>{{ profileWHQ.weaponSkill }}</td>
+            <td>{{ profileWHQ.ballisticSkill }}</td>
+            <td>{{ profileWHQ.strength }}</td>
+            <td>{{ profileWHQ.damageDice }}</td>
+            <td>{{ profileWHQ.toughness }}</td>
+            <td>{{ profileWHQ.wounds }}</td>
+            <td>{{ profileWHQ.initiative }}</td>
+            <td>{{ profileWHQ.attacks }}</td>
+            <td>{{ profileWHQ.luck }}</td>
+            <td>{{ profileWHQ.willPower }}</td>
+            <td>{{ profileWHQ.skills }}</td>
+            <td>{{ profileWHQ.escapePinning }}</td>
+
+
+        </tr>
+        {% if endTable is not defined or endTable %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

@@ -1,81 +1,78 @@
 {% block body %}
 
-    <table class="table">
-        <tbody>
-            <tr>
- {#               <th>Id</th> #}
-               
-            
-                <th>Name</th>
-               
-            
-                <th>Movement</th>
-                
-            
-                <th>WeaponSkill</th>
-              
-            
-                <th>BallisticSkill</th>
-            
-            
-                <th>Strength</th>
-               
-            
-                <th>Toughness</th>
-               
-            
-                <th>Wounds</th>
-               
-            
-                <th>Initiative</th>
-                
-            
-                <th>Attacks</th>
-               
-            
-                <th>Leadership</th>
-                
-            </tr>
+{% if startTable is not defined or startTable %}
+<table class="table">
+    <tbody>
+        <tr class="table-primary">
+            {#<th title="Id" ></th> #}
+
+            <th title="Name">Name</th>
 
 
+            <th title="Movement">M</th>
 
 
-<tr>
-                
- {#               <td>{{ profileWFB9.id }}</td> #}
-            
-                
-                <td>{{ profileWFB9.name }}</td>
-            
-               
-                <td>{{ profileWFB9.movement }}</td>
-            
-               
-                <td>{{ profileWFB9.weaponSkill }}</td>
-            
-             
-                <td>{{ profileWFB9.ballisticSkill }}</td>
-            
-              
-                <td>{{ profileWFB9.strength }}</td>
-            
-               
-                <td>{{ profileWFB9.toughness }}</td>
-            
-              
-                <td>{{ profileWFB9.wounds }}</td>
-            
-              
-                <td>{{ profileWFB9.initiative }}</td>
-            
-               
-                <td>{{ profileWFB9.attacks }}</td>
-            
-               
-                <td>{{ profileWFB9.leadership }}</td>
-            </tr>
+            <th title="WeaponSkill">W</th>
 
-        </tbody>
-    </table>
 
+            <th title="BallisticSkill">BS</th>
+
+
+            <th title="Strength">S</th>
+
+
+            <th title="Toughness">T</th>
+
+
+            <th title="Wounds">W</th>
+
+
+            <th title="Initiative">I</th>
+
+
+            <th title="Attacks">A</th>
+
+
+            <th title="Leadership">L</th>
+
+        </tr>
+        {% endif %}
+        <tr>
+
+            {# <td>{{ profileWFB9.id }}</td> #}
+
+
+            <td scope="row" class="table-secondary">{{ profileWFB9.name }}</td>
+
+
+            <td>{{ profileWFB9.movement }}</td>
+
+
+            <td>{{ profileWFB9.weaponSkill }}</td>
+
+
+            <td>{{ profileWFB9.ballisticSkill }}</td>
+
+
+            <td>{{ profileWFB9.strength }}</td>
+
+
+            <td>{{ profileWFB9.toughness }}</td>
+
+
+            <td>{{ profileWFB9.wounds }}</td>
+
+
+            <td>{{ profileWFB9.initiative }}</td>
+
+
+            <td>{{ profileWFB9.attacks }}</td>
+
+
+            <td>{{ profileWFB9.leadership }}</td>
+        </tr>
+        {% if endTable is not defined or endTable  %}
+    </tbody>
+</table>
+{% endif %}
 {% endblock %}

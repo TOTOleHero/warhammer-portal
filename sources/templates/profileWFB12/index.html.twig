@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}profileWFB12 index{% endblock %}
+
+{% block body %}
+    <h1>profileWFB12 index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Movement</th>
+                <th>WeaponSkill</th>
+                <th>BallisticSkill</th>
+                <th>Strength</th>
+                <th>Toughness</th>
+                <th>Wounds</th>
+                <th>Initiative</th>
+                <th>Attacks</th>
+                <th>Leadership</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for profileWFB12 in profileWFB12s |filter(p => p.profileType == 'profileWFB12') %}
+            <tr>
+                <td>{{ profileWFB12.id }}</td>
+                <td>{{ profileWFB12.movement }}</td>
+                <td>{{ profileWFB12.weaponSkill }}</td>
+                <td>{{ profileWFB12.ballisticSkill }}</td>
+                <td>{{ profileWFB12.strength }}</td>
+                <td>{{ profileWFB12.toughness }}</td>
+                <td>{{ profileWFB12.wounds }}</td>
+                <td>{{ profileWFB12.initiative }}</td>
+                <td>{{ profileWFB12.attacks }}</td>
+                <td>{{ profileWFB12.leadership }}</td>
+                <td>
+                    <a href="{{ path('profileWFB12_show', {'id': profileWFB12.id}) }}">show</a>
+                    <a href="{{ path('profileWFB12_edit', {'id': profileWFB12.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('profileWFB12_new') }}">Create new</a>
+{% endblock %}
