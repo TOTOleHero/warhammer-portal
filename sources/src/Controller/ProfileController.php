@@ -5,11 +5,10 @@ namespace App\Controller;
 use App\Entity\Profile;
 use App\Form\ProfileType;
 use App\Repository\ProfileRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 
 class ProfileController extends AbstractFOSRestController
 {
@@ -31,7 +30,7 @@ class ProfileController extends AbstractFOSRestController
         $view = $this->view($profileRepository->findAll(), 200);
 
         return $this->handleView($view);
-    }    
+    }
 
     /**
      * @Route("/profile/new", name="profile_new", methods={"GET","POST"})
@@ -65,8 +64,6 @@ class ProfileController extends AbstractFOSRestController
             'profile' => $profile,
         ]);
     }
-
-
 
     /**
      * @Route("/api/profile/{id}", name="api_profile_show", methods={"GET"})

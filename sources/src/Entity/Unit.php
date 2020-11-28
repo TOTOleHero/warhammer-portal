@@ -3,16 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\UnitRepository;
+use App\Traits\TaggableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as JMS;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
-use JMS\Serializer\Annotation as JMS;
-use Hateoas\Configuration\Annotation as Hateoas;
-
-use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
 
 /**
  * @Gedmo\TranslationEntity(class="App\Entity\UnitTranslation")
@@ -24,7 +23,7 @@ use Gedmo\Translatable\Translatable;
  *          parameters = { "id" = "expr(object.getId())" }
  *      )
  * )
-  * @Hateoas\Relation(
+ * @Hateoas\Relation(
  *      "nation",
  *      href = @Hateoas\Route(
  *          "api_nation_show",
@@ -40,12 +39,11 @@ class Unit
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
-
      */
     private $id;
 
     /**
-     * @Gedmo\Translatable 
+     * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
      */
     private $baseName;
@@ -56,11 +54,6 @@ class Unit
      * @ORM\JoinColumn(nullable=false)
      */
     private $nation;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Tag::class)
-     */
-    private $tags;
 
     /**
      * @var Collection|Profile[]
@@ -78,13 +71,26 @@ class Unit
      */
     private $race;
 
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
+
     public function __construct()
     {
-        $this->tags = new ArrayCollection();
+        $this->__taggableTraitConstruct();
+
         $this->profiles = new ArrayCollection();
         $this->options = new ArrayCollection();
     }
 
+    public function getAllTags()
+    {
+        return array_merge(
+            $this->getTags()->toArray(),
+            $this->getRace()->getAllTags(),
+            $this->getNation()->getAllTags()
+        );
+    }
 
     /**
      * @return Collection|GameSystem[]
@@ -92,21 +98,17 @@ class Unit
     public function getGameSystems(): array
     {
         $gameSystems = [];
-        foreach($this->profiles as $profile)
-        {
-           
+        foreach ($this->profiles as $profile) {
             $gameSystemId = $profile->getGameSystem()->getId();
-           
-            if( ! array_key_exists($gameSystemId,$gameSystems))
-            {
-                $gameSystems[$gameSystemId]=[];
+
+            if (!array_key_exists($gameSystemId, $gameSystems)) {
+                $gameSystems[$gameSystemId] = [];
             }
-            $gameSystems[$gameSystemId]=$profile->getGameSystem();
+            $gameSystems[$gameSystemId] = $profile->getGameSystem();
             ksort($gameSystems);
         }
-     
+
         return $gameSystems;
-        
     }
 
     /**
@@ -115,18 +117,19 @@ class Unit
     public function getProfilesByGameSystems(): array
     {
         //flat gamesystem array
-        $profilesByGameSystems = array_map(function($value) { return []; },$this->getGameSystems());
-       
-        foreach($this->profiles as $profile)
-        {
-            $profilesByGameSystems[$profile->getGameSystem()->getId()][]=$profile;
+        $profilesByGameSystems = array_map(
+            function ($value) {
+                return [];
+            },
+            $this->getGameSystems()
+        );
+
+        foreach ($this->profiles as $profile) {
+            $profilesByGameSystems[$profile->getGameSystem()->getId()][] = $profile;
         }
-     
+
         return $profilesByGameSystems;
-        
     }
-
-
 
     public function __toString()
     {
@@ -158,30 +161,6 @@ class Unit
     public function setNation(?Nation $nation): self
     {
         $this->nation = $nation;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Tag[]
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(Tag $tag): self
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags[] = $tag;
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Tag $tag): self
-    {
-        $this->tags->removeElement($tag);
 
         return $this;
     }

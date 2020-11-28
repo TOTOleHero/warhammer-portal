@@ -1,0 +1,50 @@
+{% block body %}
+
+{% if startTable is not defined or startTable %}
+<table class="table">
+    <tbody>
+        <tr class="table-primary">
+            {#<th title="Id" ></th> #}
+
+            <th title="Name">Name</th>
+
+
+            <th title="Movement">M</th>
+            <th title="Wounds">W</th>
+
+
+         
+
+
+            <th title="Bravery">B</th>
+
+
+            <th title="Save">S</th>
+
+        </tr>
+        {% endif %}
+        <tr>
+
+            {# <td>{{ profileAOS4.id }}</td> #}
+
+
+            <td scope="row" class="table-secondary">{{ profileAOS4.name }}</td>
+
+
+            <td>{{ profileAOS4.movement }}</td>
+
+
+            <td>{{ profileAOS4.wounds }}</td>
+
+
+            <td>{{ profileAOS4.bravery }}</td>
+
+
+            <td>{{ profileAOS4.save }}</td>
+
+        </tr>
+        {% if endTable is not defined or endTable  %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

@@ -15,7 +15,10 @@
             <th>base_name</th>
             <td>{{ unit.baseName }}</td>
         </tr>
-
+        <tr>
+            <th>tags</th>
+            <td>{% for tag in unit.allTags %}{% if not loop.first %}, {% endif %}{{ tag }}{% endfor %}</td>
+        </tr>
 
         {% for gameSystem,profiles in unit.profilesByGameSystems %}
         <tr>
@@ -26,15 +29,21 @@
         <tr>
             <td colspan="2">
                 {% for profile in profiles %}
-                {% if  profile.profileType == 'profileWFB9'%}
-                    {% include 'profileWFB9/line.html.twig' with {'profileWFB9': profile,'startTable' :loop.first,'endTable' :loop.last }  %}
-                {% endif %}
-                {% if  profile.profileType == 'profileWFB12'%}
-                    {% include 'profileWFB12/line.html.twig' with {'profileWFB12': profile,'startTable' :loop.first,'endTable' :loop.last }  %}
-                {% endif %}
-                {% if  profile.profileType == 'profileWHQ'%}
-                    {% include 'profileWHQ/line.html.twig' with {'profileWHQ': profile,'startTable' :loop.first,'endTable' :loop.last }  %}
-                {% endif %}
+                    {% if  profile.profileType == 'profileWFB9'%}
+                        {% include 'profileWFB9/line.html.twig' with {'profileWFB9': profile,'startTable' :loop.first,'endTable' :loop.last }  %}
+                    {% endif %}
+                    {% if  profile.profileType == 'profileWFB12'%}
+                        {% include 'profileWFB12/line.html.twig' with {'profileWFB12': profile,'startTable' :loop.first,'endTable' :loop.last }  %}
+                    {% endif %}
+                    {% if  profile.profileType == 'profileWHQ'%}
+                        {% include 'profileWHQ/line.html.twig' with {'profileWHQ': profile,'startTable' :loop.first,'endTable' :loop.last }  %}
+                    {% endif %}
+                    {% if  profile.profileType == 'profileAOS4'%}
+                        {% include 'profileAOS4/line.html.twig' with {'profileAOS4': profile,'startTable' :loop.first,'endTable' :loop.last }  %}
+                    {% endif %}
+                    {% if  profile.profileType == 'profileT9A12'%}
+                        {% include 'profileT9A12/line.html.twig' with {'profileT9A12': profile,'startTable' :loop.first,'endTable' :loop.last }  %}
+                    {% endif %}
 
                 {% endfor %}
             </td>

@@ -3,12 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\GameSystemRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Traits\TaggableTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Hateoas\Configuration\Annotation as Hateoas;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * @Gedmo\TranslationEntity(class="App\Entity\GameSystemTranslation")
@@ -29,24 +28,22 @@ use Gedmo\Translatable\Translatable;
  */
 class GameSystem implements Translatable
 {
-
     /**
-     * @Gedmo\Translatable      
+     * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
-    /** 
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $id;
 
-
     /**
      * Post locale
-     * Used locale to override Translation listener's locale
+     * Used locale to override Translation listener's locale.
      *
      * @Gedmo\Locale
      */
@@ -63,28 +60,37 @@ class GameSystem implements Translatable
      */
     private $world;
 
-
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
 
     public function __construct()
     {
+        $this->__taggableTraitConstruct();
+    }
+
+    public function getAllTags()
+    {
+        return array_merge(
+            $this->getTags()->toArray(),
+        );
     }
 
     public function __toString()
     {
-        return $this->getId() . ' - ' . $this->getName();
+        return $this->getId().' - '.$this->getName();
     }
-
 
     public function newProfile()
     {
         $profileClassName = $this->getProfileType()->getProfileClassName();
+
         return (new $profileClassName())
             ->setGameSystem($this);
     }
 
-
     /**
-     * Sets translatable locale
+     * Sets translatable locale.
      *
      * @param string $locale
      */

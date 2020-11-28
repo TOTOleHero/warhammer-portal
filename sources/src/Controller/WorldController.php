@@ -5,14 +5,12 @@ namespace App\Controller;
 use App\Entity\World;
 use App\Form\WorldType;
 use App\Repository\WorldRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 
-
-class WorldController  extends AbstractFOSRestController
+class WorldController extends AbstractFOSRestController
 {
     /**
      * @Route("/world", name="world_index", methods={"GET"})
@@ -23,7 +21,6 @@ class WorldController  extends AbstractFOSRestController
             'worlds' => $worldRepository->findAll(),
         ]);
     }
-
 
     /**
      * @Route("/api/world", name="api_world_index", methods={"GET"})
@@ -76,7 +73,7 @@ class WorldController  extends AbstractFOSRestController
         $view = $this->view($world, 200);
 
         return $this->handleView($view);
-    }    
+    }
 
     /**
      * @Route("/world{id}/edit", name="world_edit", methods={"GET","POST"})

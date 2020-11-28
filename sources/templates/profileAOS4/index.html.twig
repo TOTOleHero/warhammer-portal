@@ -17,16 +17,16 @@
             </tr>
         </thead>
         <tbody>
-        {% for profile_aos4 in profile_aos4s|filter(p => p.profileType == 'profileAOS4') %}
+        {% for profileAOS4 in profileAOS4s|filter(p => p.profileType == 'profileAOS4') %}
             <tr>
-                <td>{{ profile_aos4.id }}</td>
-                <td>{{ profile_aos4.movement }}</td>
-                <td>{{ profile_aos4.wounds }}</td>
-                <td>{{ profile_aos4.bravery }}</td>
-                <td>{{ profile_aos4.save }}</td>
+                <td>{{ profileAOS4.id }}</td>
+                <td>{{ profileAOS4.movement }}</td>
+                <td>{{ profileAOS4.wounds }}</td>
+                <td>{{ profileAOS4.bravery }}</td>
+                <td>{{ profileAOS4.save }}</td>
                 <td>
-                    <a href="{{ path('profile_aos4_show', {'id': profile_aos4.id}) }}">show</a>
-                    <a href="{{ path('profile_aos4_edit', {'id': profile_aos4.id}) }}">edit</a>
+                    <a href="{{ path('profileAOS4_show', {'id': profileAOS4.id}) }}">show</a>
+                    <a href="{{ path('profileAOS4_edit', {'id': profileAOS4.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +37,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('profile_aos4_new') }}">Create new</a>
+    <a href="{{ path('profileAOS4_new') }}">Create new</a>
 {% endblock %}

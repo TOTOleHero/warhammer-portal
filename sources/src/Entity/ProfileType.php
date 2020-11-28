@@ -34,7 +34,6 @@ class ProfileType
         $this->gameSystems = new ArrayCollection();
     }
 
-
     public function __toString()
     {
         return  implode(',', $this->getGameSystems()->map(function ($gs) {

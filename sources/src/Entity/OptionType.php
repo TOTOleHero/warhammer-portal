@@ -6,6 +6,7 @@ use App\Repository\OptionTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
+
 /**
  * @ORM\Entity(repositoryClass=OptionTypeRepository::class)
  */

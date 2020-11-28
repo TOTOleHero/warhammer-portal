@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}profileT9A12{% endblock %}
+
+{% block body %}
+    <h1>profileT9A12</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ profileT9A12.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ profileT9A12.name }}</td>
+            </tr>            
+            <tr>
+                <th>Movement</th>
+                <td>{{ profileT9A12.movement }}</td>
+            </tr>
+            <tr>
+                <th>WeaponSkill</th>
+                <td>{{ profileT9A12.weaponSkill }}</td>
+            </tr>
+            <tr>
+                <th>BallisticSkill</th>
+                <td>{{ profileT9A12.ballisticSkill }}</td>
+            </tr>
+            <tr>
+                <th>Strength</th>
+                <td>{{ profileT9A12.strength }}</td>
+            </tr>
+            <tr>
+                <th>Toughness</th>
+                <td>{{ profileT9A12.toughness }}</td>
+            </tr>
+            <tr>
+                <th>Wounds</th>
+                <td>{{ profileT9A12.wounds }}</td>
+            </tr>
+            <tr>
+                <th>Initiative</th>
+                <td>{{ profileT9A12.initiative }}</td>
+            </tr>
+            <tr>
+                <th>Attacks</th>
+                <td>{{ profileT9A12.attacks }}</td>
+            </tr>
+            <tr>
+                <th>Leadership</th>
+                <td>{{ profileT9A12.leadership }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('profileT9A12_index') }}">back to list</a>
+
+    <a href="{{ path('profileT9A12_edit', {'id': profileT9A12.id}) }}">edit</a>
+
+    {{ include('profileT9A12/_delete_form.html.twig') }}
+{% endblock %}

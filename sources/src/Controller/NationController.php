@@ -5,12 +5,10 @@ namespace App\Controller;
 use App\Entity\Nation;
 use App\Form\NationType;
 use App\Repository\NationRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 
 class NationController extends AbstractFOSRestController
 {
@@ -32,7 +30,7 @@ class NationController extends AbstractFOSRestController
         $view = $this->view($nationRepository->findAll(), 200);
 
         return $this->handleView($view);
-    }    
+    }
 
     /**
      * @Route("/nation/new", name="nation_new", methods={"GET","POST"})
@@ -66,7 +64,6 @@ class NationController extends AbstractFOSRestController
             'nation' => $nation,
         ]);
     }
-
 
     /**
      * @Route("/api/nation/{id}", name="api_nation_show", methods={"GET"})

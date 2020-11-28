@@ -1,0 +1,48 @@
+{% block body %}
+
+{% if startTable is not defined or startTable  %}
+<table class="table">
+    <tbody>
+        <tr class="table-primary">
+            {# <th title="Id" ></th> #}
+            <th title="Name">Name</th>
+            <th title="GlobalAdvanceRate">Adv</th>
+            <th title="GlobalMarch">Mar</th>
+            <th title="GlobalDiscipline">Dis</th>
+            <th title="DefensiveHealthPoints">HP</th>
+            <th title="DefensiveSkill">Def</th>
+            <th title="DefensiveResilience">Res</th>
+            <th title="DefensiveArmour">Arm</th>
+            <th title="OffensiveAttack">Att</th>
+            <th title="OffensiveSkill">Off</th>
+            <th title="OffensiveStrength">Str</th>
+            <th title="OffensiveArmourPenetration">AP</th>
+            <th title="OffensiveAgility">Agi</th>
+        </tr>
+        {% endif %}
+        <tr>
+            {#<td>{{ profileT9A12.id }}</td> #}
+            <td scope="row" class="table-secondary">{{ profileT9A12.name }}</td>
+
+
+            <td>{{ profileT9A12.globalAdvanceRate }}</td>
+            <td>{{ profileT9A12.globalMarch }}</td>
+            <td>{{ profileT9A12.globalDiscipline }}</td>
+            <td>{{ profileT9A12.defensiveHealthPoints }}</td>
+            <td>{{ profileT9A12.defensiveSkill }}</td>
+            <td>{{ profileT9A12.defensiveResilience }}</td>
+            <td>{{ profileT9A12.defensiveArmour }}</td>
+            <td>{{ profileT9A12.offensiveAgility }}</td>
+            <td>{{ profileT9A12.offensiveAttack }}</td>
+            <td>{{ profileT9A12.offensiveSkill }}</td>
+            <td>{{ profileT9A12.offensiveStrength }}</td>
+            <td>{{ profileT9A12.offensiveArmourPenetration }}</td>
+
+
+
+        </tr>
+        {% if endTable is not defined or endTable  %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit profileT9A12{% endblock %}
+
+{% block body %}
+    <h1>Edit profileT9A12</h1>
+
+    {{ include('profileT9A12/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('profileT9A12_index') }}">back to list</a>
+
+    {{ include('profileT9A12/_delete_form.html.twig') }}
+{% endblock %}

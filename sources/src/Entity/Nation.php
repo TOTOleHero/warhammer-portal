@@ -3,13 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\NationRepository;
+use App\Traits\TaggableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Hateoas\Configuration\Annotation as Hateoas;
-
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * @ORM\Entity(repositoryClass=NationRepository::class)
@@ -41,19 +41,33 @@ class Nation
      */
     private $units;
 
-
-
     /**
      * Post locale
-     * Used locale to override Translation listener's locale
+     * Used locale to override Translation listener's locale.
      *
      * @Gedmo\Locale
      */
     protected $locale;
 
-  
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
+
+    public function __construct()
+    {
+        $this->__taggableTraitConstruct();
+        $this->units = new ArrayCollection();
+    }
+
+    public function getAllTags()
+    {
+        return array_merge(
+            $this->getTags()->toArray(),
+        );
+    }
+
     /**
-     * Sets translatable locale
+     * Sets translatable locale.
      *
      * @param string $locale
      */
@@ -64,13 +78,9 @@ class Nation
         return $this;
     }
 
-    public function __construct()
-    {
-        $this->units = new ArrayCollection();
-    }
     public function __toString()
     {
-        return $this->getId() . ' - '.$this->getName();
+        return $this->getId().' - '.$this->getName();
     }
 
     public function getId(): ?string
@@ -120,13 +130,10 @@ class Nation
         return $this;
     }
 
-  
     public function setId(string $id): self
     {
         $this->id = $id;
 
         return $this;
     }
-
-
 }

@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 // src/EventSubscriber/UserLocaleSubscriber.php
+
 namespace App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

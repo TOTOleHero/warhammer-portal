@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\RaceRepository;
+use App\Traits\TaggableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Hateoas\Configuration\Annotation as Hateoas;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * @ORM\Entity(repositoryClass=RaceRepository::class)
@@ -30,12 +30,11 @@ use Gedmo\Translatable\Translatable;
 class Race
 {
     /**
-     * @Gedmo\Translatable   
+     * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
- 
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
@@ -43,18 +42,16 @@ class Race
      */
     private $id;
 
-
     /**
      * Post locale
-     * Used locale to override Translation listener's locale
+     * Used locale to override Translation listener's locale.
      *
      * @Gedmo\Locale
      */
     protected $locale;
 
-
     /**
-     * Sets translatable locale
+     * Sets translatable locale.
      *
      * @param string $locale
      */
@@ -65,18 +62,28 @@ class Race
         return $this;
     }
 
-
     public function __toString()
     {
-        return $this->getId() . ' - '.$this->getName();
+        return $this->getId().' - '.$this->getName();
+    }
+
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
     }
 
     public function __construct()
     {
+        $this->__taggableTraitConstruct();
         $this->units = new ArrayCollection();
         $this->nations = new ArrayCollection();
     }
 
+    public function getAllTags()
+    {
+        return array_merge(
+            $this->getTags()->toArray(),
+        );
+    }
 
     public function getName(): ?string
     {
@@ -90,8 +97,6 @@ class Race
         return $this;
     }
 
-
-
     public function getId(): ?string
     {
         return $this->id;
@@ -103,6 +108,4 @@ class Race
 
         return $this;
     }
-
-  
 }

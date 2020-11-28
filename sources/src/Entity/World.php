@@ -3,20 +3,18 @@
 namespace App\Entity;
 
 use App\Repository\WorldRepository;
+use App\Traits\TaggableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as JMS;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
-use JMS\Serializer\Annotation as JMS;
-use Hateoas\Configuration\Annotation as Hateoas;
-
-use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
 
 /**
  * @ORM\Entity(repositoryClass=WorldRepository::class)
-  * @Hateoas\Relation(
+ * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
  *          "api_world_show",
@@ -32,7 +30,6 @@ class World
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
-
      */
     private $id;
 
@@ -45,10 +42,34 @@ class World
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
 
     public function __construct()
     {
+        $this->__taggableTraitConstruct();
         $this->gameSystems = new ArrayCollection();
+    }
+
+    public function getAllTags()
+    {
+        $allTags = array_merge(
+            $this->getTags()->toArray(),
+        );
+
+        $allGameSystemsTags = $this->getGameSystems()->map(function ($value) {
+            return $value->getAllTags();
+        })->toArray();
+
+        foreach ($allGameSystemsTags as $gameSystemsTags) {
+            $allTags = array_merge(
+                $allTags,
+                $gameSystemsTags,
+            );
+        }
+
+        return $allTags;
     }
 
     public function getId(): ?Uuid

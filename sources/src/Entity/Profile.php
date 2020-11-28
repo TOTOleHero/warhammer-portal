@@ -3,22 +3,23 @@
 namespace App\Entity;
 
 use App\Repository\ProfileRepository;
+use App\Traits\TaggableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as JMS;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
-use JMS\Serializer\Annotation as JMS;
-use Hateoas\Configuration\Annotation as Hateoas;
-
-
 
 /**
  * @ORM\InheritanceType("JOINED")
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"profileWFB12" = "ProfileWFB12",
- *                          "profileWFB9" = "ProfileWFB9", 
+ *                          "profileWFB9" = "ProfileWFB9",
  *                          "profileAOS4" = "ProfileAOS4",
- *                          "profileWHQ" = "ProfileWHQ"})
+ *                          "profileWHQ" = "ProfileWHQ",
+ *                          "profileT9A12" = "ProfileT9A12"
+ * })
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -33,7 +34,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *          parameters = { "id" = "expr(object.getUnit().getId())" }
  *      )
  * )
-  * @Hateoas\Relation(
+ * @Hateoas\Relation(
  *      "gameSystem",
  *      href = @Hateoas\Route(
  *          "api_game_system_show",
@@ -43,13 +44,11 @@ use Hateoas\Configuration\Annotation as Hateoas;
  */
 abstract class Profile
 {
-
-    protected const PROFILE_TYPE_WFB12 = "profileWFB12";
-    protected const PROFILE_TYPE_WFB9 = "profileWFB9";
-    protected const PROFILE_TYPE_AOS4 = "profileAOS4";
-    protected const PROFILE_TYPE_WHQ = "profileWHQ";
-    
-
+    protected const PROFILE_TYPE_WFB12 = 'profileWFB12';
+    protected const PROFILE_TYPE_WFB9 = 'profileWFB9';
+    protected const PROFILE_TYPE_AOS4 = 'profileAOS4';
+    protected const PROFILE_TYPE_WHQ = 'profileWHQ';
+    protected const PROFILE_TYPE_T9A12 = 'profileT9A12';
 
     /**
      * @ORM\Id
@@ -67,7 +66,6 @@ abstract class Profile
      */
     private $unit;
 
-
     /**
      * @ORM\ManyToOne(targetEntity=GameSystem::class)
      * @ORM\JoinColumn(nullable=false)
@@ -79,6 +77,15 @@ abstract class Profile
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
+
+    public function __construct()
+    {
+        $this->__taggableTraitConstruct();
+    }
 
     abstract public function getProfileType(): ?string;
 

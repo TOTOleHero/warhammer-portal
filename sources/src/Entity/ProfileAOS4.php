@@ -4,19 +4,12 @@ namespace App\Entity;
 
 use App\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
-use Symfony\Component\Uid\Uuid;
+
 /**
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
  */
 class ProfileAOS4 extends Profile
 {
-
-
-    
-
-
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -36,7 +29,6 @@ class ProfileAOS4 extends Profile
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $save;
-
 
     public function getProfileType(): ?string
     {

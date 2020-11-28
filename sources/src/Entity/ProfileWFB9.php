@@ -4,20 +4,18 @@ namespace App\Entity;
 
 use App\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
-use Symfony\Component\Uid\Uuid;
+
 /**
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
  */
 class ProfileWFB9 extends Profile
 {
-
-   /**
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $movement;
 
-     /**
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $weaponSkill;
@@ -73,7 +71,6 @@ class ProfileWFB9 extends Profile
 
         return $this;
     }
-
 
     public function getWeaponSkill(): ?string
     {
@@ -170,6 +167,4 @@ class ProfileWFB9 extends Profile
 
         return $this;
     }
-
-
 }

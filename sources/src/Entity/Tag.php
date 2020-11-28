@@ -4,8 +4,8 @@ namespace App\Entity;
 
 use App\Repository\TagRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
-use Symfony\Component\Uid\Uuid;
+use function Symfony\Component\String\u;
+
 /**
  * @ORM\Entity(repositoryClass=TagRepository::class)
  */
@@ -13,31 +13,30 @@ class Tag
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="string", length=255)
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    public function __construct($id = null)
+    {
+        $this->setId($id);
+    }
 
-    public function getId(): ?Uuid
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function setId(string $id): self
     {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
+        $this->id = u($id)->snake();
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getId();
     }
 }

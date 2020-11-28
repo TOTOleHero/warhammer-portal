@@ -4,15 +4,13 @@ namespace App\Entity;
 
 use App\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
-use Symfony\Component\Uid\Uuid;
+
 /**
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
  */
 class ProfileWHQ extends Profile
 {
-
-   /**
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $battleLevel;
@@ -22,8 +20,7 @@ class ProfileWHQ extends Profile
      */
     private $gold;
 
-
-   /**
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $movement;
@@ -47,7 +44,6 @@ class ProfileWHQ extends Profile
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $damageDice;
-
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -89,12 +85,10 @@ class ProfileWHQ extends Profile
      */
     private $willPower;
 
-
     public function getProfileType(): ?string
     {
         return self::PROFILE_TYPE_WHQ;
     }
-
 
     public function getDamageDice(): ?string
     {
@@ -132,7 +126,6 @@ class ProfileWHQ extends Profile
         return $this;
     }
 
-
     public function getEscapePinning(): ?string
     {
         return $this->escapePinning;
@@ -145,8 +138,6 @@ class ProfileWHQ extends Profile
         return $this;
     }
 
-
-
     public function getMovement(): ?string
     {
         return $this->movement;
@@ -158,7 +149,6 @@ class ProfileWHQ extends Profile
 
         return $this;
     }
-
 
     public function getWeaponSkill(): ?string
     {
@@ -244,9 +234,6 @@ class ProfileWHQ extends Profile
         return $this;
     }
 
-
-
-
     public function getGold(): ?string
     {
         return $this->gold;
@@ -258,8 +245,6 @@ class ProfileWHQ extends Profile
 
         return $this;
     }
-
-
 
     public function getWillPower(): ?string
     {
@@ -284,5 +269,4 @@ class ProfileWHQ extends Profile
 
         return $this;
     }
-
 }

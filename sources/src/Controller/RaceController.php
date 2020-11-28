@@ -6,37 +6,34 @@ use App\Entity\Race;
 use App\Entity\Unit;
 use App\Form\RaceType;
 use App\Repository\RaceRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 
 class RaceController extends AbstractFOSRestController
 {
     /**
      * @Route("/race/", name="race_index", methods={"GET"})
      */
-    public function index(RaceRepository $raceRepository,Request $request,$embedType = false): Response
+    public function index(RaceRepository $raceRepository, Request $request, $embedType = false): Response
     {
         $templateBase = 'race/';
-        $template = 'index.html.twig';  
-        switch($embedType)
-        {
-            case 'groupListContainer' :
-                $template ='list_group.html.twig';
-                break;  
-            case 'dropdownList' :
-                $template ='dropdown.html.twig';
+        $template = 'index.html.twig';
+        switch ($embedType) {
+            case 'groupListContainer':
+                $template = 'list_group.html.twig';
+                break;
+            case 'dropdownList':
+                $template = 'dropdown.html.twig';
                 break;
             case false:
-                break;  
+                break;
             default:
                 return $this->render('embedTypeNotFound.html.twig', [
                     'embedType' => $embedType,
                     'method' => __METHOD__,
                     'class' => __CLASS__,
-
                 ]);
         }
 
@@ -54,7 +51,6 @@ class RaceController extends AbstractFOSRestController
 
         return $this->handleView($view);
     }
-
 
     /**
      * @Route("/race/new", name="race_new", methods={"GET","POST"})
@@ -85,9 +81,10 @@ class RaceController extends AbstractFOSRestController
     public function show(Race $race): Response
     {
         $unitRepository = $this->get('doctrine')->getRepository(Unit::class);
+
         return $this->render('race/show.html.twig', [
             'race' => $race,
-            'units' => $unitRepository->findByRace($race)
+            'units' => $unitRepository->findByRace($race),
         ]);
     }
 

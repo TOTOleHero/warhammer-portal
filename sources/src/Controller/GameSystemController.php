@@ -5,39 +5,34 @@ namespace App\Controller;
 use App\Entity\GameSystem;
 use App\Form\GameSystemType;
 use App\Repository\GameSystemRepository;
-
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
-
 
 class GameSystemController extends AbstractFOSRestController
 {
     /**
      * @Route("/game-system/", name="game_system_index", methods={"GET"})
      */
-    public function index(GameSystemRepository $gameSystemRepository,$embedType = false): Response
+    public function index(GameSystemRepository $gameSystemRepository, $embedType = false): Response
     {
-        
         $templateBase = 'game_system/';
-        $template = 'index.html.twig';  
-        switch($embedType)
-        {
-            case 'groupListContainer' :
-                $template ='list_group.html.twig';
-                break;  
-            case 'dropdownList' :
-                $template ='dropdown.html.twig';
+        $template = 'index.html.twig';
+        switch ($embedType) {
+            case 'groupListContainer':
+                $template = 'list_group.html.twig';
+                break;
+            case 'dropdownList':
+                $template = 'dropdown.html.twig';
                 break;
             case false:
-                break;  
+                break;
             default:
                 return $this->render('embedTypeNotFound.html.twig', [
                     'embedType' => $embedType,
                     'method' => __METHOD__,
                     'class' => __CLASS__,
-
                 ]);
         }
 
@@ -45,7 +40,6 @@ class GameSystemController extends AbstractFOSRestController
             'game_systems' => $gameSystemRepository->findAll(),
         ]);
     }
-
 
     /**
      * @Route("/api/game-system/", name="api_game_system_index", methods={"GET"})
@@ -55,16 +49,13 @@ class GameSystemController extends AbstractFOSRestController
         $view = $this->view($gameSystemRepository->findAll(), 200);
 
         return $this->handleView($view);
-
     }
-
 
     /**
      * @Route("/contribute/game-system/new", name="game_system_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
- 
         $gameSystem = new GameSystem();
         $form = $this->createForm(GameSystemType::class, $gameSystem);
         $form->handleRequest($request);
@@ -92,9 +83,7 @@ class GameSystemController extends AbstractFOSRestController
         return $this->render('game_system/show.html.twig', [
             'game_system' => $gameSystem,
         ]);
-
     }
-
 
     /**
      * @Route("/api/game-system/{id}", name="api_game_system_show", methods={"GET"})
@@ -104,7 +93,6 @@ class GameSystemController extends AbstractFOSRestController
         $view = $this->view($gameSystem, 200);
 
         return $this->handleView($view);
-
     }
 
     /**

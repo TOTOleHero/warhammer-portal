@@ -3,10 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\WorldAlignmentRepository;
+use App\Traits\TaggableTrait;
 use Doctrine\ORM\Mapping as ORM;
-
-
-
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 
@@ -16,13 +14,12 @@ use Gedmo\Translatable\Translatable;
  */
 class WorldAlignment
 {
- /**
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $id;
-
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -36,14 +33,23 @@ class WorldAlignment
 
     /**
      * Post locale
-     * Used locale to override Translation listener's locale
+     * Used locale to override Translation listener's locale.
      *
      * @Gedmo\Locale
      */
     protected $locale;
 
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
+
+    public function __construct()
+    {
+        $this->__taggableTraitConstruct();
+    }
+
     /**
-     * Sets translatable locale
+     * Sets translatable locale.
      *
      * @param string $locale
      */

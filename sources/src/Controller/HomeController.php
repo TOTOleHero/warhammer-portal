@@ -29,39 +29,34 @@ class HomeController extends AbstractController
         $collection = $router->getRouteCollection();
         $allRoutes = $collection->all();
 
-        $routes = array();
+        $routes = [];
 
         /** @var $params \Symfony\Component\Routing\Route */
-        foreach ($allRoutes as $route => $params)
-        {
+        foreach ($allRoutes as $route => $params) {
             $defaults = $params->getDefaults();
-            
+
             $controllerAction = explode(':', $defaults['_controller']);
             $controller = $controllerAction[0];
 
-            if($controller == 'App\Controller\HomeController')
-            {
+            if ('App\Controller\HomeController' == $controller) {
                 continue;
             }
 
-            if(substr($controller,0,strlen('App\Controller')) != 'App\Controller')
-            {
+            if ('App\Controller' != substr($controller, 0, strlen('App\Controller'))) {
                 continue;
             }
 
-            if(! method_exists ($controller,'index' ))
-            {
+            if (!method_exists($controller, 'index')) {
                 continue;
             }
 
             if (!isset($routes[$controller])) {
-                $routes[$controller] = array();
+                $routes[$controller] = [];
             }
 
-            $routes[$controller][]= $route;
-            
+            $routes[$controller][] = $route;
         }
-        
+
         return $this->render('home/test.html.twig', [
             'routesController' => array_keys($routes),
         ]);
