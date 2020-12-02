@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\UnitRepository;
 use App\Traits\TaggableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,24 +13,17 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
 
 /**
- * @Gedmo\TranslationEntity(class="App\Entity\UnitTranslation")
- * @ORM\Entity(repositoryClass=UnitRepository::class)
+ * @Gedmo\TranslationEntity(class="App\Entity\UnitGameSystemTranslation")
+ * @ORM\Entity(repositoryClass=UnitGameSystemRepository::class)
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
- *          "api_unit_show",
+ *          "api_unitGameSystem_show",
  *          parameters = { "id" = "expr(object.getId())" }
  *      )
  * )
- * @Hateoas\Relation(
- *      "nation",
- *      href = @Hateoas\Route(
- *          "api_nation_show",
- *          parameters = { "id" = "expr(object.getNation().getId())" }
- *      )
- * )
  */
-class Unit
+class UnitGameSystem
 {
     /**
      * @ORM\Id
@@ -46,18 +38,11 @@ class Unit
      * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
      */
-    private $baseName;
-
-    /**
-     * @JMS\Type("string")
-     * @ORM\ManyToOne(targetEntity=Nation::class, inversedBy="units")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $nation;
+    private $name;
 
     /**
      * @var Collection|Profile[]
-     * @ORM\OneToMany(targetEntity=Profile::class, mappedBy="unit", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Profile::class, mappedBy="unitGameSystem", orphanRemoval=true)
      */
     private $profiles;
 
@@ -66,10 +51,20 @@ class Unit
      */
     private $options;
 
+  
+
+    
     /**
-     * @ORM\ManyToOne(targetEntity=Race::class)
+     * @ORM\ManyToOne(targetEntity=UnitGeneric::class, inversedBy="unitGameSystems")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $race;
+    private $unitGeneric;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=GameSystem::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $gameSystem;
 
     use TaggableTrait {
         TaggableTrait::__construct as private __taggableTraitConstruct;
@@ -81,59 +76,20 @@ class Unit
 
         $this->profiles = new ArrayCollection();
         $this->options = new ArrayCollection();
+
+        $this->equipments = new ArrayCollection();
     }
 
     public function getAllTags()
     {
         return array_merge(
             $this->getTags()->toArray(),
-            $this->getRace()->getAllTags(),
-            $this->getNation()->getAllTags()
         );
-    }
-
-    /**
-     * @return Collection|GameSystem[]
-     */
-    public function getGameSystems(): array
-    {
-        $gameSystems = [];
-        foreach ($this->profiles as $profile) {
-            $gameSystemId = $profile->getGameSystem()->getId();
-
-            if (!array_key_exists($gameSystemId, $gameSystems)) {
-                $gameSystems[$gameSystemId] = [];
-            }
-            $gameSystems[$gameSystemId] = $profile->getGameSystem();
-            ksort($gameSystems);
-        }
-
-        return $gameSystems;
-    }
-
-    /**
-     * @return Collection|Profile[]
-     */
-    public function getProfilesByGameSystems(): array
-    {
-        //flat gamesystem array
-        $profilesByGameSystems = array_map(
-            function ($value) {
-                return [];
-            },
-            $this->getGameSystems()
-        );
-
-        foreach ($this->profiles as $profile) {
-            $profilesByGameSystems[$profile->getGameSystem()->getId()][] = $profile;
-        }
-
-        return $profilesByGameSystems;
     }
 
     public function __toString()
     {
-        return $this->getBaseName();
+        return $this->getName();
     }
 
     public function getId(): ?Uuid
@@ -141,26 +97,14 @@ class Unit
         return $this->id;
     }
 
-    public function getBaseName(): ?string
+    public function getName(): ?string
     {
-        return $this->baseName;
+        return $this->name;
     }
 
-    public function setBaseName(string $baseName): self
+    public function setName(string $name): self
     {
-        $this->baseName = $baseName;
-
-        return $this;
-    }
-
-    public function getNation(): ?Nation
-    {
-        return $this->nation;
-    }
-
-    public function setNation(?Nation $nation): self
-    {
-        $this->nation = $nation;
+        $this->name = $name;
 
         return $this;
     }
@@ -177,7 +121,7 @@ class Unit
     {
         if (!$this->profiles->contains($profile)) {
             $this->profiles[] = $profile;
-            $profile->setUnit($this);
+            $profile->setUnitGameSystem($this);
         }
 
         return $this;
@@ -187,8 +131,8 @@ class Unit
     {
         if ($this->profiles->removeElement($profile)) {
             // set the owning side to null (unless already changed)
-            if ($profile->getUnit() === $this) {
-                $profile->setUnit(null);
+            if ($profile->getUnitGameSystem() === $this) {
+                $profile->setUnitGameSystem(null);
             }
         }
 
@@ -219,14 +163,29 @@ class Unit
         return $this;
     }
 
-    public function getRace(): ?Race
+    
+   
+
+    public function getUnitGeneric(): ?UnitGeneric
     {
-        return $this->race;
+        return $this->unitGeneric;
     }
 
-    public function setRace(?Race $race): self
+    public function setUnitGeneric(?UnitGeneric $unitGeneric): self
     {
-        $this->race = $race;
+        $this->unitGeneric = $unitGeneric;
+
+        return $this;
+    }
+
+    public function getGameSystem(): ?GameSystem
+    {
+        return $this->gameSystem;
+    }
+
+    public function setGameSystem(?GameSystem $gameSystem): self
+    {
+        $this->gameSystem = $gameSystem;
 
         return $this;
     }

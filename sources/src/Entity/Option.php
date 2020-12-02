@@ -10,9 +10,20 @@ use Symfony\Component\Uid\Uuid;
 /**
  * @ORM\Entity(repositoryClass=OptionRepository::class)
  * @ORM\Table(name="`option`")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"commandOption" = "CommandOption",
+ *                          "upgradeOption" = "UpgradeOption",
+ *                          "equipmentOption" = "EquipmentOption"
+ *
+ * })
  */
-class Option
+abstract class Option
 {
+    const OPTION_TYPE_COMMAND = 'commandOption';
+    const OPTION_TYPE_UPGRADE = 'upgradeOption';
+    const OPTION_TYPE_EQUIPMENT = 'equipmentOption';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
@@ -22,10 +33,20 @@ class Option
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=OptionType::class)
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cost;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=GameSystem::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $type;
+    private $gameSystem;
 
     public function getId(): ?Uuid
     {
@@ -37,9 +58,38 @@ class Option
         return $this->type;
     }
 
-    public function setType(?OptionType $type): self
+    public function getDescription(): ?string
     {
-        $this->type = $type;
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCost(): ?string
+    {
+        return $this->cost;
+    }
+
+    public function setCost(string $cost): self
+    {
+        $this->cost = $cost;
+
+        return $this;
+    }
+
+    public function getGameSystem(): ?GameSystem
+    {
+        return $this->gameSystem;
+    }
+
+    public function setGameSystem(?GameSystem $gameSystem): self
+    {
+        $this->gameSystem = $gameSystem;
 
         return $this;
     }

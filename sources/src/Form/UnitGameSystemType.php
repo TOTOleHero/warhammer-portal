@@ -2,27 +2,29 @@
 
 namespace App\Form;
 
-use App\Entity\Unit;
+use App\Entity\UnitGameSystem;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UnitType extends AbstractType
+class UnitGameSystemType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
-            ->add('nation')
-            ->add('tags')
             ->add('options')
+            ->add('rules')
+            ->add('unitGeneric')
+            ->add('gameSystem')
+            ->add('tags')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Unit::class,
+            'data_class' => UnitGameSystem::class,
         ]);
     }
 }

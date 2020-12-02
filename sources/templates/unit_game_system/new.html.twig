@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New UnitGameSystem{% endblock %}
+
+{% block body %}
+    <h1>Create new UnitGameSystem</h1>
+
+    {{ include('unit_game_system/_form.html.twig') }}
+
+    <a href="{{ path('unit_game_system_index') }}">back to list</a>
+{% endblock %}

@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Race;
-use App\Entity\Unit;
 use App\Form\RaceType;
 use App\Repository\RaceRepository;
+use App\Repository\UnitGenericRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,13 +78,11 @@ class RaceController extends AbstractFOSRestController
     /**
      * @Route("/race/{id}", name="race_show", methods={"GET"})
      */
-    public function show(Race $race): Response
+    public function show(Race $race, UnitGenericRepository $unitGenericRepository): Response
     {
-        $unitRepository = $this->get('doctrine')->getRepository(Unit::class);
-
         return $this->render('race/show.html.twig', [
             'race' => $race,
-            'units' => $unitRepository->findByRace($race),
+            'unitGenerics' => $unitGenericRepository->findByRace($race),
         ]);
     }
 

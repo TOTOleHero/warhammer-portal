@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use Hateoas\Hateoas;
+use Hateoas\HateoasBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 
-class HomeController extends AbstractController
+class HomeController extends AbstractFOSRestController
 {
     /**
      * @Route("/", name="home")
@@ -16,6 +19,32 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
+    }
+
+    /**
+     * @Route("/api/", name="api_index", methods={"GET"})
+     */
+    public function apiIndex(RouterInterface $router): Response
+    {
+
+        $baseLinks = [
+            '_links' =>[
+                "nations" => [
+                    'href' => $router->generate('api_nation_index')
+                ],
+                "races" => [
+                    'href' => $router->generate('api_race_index')
+                ]
+                ,
+                "gameSystems" => [
+                    'href' => $router->generate('api_game_system_index')
+                ]
+            ]
+        ];
+
+        $view = $this->view($baseLinks, 200);
+
+        return $this->handleView($view);
     }
 
     /**

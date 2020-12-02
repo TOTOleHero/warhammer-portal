@@ -1,5 +1,7 @@
-{% block body %}
 
+
+{% set profile = profileT9A12 %}
+{% block body %}
 {% if startTable is not defined or startTable  %}
 <table class="table">
     <tbody>
@@ -22,7 +24,7 @@
         {% endif %}
         <tr>
             {#<td>{{ profileT9A12.id }}</td> #}
-            <td scope="row" class="table-secondary">{{ profileT9A12.name }}</td>
+            <td scope="row" class="table-secondary">{{ profile.name }}</td>
 
 
             <td>{{ profileT9A12.globalAdvanceRate }}</td>
@@ -40,6 +42,12 @@
 
 
 
+        </tr>
+        <tr>
+            {# <td>{{ profileAOS4.id }}</td> #}
+            <td ></td>
+            <td scope="row">Equipments</td>
+            <td colspan="11">{% for equipment in profile.equipments %}{% if not loop.first %}, {% endif %}{{ equipment }}{% else %}No equipment{% endfor %}.</td>
         </tr>
         {% if endTable is not defined or endTable  %}
     </tbody>

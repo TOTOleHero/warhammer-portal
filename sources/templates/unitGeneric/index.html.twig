@@ -14,13 +14,13 @@
             </tr>
         </thead>
         <tbody>
-        {% for unit in units %}
+        {% for unitGeneric in unitGenerics %}
             <tr>
-                <td>{{ unit.id }}</td>
-                <td>{{ unit.baseName }}</td>
+                <td>{{ unitGeneric.id }}</td>
+                <td>{{ unitGeneric.baseName }}</td>
                 <td>
-                    <a href="{{ path('unit_show', {'id': unit.id}) }}">show</a>
-                    <a href="{{ path('unit_edit', {'id': unit.id}) }}">edit</a>
+                    <a href="{{ path('unitGeneric_show', {'id': unitGeneric.id}) }}">show</a>
+                    <a href="{{ path('unitGeneric_edit', {'id': unitGeneric.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('unit_new') }}">Create new</a>
+    <a href="{{ path('unitGeneric_new') }}">Create new</a>
 {% endblock %}

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProfileRepository;
 use App\Traits\TaggableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as JMS;
@@ -11,8 +13,8 @@ use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
 
 /**
- * @ORM\InheritanceType("JOINED")
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
+ * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"profileWFB12" = "ProfileWFB12",
  *                          "profileWFB9" = "ProfileWFB9",
@@ -28,10 +30,10 @@ use Symfony\Component\Uid\Uuid;
  *      )
  * )
  * @Hateoas\Relation(
- *      "unit",
+ *      "unitGameSystem",
  *      href = @Hateoas\Route(
- *          "api_unit_show",
- *          parameters = { "id" = "expr(object.getUnit().getId())" }
+ *          "api_unitGameSystem_show",
+ *          parameters = { "id" = "expr(object.getUnitGameSystem().getId())" }
  *      )
  * )
  * @Hateoas\Relation(
@@ -61,10 +63,10 @@ abstract class Profile
 
     /**
      * @JMS\Type("string")
-     * @ORM\ManyToOne(targetEntity=Unit::class, inversedBy="profiles")
+     * @ORM\ManyToOne(targetEntity=UnitGameSystem::class, inversedBy="profiles")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $unit;
+    private $unitGameSystem;
 
     /**
      * @ORM\ManyToOne(targetEntity=GameSystem::class)
@@ -78,6 +80,19 @@ abstract class Profile
      */
     private $name;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Equipment::class)
+     */
+    private $equipments;
+
+  /**
+     * @ORM\ManyToMany(targetEntity=Rule::class)
+     */
+    private $rules;
+
+
+
     use TaggableTrait {
         TaggableTrait::__construct as private __taggableTraitConstruct;
     }
@@ -85,6 +100,8 @@ abstract class Profile
     public function __construct()
     {
         $this->__taggableTraitConstruct();
+        $this->equipments = new ArrayCollection();
+        $this->rules = new ArrayCollection();
     }
 
     abstract public function getProfileType(): ?string;
@@ -94,14 +111,14 @@ abstract class Profile
         return $this->id;
     }
 
-    public function getUnit(): ?Unit
+    public function getUnitGameSystem(): ?UnitGameSystem
     {
-        return $this->unit;
+        return $this->unitGameSystem;
     }
 
-    public function setUnit(?Unit $unit): self
+    public function setUnitGameSystem(?UnitGameSystem $unitGameSystem): self
     {
-        $this->unit = $unit;
+        $this->unitGameSystem = $unitGameSystem;
 
         return $this;
     }
@@ -129,4 +146,56 @@ abstract class Profile
 
         return $this;
     }
+
+
+    /**
+     * @return Collection|Equipment[]
+     */
+    public function getEquipments(): Collection
+    {
+        return $this->equipments;
+    }
+
+    public function addEquipment(Equipment $equipment): self
+    {
+        if (!$this->equipments->contains($equipment)) {
+            $this->equipments[] = $equipment;
+        }
+
+        return $this;
+    }
+
+    public function removeEquipment(Equipment $equipment): self
+    {
+        $this->equipments->removeElement($equipment);
+
+        return $this;
+    }
+
+    
+    /**
+     * @return Collection|Rule[]
+     */
+    public function getRules(): Collection
+    {
+        return $this->rules;
+    }
+
+    public function addRule(Rule $rule): self
+    {
+        if (!$this->rules->contains($rule)) {
+            $this->rules[] = $rule;
+        }
+
+        return $this;
+    }
+
+    public function removeRule(Rule $rule): self
+    {
+        $this->rules->removeElement($rule);
+
+        return $this;
+    }
+
+
 }

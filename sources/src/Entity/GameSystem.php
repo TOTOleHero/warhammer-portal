@@ -35,6 +35,11 @@ class GameSystem implements Translatable
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $publisher;
+
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\Column(type="string", length=255, unique=true)
@@ -145,6 +150,18 @@ class GameSystem implements Translatable
     public function setWorld(?World $world): self
     {
         $this->world = $world;
+
+        return $this;
+    }
+
+    public function getPublisher(): ?string
+    {
+        return $this->publisher;
+    }
+
+    public function setPublisher(string $publisher): self
+    {
+        $this->publisher = $publisher;
 
         return $this;
     }

@@ -1,3 +1,4 @@
+{% set profile = profileWFB9 %}
 {% block body %}
 
 {% if startTable is not defined or startTable %}
@@ -71,6 +72,21 @@
 
             <td>{{ profileWFB9.leadership }}</td>
         </tr>
+        <tr>
+            {# <td>{{ profileAOS4.id }}</td> #}
+            <td ></td>
+            <td scope="row">Equipments</td>
+            <td colspan="7">{% for equipment in profile.equipments %}{% if not loop.first %}, {% endif %}{{ equipment }}{% else %}No equipment{% endfor %}.</td>
+        </tr>
+        <tr>
+            {# <td>{{ profileAOS4.id }}</td> #}
+            <td ></td>
+            <td scope="row">Rules</td>
+            <td colspan="7">{% for rule in profile.rules %}{% if not loop.first %}, {% endif %}{{ rule }}{% else %}No rule{% endfor %}.</td>
+        </tr>
+
+
+        
         {% if endTable is not defined or endTable  %}
     </tbody>
 </table>

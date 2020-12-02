@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UnitGameSystem{% endblock %}
+
+{% block body %}
+    <h1>UnitGameSystem</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ unit_game_system.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ unit_game_system.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('unit_game_system_index') }}">back to list</a>
+
+    <a href="{{ path('unit_game_system_edit', {'id': unit_game_system.id}) }}">edit</a>
+
+    {{ include('unit_game_system/_delete_form.html.twig') }}
+{% endblock %}

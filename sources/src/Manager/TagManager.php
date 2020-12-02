@@ -4,6 +4,7 @@ namespace App\Manager;
 
 use App\Entity\Tag;
 use Doctrine\ORM\EntityManagerInterface;
+use function Symfony\Component\String\u;
 
 class TagManager
 {
@@ -21,7 +22,7 @@ class TagManager
     {
         $tagRepository = $this->entityManager->getRepository(Tag::class);
 
-        $tagObject = $tagRepository->find($tag);
+        $tagObject = $tagRepository->find(u($tag)->snake());
 
         if (null === $tagObject) {
             $tagObject = new Tag($tag);

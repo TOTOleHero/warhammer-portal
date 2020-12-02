@@ -37,9 +37,9 @@ class Nation
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Unit::class, mappedBy="nation")
+     * @ORM\OneToMany(targetEntity=UnitGeneric::class, mappedBy="nation")
      */
-    private $units;
+    private $unitGenerics;
 
     /**
      * Post locale
@@ -56,7 +56,7 @@ class Nation
     public function __construct()
     {
         $this->__taggableTraitConstruct();
-        $this->units = new ArrayCollection();
+        $this->unitGenerics = new ArrayCollection();
     }
 
     public function getAllTags()
@@ -101,29 +101,29 @@ class Nation
     }
 
     /**
-     * @return Collection|Unit[]
+     * @return Collection|UnitGeneric[]
      */
-    public function getUnits(): Collection
+    public function getUnitGenerics(): Collection
     {
-        return $this->units;
+        return $this->unitGenerics;
     }
 
-    public function addUnit(Unit $unit): self
+    public function addUnitGeneric(UnitGeneric $unitGeneric): self
     {
-        if (!$this->units->contains($unit)) {
-            $this->units[] = $unit;
-            $unit->setNation($this);
+        if (!$this->unitGenerics->contains($unitGeneric)) {
+            $this->unitGenerics[] = $unitGeneric;
+            $unitGeneric->setNation($this);
         }
 
         return $this;
     }
 
-    public function removeUnit(Unit $unit): self
+    public function removeUnitGeneric(UnitGeneric $unitGeneric): self
     {
-        if ($this->units->removeElement($unit)) {
+        if ($this->unitGenerics->removeElement($unitGeneric)) {
             // set the owning side to null (unless already changed)
-            if ($unit->getNation() === $this) {
-                $unit->setNation(null);
+            if ($unitGeneric->getNation() === $this) {
+                $unitGeneric->setNation(null);
             }
         }
 
