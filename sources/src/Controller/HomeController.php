@@ -46,6 +46,10 @@ class HomeController extends AbstractFOSRestController
                 "equipments" => [
                     'href' => $router->generate('api_equipment_index')
                 ]
+                ,
+                "worlds" => [
+                    'href' => $router->generate('api_world_index')
+                ]
             ]
         ];
 

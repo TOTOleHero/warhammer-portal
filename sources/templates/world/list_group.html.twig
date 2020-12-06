@@ -1,0 +1,23 @@
+<div class="list-group">
+{% for world in worlds %}
+  <a href="{{ path('world_show', {'id': world.id}) }}" class="list-group-item list-group-item-action flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{ world.name }}</h5>
+      <small>3 days ago</small>
+    </div>
+    <p class="mb-1">Description</p>
+    <small>World : </small>
+  </a>
+
+{% else %}
+ <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">No data</h5>
+      <small></small>
+    </div>
+    <p class="mb-1">No data</p>
+    <small></small>
+  </a>
+ {% endfor %}
+
+</div>

@@ -26,10 +26,8 @@ class World
 {
     /**
      * @ORM\Id
-     * @JMS\Type("string")
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $id;
 
@@ -72,10 +70,17 @@ class World
         return $allTags;
     }
 
-    public function getId(): ?Uuid
+    public function getId(): ?string
     {
         return $this->id;
     }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
 
     /**
      * @return Collection|GameSystem[]

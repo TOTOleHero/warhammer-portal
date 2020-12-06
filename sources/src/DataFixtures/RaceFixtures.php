@@ -20,7 +20,17 @@ class RaceFixtures extends Fixture
     }
 
     protected $data = [
-        ['ELVE', 'en_US', 'Elve'],
+        ['ELVE', 'en_US', 'Elve',
+    
+        'externalLinks'=>
+        [
+            [
+                'category' => 'communityDescription'
+                ,'href'=>'https://warhammerfantasy.fandom.com/wiki/Elves',
+                'locale' => 'en_US'
+            ]
+        ]
+    ],
         ['DWARF', 'en_US', 'Dwarf'],
         ['HUMAN', 'en_US', 'Human'],
 

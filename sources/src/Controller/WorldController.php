@@ -10,30 +10,55 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class WorldController extends AbstractFOSRestController
 {
     /**
-     * @Route("/world", name="world_index", methods={"GET"})
+     * @Route("/world/", name="world_index", methods={"GET"})
      */
-    public function index(WorldRepository $worldRepository): Response
+    public function index(WorldRepository $worldRepository, $embedType = false): Response
     {
-        return $this->render('world/index.html.twig', [
+       
+       
+        $templateBase = 'world/';
+        $template = 'index.html.twig';
+        switch ($embedType) {
+            case 'groupListContainer':
+                $template = 'list_group.html.twig';
+                break;
+            case 'dropdownList':
+                $template = 'dropdown.html.twig';
+                break;
+            case false:
+                break;
+            default:
+                return $this->render('embedTypeNotFound.html.twig', [
+                    'embedType' => $embedType,
+                    'method' => __METHOD__,
+                    'class' => __CLASS__,
+                ]);
+        }
+       
+        return $this->render($templateBase.$template, [
             'worlds' => $worldRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/api/world", name="api_world_index", methods={"GET"})
+     * @Route("/api/world/", name="api_world_index", methods={"GET"})
      */
-    public function apiIindex(WorldRepository $worldRepository): Response
+    public function apiIndex(WorldRepository $worldRepository): Response
     {
+        
         $view = $this->view($worldRepository->findAll(), 200);
 
         return $this->handleView($view);
     }
 
+
+
     /**
-     * @Route("/worldnew", name="world_new", methods={"GET","POST"})
+     * @Route("/world/new", name="world_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -56,7 +81,7 @@ class WorldController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/world{id}", name="world_show", methods={"GET"})
+     * @Route("/world/{id}", name="world_show", methods={"GET"})
      */
     public function show(World $world): Response
     {
@@ -65,18 +90,20 @@ class WorldController extends AbstractFOSRestController
         ]);
     }
 
+
     /**
-     * @Route("/api/world{id}", name="api_world_show", methods={"GET"})
+     * @Route("/api/world/{id}", name="api_world_show", methods={"GET"})
      */
     public function apiShow(World $world): Response
     {
+        
         $view = $this->view($world, 200);
 
         return $this->handleView($view);
     }
 
     /**
-     * @Route("/world{id}/edit", name="world_edit", methods={"GET","POST"})
+     * @Route("/world/{id}/edit", name="world_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, World $world): Response
     {
@@ -96,7 +123,7 @@ class WorldController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/world{id}", name="world_delete", methods={"DELETE"})
+     * @Route("/world/{id}", name="world_delete", methods={"DELETE"})
      */
     public function delete(Request $request, World $world): Response
     {
