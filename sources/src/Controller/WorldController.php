@@ -58,7 +58,7 @@ class WorldController extends AbstractFOSRestController
 
 
     /**
-     * @Route("/world/new", name="world_new", methods={"GET","POST"})
+     * @Route("/contribute/world/new", name="world_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {

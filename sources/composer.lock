@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "83c39d4652baab82d9dc3c609134cc27",
+    "content-hash": "115dfe3760fa8a1f4c078bd843b76187",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2831,6 +2831,55 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.3"
             },
             "time": "2020-03-23T09:12:05+00:00"
+        },
+        {
+            "name": "ry167/twig-gravatar",
+            "version": "4.0.0-RC",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ry167/twig-gravatar.git",
+                "reference": "21b10e48e38269ec94f1aced97bf1b101f9cbe65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ry167/twig-gravatar/zipball/21b10e48e38269ec94f1aced97bf1b101f9cbe65",
+                "reference": "21b10e48e38269ec94f1aced97bf1b101f9cbe65",
+                "shasum": ""
+            },
+            "require": {
+                "twig/twig": ">=2.7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.6.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/TwigGravatar.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Halliday",
+                    "email": "ry167@ry167.com",
+                    "homepage": "http://blog.ry167.com"
+                }
+            ],
+            "description": "Gravatar filters for Twig templates",
+            "homepage": "https://github.com/ry167/twig-gravatar",
+            "keywords": [
+                "gravatar",
+                "twig"
+            ],
+            "support": {
+                "issues": "https://github.com/ry167/twig-gravatar/issues",
+                "source": "https://github.com/ry167/twig-gravatar"
+            },
+            "time": "2020-01-26T21:34:08+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -7974,6 +8023,55 @@
             "time": "2020-10-24T12:03:25+00:00"
         },
         {
+            "name": "symfonycasts/verify-email-bundle",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SymfonyCasts/verify-email-bundle.git",
+                "reference": "501e503f6a8ae282ffb3fff167e0740dae56b1ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/501e503f6a8ae282ffb3fff167e0740dae56b1ae",
+                "reference": "501e503f6a8ae282ffb3fff167e0740dae56b1ae",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "symfony/config": "^4.4 | ^5.0",
+                "symfony/dependency-injection": "^4.4 | ^5.0",
+                "symfony/http-kernel": "^4.4 | ^5.0",
+                "symfony/routing": "^4.4 | ^5.0"
+            },
+            "conflict": {
+                "symfony/framework-bundle": "<4.4"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.7",
+                "doctrine/persistence": "^1.3",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "symfony/framework-bundle": "^4.4 | ^5.0",
+                "symfony/phpunit-bridge": "^5.0",
+                "vimeo/psalm": "^3.8"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "SymfonyCasts\\Bundle\\VerifyEmail\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Simple, stylish Email Verification for Symfony",
+            "support": {
+                "issues": "https://github.com/SymfonyCasts/verify-email-bundle/issues",
+                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/master"
+            },
+            "time": "2020-05-24T11:04:34+00:00"
+        },
+        {
             "name": "twig/extra-bundle",
             "version": "v3.1.1",
             "source": {
@@ -9343,7 +9441,9 @@
     ],
     "aliases": [],
     "minimum-stability": "beta",
-    "stability-flags": [],
+    "stability-flags": {
+        "ry167/twig-gravatar": 5
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

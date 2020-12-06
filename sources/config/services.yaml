@@ -44,6 +44,15 @@ services:
     #     arguments: ['%kernel.default_locale%']
     #     # uncomment the next line if you are not using autoconfigure
     #     # tags: [kernel.event_subscriber]
-
+    twig.extension.gravatar:
+        class: \TwigGravatar
+        arguments:
+            $default: ~        # e.g. 'monsterid'
+            $size: ~            # e.g. 50
+            $filterPrefix: 'gr'    # e.g. 'foo'
+            $rating: ~          # e.g. 'x'
+            $useHttps: true
+        tags:
+            - { name: twig.extension }
     
  

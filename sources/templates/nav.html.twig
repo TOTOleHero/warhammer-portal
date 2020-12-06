@@ -30,5 +30,19 @@
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </form>
+
+    {% if app.user %}
+      <div class="nav-item dropdown">
+        
+        <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img src="{{ app.user.email|grAvatar|grSize(36) }}" class="avatar" alt="Avatar"> {{ app.user.username }} <b class="caret"></b></a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+          <div class="divider dropdown-divider"></div>
+          <a href="{{ path('app_logout') }}" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+    {% endif %}
+
   </div>
 </nav>
