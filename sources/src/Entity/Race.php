@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\RaceRepository;
 use App\Traits\TaggableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
@@ -51,6 +52,11 @@ class Race
     protected $locale;
 
     /**
+     * @ORM\ManyToMany(targetEntity=ExternalLink::class)
+     */
+    private $externalLinks;
+
+    /**
      * Sets translatable locale.
      *
      * @param string $locale
@@ -76,6 +82,7 @@ class Race
         $this->__taggableTraitConstruct();
         $this->units = new ArrayCollection();
         $this->nations = new ArrayCollection();
+        $this->externalLinks = new ArrayCollection();
     }
 
     public function getAllTags()
@@ -105,6 +112,30 @@ class Race
     public function setId(string $id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ExternalLink[]
+     */
+    public function getExternalLinks(): Collection
+    {
+        return $this->externalLinks;
+    }
+
+    public function addExternalLink(ExternalLink $externalLink): self
+    {
+        if (!$this->externalLinks->contains($externalLink)) {
+            $this->externalLinks[] = $externalLink;
+        }
+
+        return $this;
+    }
+
+    public function removeExternalLink(ExternalLink $externalLink): self
+    {
+        $this->externalLinks->removeElement($externalLink);
 
         return $this;
     }

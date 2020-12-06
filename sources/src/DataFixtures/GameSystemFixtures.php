@@ -33,6 +33,7 @@ class GameSystemFixtures extends Fixture implements DependentFixtureInterface
         ['AOSV2', 'en_US', 'Age Of Sigmar V2', 'profileAOS4', 'Games Workshop'],
         ['T9AV2', 'en_US', 'The 9th Age V2', 'profileT9A12', 'Games Workshop'],
         ['T9AV1', 'en_US', 'The 9th Age V1', 'profileT9A12', 'Games Workshop'],
+        ['MHV1', 'en_US', 'Mordheim V1', 'profileWFB9', 'Games Workshop'],
      ];
 
     public function load(ObjectManager $manager)

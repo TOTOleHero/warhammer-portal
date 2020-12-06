@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\GameSystemRepository;
 use App\Traits\TaggableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
@@ -65,6 +67,11 @@ class GameSystem implements Translatable
      */
     private $world;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=ExternalLink::class)
+     */
+    private $externalLinks;
+
     use TaggableTrait {
         TaggableTrait::__construct as private __taggableTraitConstruct;
     }
@@ -72,6 +79,7 @@ class GameSystem implements Translatable
     public function __construct()
     {
         $this->__taggableTraitConstruct();
+        $this->externalLinks = new ArrayCollection();
     }
 
     public function getAllTags()
@@ -162,6 +170,32 @@ class GameSystem implements Translatable
     public function setPublisher(string $publisher): self
     {
         $this->publisher = $publisher;
+
+        return $this;
+    }
+
+
+    
+    /**
+     * @return Collection|ExternalLink[]
+     */
+    public function getExternalLinks(): Collection
+    {
+        return $this->externalLinks;
+    }
+
+    public function addExternalLink(ExternalLink $externalLink): self
+    {
+        if (!$this->externalLinks->contains($externalLink)) {
+            $this->externalLinks[] = $externalLink;
+        }
+
+        return $this;
+    }
+
+    public function removeExternalLink(ExternalLink $externalLink): self
+    {
+        $this->externalLinks->removeElement($externalLink);
 
         return $this;
     }

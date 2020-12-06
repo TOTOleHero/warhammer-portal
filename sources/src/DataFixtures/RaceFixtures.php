@@ -20,9 +20,21 @@ class RaceFixtures extends Fixture
     }
 
     protected $data = [
-        ['ELVES', 'en_US', 'Elves'],
-        ['DWARFS', 'en_US', 'Dwarfs'],
-        ['HUMANS', 'en_US', 'Humans'],
+        ['ELVE', 'en_US', 'Elve'],
+        ['DWARF', 'en_US', 'Dwarf'],
+        ['HUMAN', 'en_US', 'Human'],
+
+        ['HALFING', 'en_US', 'Halging'],
+        ['OLD_ONE', 'en_US', 'Old one'],
+        ['ORC', 'en_US', 'Orc'],
+        ['GOBLIN', 'en_US', 'Goblin'],
+        ['MONSTER', 'en_US', 'Monster'],
+        ['GIANT', 'en_US', 'Giant'],
+        ['TROLL', 'en_US', 'Troll'],
+        ['SKAVEN', 'en_US', 'Skaven'],
+        ['UNDEAD', 'en_US', 'Undead'],
+        ['DAEMON', 'en_US', 'Daemon'],
+
     ];
 
     public function load(ObjectManager $manager)

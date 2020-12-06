@@ -49,6 +49,11 @@ class Nation
      */
     protected $locale;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=ExternalLink::class)
+     */
+    private $externalLinks;
+
     use TaggableTrait {
         TaggableTrait::__construct as private __taggableTraitConstruct;
     }
@@ -57,6 +62,7 @@ class Nation
     {
         $this->__taggableTraitConstruct();
         $this->unitGenerics = new ArrayCollection();
+        $this->externalLinks = new ArrayCollection();
     }
 
     public function getAllTags()
@@ -133,6 +139,30 @@ class Nation
     public function setId(string $id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ExternalLink[]
+     */
+    public function getExternalLinks(): Collection
+    {
+        return $this->externalLinks;
+    }
+
+    public function addExternalLink(ExternalLink $externalLink): self
+    {
+        if (!$this->externalLinks->contains($externalLink)) {
+            $this->externalLinks[] = $externalLink;
+        }
+
+        return $this;
+    }
+
+    public function removeExternalLink(ExternalLink $externalLink): self
+    {
+        $this->externalLinks->removeElement($externalLink);
 
         return $this;
     }

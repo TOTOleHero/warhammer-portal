@@ -51,7 +51,7 @@ class UnitGeneric
 
     /**
      * @JMS\Type("string")
-     * @ORM\ManyToOne(targetEntity=Nation::class, inversedBy="units")
+     * @ORM\ManyToOne(targetEntity=Nation::class, inversedBy="unitGenerics")
      * @ORM\JoinColumn(nullable=false)
      */
     private $nation;
@@ -86,6 +86,24 @@ class UnitGeneric
     }
 
     /**
+     * @return GameSystem
+     */
+    public function getGameSystem($gameSystemId): GameSystem
+    {
+       
+        foreach ($this->getGameSystems() as $gameSystem) {
+            if($gameSystemId == $gameSystem->getId())
+            {
+                return $gameSystem;
+            }
+            
+        }
+
+        throw new GameSystemNotFoundException(sprintf('No GameSystem exit with gameSystem "%s"',$gameSystemId));
+        
+    }
+
+    /**
      * @return Collection|GameSystem[]
      */
     public function getGameSystems(): array
@@ -108,16 +126,16 @@ class UnitGeneric
     /**
      * @return UnitGameSystem
      */
-    public function findUnitGamesSystemByGameSystem($gameSystem): UnitGameSystem
+    public function findUnitGamesSystemByGameSystemId($gameSystemId): UnitGameSystem
     {
         foreach ($this->getUnitGameSystems() as $unitGameSystem) {
-            if($unitGameSystem->getGameSystem()->getId() == $gameSystem)
+            if($unitGameSystem->getGameSystem()->getId() == $gameSystemId)
             {
                return $unitGameSystem;
             }
         }
 
-        throw new GameSystemNotFoundException(sprintf('No UnitGameSystem exit with gameSystem "%s"',$gameSystem));
+        throw new GameSystemNotFoundException(sprintf('No UnitGameSystem exit with gameSystem "%s"',$gameSystemId));
     }
 
     /**
