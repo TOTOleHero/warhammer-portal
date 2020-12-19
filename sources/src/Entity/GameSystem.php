@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\GameSystemRepository;
+use App\Traits\LinkableTrait;
 use App\Traits\TaggableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -67,17 +68,20 @@ class GameSystem implements Translatable
      */
     private $world;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=ExternalLink::class)
-     */
-    private $externalLinks;
+
 
     use TaggableTrait {
         TaggableTrait::__construct as private __taggableTraitConstruct;
     }
 
+
+    use LinkableTrait{
+        LinkableTrait::__construct as private __linkableTraitConstruct;
+    }
+
     public function __construct()
     {
+        $this->__linkableTraitConstruct();
         $this->__taggableTraitConstruct();
         $this->externalLinks = new ArrayCollection();
     }
@@ -176,27 +180,5 @@ class GameSystem implements Translatable
 
 
     
-    /**
-     * @return Collection|ExternalLink[]
-     */
-    public function getExternalLinks(): Collection
-    {
-        return $this->externalLinks;
-    }
-
-    public function addExternalLink(ExternalLink $externalLink): self
-    {
-        if (!$this->externalLinks->contains($externalLink)) {
-            $this->externalLinks[] = $externalLink;
-        }
-
-        return $this;
-    }
-
-    public function removeExternalLink(ExternalLink $externalLink): self
-    {
-        $this->externalLinks->removeElement($externalLink);
-
-        return $this;
-    }
+    
 }

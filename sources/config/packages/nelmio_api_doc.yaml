@@ -1,0 +1,12 @@
+nelmio_api_doc:
+    models: { use_jms: true }
+    documentation:
+        #host: api.example.com
+        #schemes: [http, https]    
+        info:
+            title: Fantasy Battle DB
+            description: API for Fantasy Battle DB site
+            version: 1.0.0
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

@@ -10,7 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use Swagger\Annotations as SWG;
 
 class EquipmentController extends AbstractFOSRestController
 {
@@ -26,6 +28,15 @@ class EquipmentController extends AbstractFOSRestController
 
     /**
      * @Route("/api/equipment/", name="api_equipment_index", methods={"GET"})
+     * @SWG\Response(
+     *     response=200,
+     *     description="All Equipment",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @SWG\Items(ref=@Model(type=Equipment::class))
+     *     )
+     * )
+     * @SWG\Tag(name="equipment")
      */
     public function apiIndex(EquipmentRepository $equipmentRepository): Response
     {
@@ -69,6 +80,14 @@ class EquipmentController extends AbstractFOSRestController
 
      /**
      * @Route("/api/equipment/{id}", name="api_equipment_show", methods={"GET"})
+     * @SWG\Response(
+     *     response=200,
+     *     description="All Equipment",
+     *     @SWG\Schema(
+     *         @Model(type=Equipment::class)
+     *     )
+     * ) 
+     * @SWG\Tag(name="equipment")
      */
     public function apiShow(Equipment $equipment): Response
     {
