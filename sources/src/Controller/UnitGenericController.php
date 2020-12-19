@@ -26,7 +26,7 @@ class UnitGenericController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/api/unitGeneric/", name="api_unitGeneric_index", methods={"GET"})
+     * @Route("/api/unitGeneric/", name="api_unitGeneric_index", methods={"GET"}) 
      */
     public function apiIndex(UnitGenericRepository $unitGenericRepository): Response
     {

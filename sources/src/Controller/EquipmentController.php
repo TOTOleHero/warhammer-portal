@@ -82,7 +82,7 @@ class EquipmentController extends AbstractFOSRestController
      * @Route("/api/equipment/{id}", name="api_equipment_show", methods={"GET"})
      * @SWG\Response(
      *     response=200,
-     *     description="All Equipment",
+     *     description="One Equipment",
      *     @SWG\Schema(
      *         @Model(type=Equipment::class)
      *     )

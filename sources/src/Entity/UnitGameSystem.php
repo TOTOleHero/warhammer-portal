@@ -12,6 +12,9 @@ use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use Swagger\Annotations as SWG;
 
 /**
  * @Gedmo\TranslationEntity(class="App\Entity\UnitGameSystemTranslation")
@@ -44,6 +47,18 @@ class UnitGameSystem
     /**
      * @var Collection|Profile[]
      * @ORM\OneToMany(targetEntity=Profile::class, mappedBy="unitGameSystem", orphanRemoval=true)
+     * @SWG\Property(
+     *      type="array",
+     *      @SWG\Items(
+     *          ref=@Model(type=Profile::class), 
+     *          allOf={
+     *          @SWG\Schema(ref=@Model(type=ProfileAOS4::class)),
+     *          @SWG\Schema(ref=@Model(type=ProfileWFB9::class)),
+     *          @SWG\Schema(ref=@Model(type=ProfileWFB12::class)),
+     *          @SWG\Schema(ref=@Model(type=ProfileWHQ::class)),
+     *          @SWG\Schema(ref=@Model(type=ProfileT9A12::class))
+     *      })
+     * )
      */
     private $profiles;
 

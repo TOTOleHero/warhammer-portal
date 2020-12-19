@@ -5,7 +5,16 @@ namespace App\Entity;
 use App\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Swagger\Annotations as SWG;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+
 /**
+  * @SWG\Definition(
+ *      allOf={
+ *          @SWG\Schema(ref=@Model(type=Profile::class))
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
  */
 class ProfileWHQ extends Profile

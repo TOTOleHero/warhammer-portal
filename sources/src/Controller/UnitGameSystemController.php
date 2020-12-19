@@ -29,6 +29,15 @@ class UnitGameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/api/unitGameSystem/", name="api_unitGameSystem_index", methods={"GET"})
+     * @SWG\Response(
+     *     response=200,
+     *     description="All UnitGameSystem",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @SWG\Items(ref=@Model(type=UnitGameSystem::class))
+     *     )
+     * )
+     * @SWG\Tag(name="unti") 
      */
     public function apiIndex(UnitGameSystemRepository $unitGameSystemRepository): Response
     {
@@ -62,6 +71,15 @@ class UnitGameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/unitGameSystem/{id}", name="unitGameSystem_show", methods={"GET"})
+     * @SWG\Response(
+     *     response=200,
+     *     description="One UnitGameSystem",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @SWG\Items(ref=@Model(type=UnitGameSystem::class))
+     *     )
+     * )
+     * @SWG\Tag(name="unit")
      */
     public function show(UnitGameSystem $unitGameSystem): Response
     {

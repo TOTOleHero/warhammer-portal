@@ -1,6 +1,9 @@
 # warhammer-portal
 
 
+![UML version](./doc/uml.svg)
+<img src="./doc/uml.svg">
+
 ## prerequisites
 
 ### create DB
