@@ -50,7 +50,6 @@ class UnitGameSystem
      * @SWG\Property(
      *      type="array",
      *      @SWG\Items(
-     *          ref=@Model(type=Profile::class), 
      *          allOf={
      *          @SWG\Schema(ref=@Model(type=ProfileAOS4::class)),
      *          @SWG\Schema(ref=@Model(type=ProfileWFB9::class)),
