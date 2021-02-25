@@ -1,0 +1,150 @@
+Adventure Code,Level,Type,Race,Monster Name,Wounds,WND,Move,WS,BS,Strength,T,Initiative,Attacks,Gold (Each),Armour,Damage,Special Abilities,1,2,3,4,5,6,7,8,9,10
+,,DARK_ELVES,ELVE,Dark Elf Warrior,6,OOOOOO,5,4,3+,3,3(4),6,1,100,1,1D6,Armed With Crossbows (Str 4); Doge (6+); Hate Elves,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELVE,Dark Elf Champion,14,OOOOOOOOOOOOOO,5,5,5+,4,3(5),7,2,480,2,2D6,Dodge 6+; Hate Elves; Magic Weapon,2,2,3,3,4,4,4,4,4,4
+,,CHAOS,BEAST_HUMANOID ,Beastman,6,OOOOOO,4,4,4+,3,4,3,1,100,-,1D6,Throw Spears (Str 3),2,3,3,4,4,4,4,4,5,5
+,,CHAOS,BEAST_HUMANOID ,Beastman Champion,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,5,3+,4,4,4,2,610,-,1D6/2D6(5+),Magic Weapon; Throw Spears (Str 8),2,2,3,3,4,4,4,4,4,4
+,,CHAOS,BEAST_HUMANOID ,Beastman Hero,34,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,6,2+,4,5(7),5,3,1300,2,2D6,Magic Item; Magic Weapon; Throw Spears (Str 9),2,2,3,3,3,4,4,4,4,4
+,,CHAOS,BEAST_HUMANOID ,Beastman Lord,47,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,7,1+,4,5(7),6,4,2000,2,3D6,Magic Armour; 2 x Magic Item; Magic Weapon; Throw Spears (Str 10),2,2,2,3,3,3,4,4,4,4
+,,CHAOS,BEAST_HUMANOID ,Beastman Shaman,26,OOOOOOOOOOOOOOOOOOOOOOOOOO,4,4,5+,3,5,4,1,680,-,1D6,Beastman Magic 1; Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,CHAOS,BEAST_HUMANOID ,Beastman Shaman Champion,34,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,4,4+,4,5,4,1,1340,-,2D6,Beastman Magic 2; Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,CHAOS,HUMAN ,Chaos Warrior,12,OOOOOOOOOOOO,4,6,1+,4,4(6),6,2,240,2,1D6,,2,2,3,3,3,4,4,4,4,4
+,,CHAOS,HUMAN ,Chaos Champion,15,OOOOOOOOOOOOOOO,4,7,Auto,5,4(6),7,3,910,2,1D6,Magic Armour; Magic Weapon,2,2,2,3,3,3,4,4,4,4
+,,CHAOS,HUMAN ,Chaos Hero,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,8,Auto,5,5(11),8,4,1930,6,3D6,"Magic Armour, 2 x Magic Item; Magic Weapon",2,2,2,3,3,3,3,4,4,4
+,,CHAOS,HUMAN ,Chaos Lord,35,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,9,Auto,5,5(11),9,5,3050,6,4D6,Magic Armour; 3 x Magic Item; Magic Weapon,2,2,2,2,3,3,3,3,4,4
+,,CHAOS,HUMAN ,Chaos Sorcerer,15,OOOOOOOOOOOOOOO,4,6,1+,4,5(6),6,2,840,1,1D6,Chaos Magic 1; Magic Resistance 4+; Magic Armour; Magic Item; Magic Weapon; Parry 5+,2,2,3,3,3,4,4,4,4,4
+,,CHAOS,HUMAN ,Master Chaos Sorcerer,31,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,6,1+,5,5(6),8,3,2400,1,4D6,Chaos Magic 3; Magic Dispel 4+; Magic Armour; Parry 5+,2,2,3,3,3,4,4,4,4,4
+,,CHAOS,DAEMON ,Chaos Hound,8,OOOOOOOO,6,4,-,4,4(6),4,2,160,2,1D6,Ambush 5+; Gang Up,2,3,3,4,4,4,4,4,5,5
+,,CHAOS,DAEMON ,Daemon of Khorne - Bloodletter,7,OOOOOOO,4,5,2+,4,3,6,2,200,-,1D6,Armed with Hellblade; Daemonic -1; Fear 5,2,2,3,3,4,4,4,4,4,4
+,,CHAOS,DAEMON ,Daemon of Khorne - Juggernaut,35,OOOOOOOOOOOOOOOOOOOOOOOOO,7,3,-,5,5(7),2,2,700,2,2D6,Daemonic -1; Fear 7; Magic Resistance 5+; Never Pinned,2,3,4,4,4,4,5,5,5,6
+,,DARK_ELVES,ELVE,Dark Elf Lord,34,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,7,Auto,4,4(8),9,4,1600,4,3D6,Dodge 4+; Hate Elves; Magic Resistance 5+; Magic Weapon; 2 x Magic Item; Magic Armour,2,2,2,3,3,3,4,4,4,4
+,,DARK_ELVES,ELVE,Dark Elf Assassin,12,OOOOOOOOOOOO,5,9,Auto,4,4,10,2,410,-,1D6,Ambush; Magic 5+; Assassinate 6+; Dodge 5+; Hate Elves; Weeping Blades,2,2,2,2,3,3,3,3,4,4
+,,DARK_ELVES,ELVE,Dark Elf Beastmaster,15,OOOOOOOOOOOOOOO,5,5,2+,4,4(6),4,2,160,2,1D6,Armed With Crossbows (Str 5); Beast Handler (Chaos Hounds or Warhounds); Hate Elves,2,2,3,3,4,4,4,4,4,4
+,,CHAOS,DAEMON ,Bloodthirster,125,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,10,Auto,8,7,8,10,8000,-,8D6,Armed with Axe of Khorne; Armed with Daemon Whip; Drain Power; Fly; Greater Daemon 14; Ignore Blow 3+; Ignore Pain 12; Large Monster; Magic Drain 5+,2,2,2,2,3,3,3,3,3,4
+,,CHAOS,DAEMON ,Daemon of Slaanesh - Daemonette,15,OOOOOOOOOOOOOOO,4,6,2+,4,3,6,3,300,-,1D6,Ambush 5+; Daemonic -1; Fear 6; Magic Resistance 6+,2,2,3,3,3,4,4,4,4,4
+,,CHAOS,DAEMON ,Daemon of Slaanesh - Fiend of Slaanesh,8,OOOOOOOO,6,3,-,3,3,3,3,250,-,1D6,Aura of Slaanesh; Daemonic -1; Fear 6,2,3,4,4,4,4,5,5,5,6
+,,CHAOS,DAEMON ,Keeper of Secrets,84,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,9,Auto,7,7(11),7,6,5500,5,6D6,Ambush; Magic 2+; Aura of Slaanesh; Never Pinned; Greater Daemon 13; Ignore Blow 5+; Ignore Pain 7; Large Monster; Chaos Magic 4; Magic Dispel 4+; Magic Resistance 4+,2,2,2,2,3,3,3,3,4,4
+,,CHAOS,DAEMON ,Daemon of Nurgle - Plaugebearer,9,OOOOOOOOO,4,5,2+,4,3,6,2,200,-,1D6,Daemonic -1; Fear 5; Plague,2,2,3,3,4,4,4,4,4,4
+,,CHAOS,DAEMON ,Daemon of Nurgle - Beast of Nurgle,25,OOOOOOOOOOOOOOOOOOOOOOOOO,3,3,-,3,5,3,1D6,750,-,2D6,Daemonic -1; Paralysis; Plague; Slime Trail,2,3,4,4,4,4,5,5,5,6
+,,CHAOS,DAEMON ,Daemon of Nurgle - Nurgling,2,OO,4,3,4+,3,3,4,2,50,-,Special,Ambush Auto; Daemonic -1; Fear 4; Gang Up; Plague,2,3,4,4,4,4,5,5,5,6
+,,CHAOS,DAEMON ,Great Unclean One,100,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,7,Auto,7,8(12),4,7,5500,4,6D6,Ambush; Magic 5+; Chaos Magic 4; Greater Daemon 13; Ignore Blows 5+; Ignore Pain 10; Large Monster; Magic Dispel 4+; Plauge; Magic Resistance 4+; Stream of Corruption,2,2,2,3,3,3,4,4,4,4
+,,CHAOS,DAEMON ,Daemon of Tzeentch - Flamer of Tzeentch,17,OOOOOOOOOOOOOOOOO,9,3,2+,5,4,4,Special,300,-,Special,Ambush; Magic 5+; Daemonic -1; Fear 7; Flamer of Tzeentch Attack; Magic Resistance 6+,2,3,4,4,4,4,5,5,5,6
+,,CHAOS,DAEMON ,Daemon of Tzeentch - Pink Horror,8,OOOOOOOO,4,5,2+,4,3,6,2,200,-,1D6,Daemonic -1; Fear 6; Magic Resistance 6+; Die--Blue Horrors,2,2,3,3,4,4,4,4,4,4
+,,CHAOS,DAEMON ,Daemon of Tzeentch - Blue Horror,4,OOOO,4,3,4+,3,3,7,1,100,-,1D6,Daemonic -1; Fear 4; Magic Resistance 6+,2,3,4,4,4,4,5,5,5,6
+,,CHAOS,DAEMON ,Lord of Change,75,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,8,9,Auto,7,7(11),10,6,5000,4,6D6,Ambush; Magic Auto; Greater Daemon 13; Chaos Magic 5; Fly; Ignore Blows 5+; Ignore Pain 7; Large Monster; Magic Source; 3 x Magic Item; Power of Tzeentch,2,2,2,2,3,3,3,3,4,4
+,,CHAOS_DWARFS,DWARF,Chaos Dwarf,8,OOOOOOOO,3,4,4+,3,4(6),2,1,140,2,1D6/2D6(6+),Magic Resistance 6+,2,3,3,4,4,4,4,4,5,5
+,,CHAOS_DWARFS,DWARF,Chaos Dwarf w/ Blunderbuss,8,OOOOOOOO,3,4,4+,3,4(5),2,1,140,1,1D6,Armed with Blunderbuss; Magic Resistance 6+,2,3,3,4,4,4,4,4,5,5
+,,CHAOS_DWARFS,DWARF,Chaos Dwarf Champion,16,OOOOOOOOOOOOOOOO,3,5,3+,4,4(6),3,2,480,2,2D6/3D6(5+),Magic Resistance 6+; Magic Armour; Magic Item; Magic Weapon,2,2,3,3,4,4,4,4,4,4
+,,CHAOS_DWARFS,DWARF,Chaos Dwarf Lord,33,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,3,7,1+,4,5(8),5,4,1600,3,3D6,Magic Resistance 5+; Magic Armour; 2 x Magic Item; Magic Weapon,2,2,2,3,3,3,4,4,4,4
+,,CHAOS_DWARFS,DWARF,Chaos Dwarf Sorcerer,8,OOOOOOOO,3,4,4+,3,5+1* (8),3,1,590,2,1D6/2D6(6+),Chaos Dwarf Magic 1; Magic Dispel 4+; Magic Resistance 4+; Protection Ring (+1 T*),2,3,3,4,4,4,4,4,5,5
+,,CHAOS_DWARFS,DWARF,Chaos Dwarf Master Sorcerer,26,OOOOOOOOOOOOOOOOOOOOOOOOOO,3,4,4+,4,5(8),3,1,590,2,1D6/2D6(6+),Chaos Dwarf Magic 3; Magic Dispel 4+; Magic Item; Magic Armour; Magic Weapon; Magic Resistance 4+,2,3,3,4,4,4,4,4,5,5
+,,CHAOS_DWARFS,DWARF,Chaos Dwarf Sorcerer Lord,40,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,3,4,4+,4,5(8),5,3,3280,3,3D6/4D6(5+),Chaos Dwarf Magic 4; Magic Dispel 4+; Magic Resistance 3+; Magic Armour; 3 x Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,GREENSKINS,GOBLIN ,Goblin,2,OO,4,2,5+,3,3,2,1,20,-,1D6,Armed with [1-2] Bows (Str 1) or [4-6] Spears (fight in Ranks),3,4,4,4,5,5,6,6,6,6
+,,DARK_ELVES,ELVE,Dark Elf Hero,25,OOOOOOOOOOOOOOOOOOOOOOOOO,5,6,1+,4,4(8),8,3,1040,4,2D6,Dodge 4+; Hate Elves; Magic Resistance 5+; Magic Armour; 2 x Magic,,,,,,,,,,
+,,DARK_ELVES,ELVE,Dark Elf Hero,25,OOOOOOOOOOOOOOOOOOOOOOOOO,5,6,1+,4,4(8),8,3,1040,4,2D6,Dodge 4+; Hate Elves; Magic Resistance 5+; Magic Weapon; Magic Armour,2,2,3,3,3,4,4,4,4,4
+,,DARK_ELVES,ELVE,Dark Elf Sorcerer,12,OOOOOOOOOOOO,5,4,3+,3,4,7,1,590,-,1D6,Dark Elf Magic 1; Hate Elves; Magic Resistance 6+; Magic Item,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELVE,Dark Elf Sorcerer Champion,20,OOOOOOOOOOOOOOOOOOOO,5,4,3+,4,4(5),7,1,1210,1,1D6,Hate Elves; Dark Elf Magic 2; Magic Resistance 5+; Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELVE,Dark Elf Master Sorcerer,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,4,3+,4,4(6),8,2,2190,2,2D6,Hate Elves; Dark Elf Magic 3; Magic Dispel 4+; Magic Resistance 4+; 2 x Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELVE,Dark Elf Sorcerer Lord,41,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,4,3+,4,4(7),9,3,3280,3,3D6,Ambush; Magic A; Hate Elves; Dark Elf Magic 4; Magic Dispel 4+; Magic Resistance 3+; 3 x Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELVE,Dark Elf Naggaroth Black Guards,6,OOOOOO,5,5,3+,4,3(5),7,1,150,2,1D6,Armed With Halberds; Fight In Ranks; Hate Elves,2,2,3,3,4,4,4,4,4,4
+,,DARK_ELVES,ELVE,Witch Elf,11,OOOOOOOOOOO,5,4,3+,3,3,6,1,140,-,1D6,Frenzy 4+; Hate Elves,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELVE,Witch Elf Champion,13,OOOOOOOOOOOOO,5,5,2+,4,3,7,2,600,-,1D6,Frenzy 3+; Hate Elves,2,2,3,3,4,4,4,4,4,4
+,,GIANT,GIANT,Giant,64,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,3,4+,7,6(11),3,Spec.,2000,5,5D6,Fear 11; Giant Attacks; Ignore Blows 5+; Ignore Pain 10; Large Monster; Never Pinned,2,3,4,4,4,4,5,5,5,6
+,,CHAOS_DWARFS,DWARF,Bull Centaur,12,OOOOOOOOOOOO,8,4,4+,4,4(6),3,2,410,2,1D6/2D6(5+),Fear 5; Magic Resistance 6+,2,3,3,4,4,4,4,4,5,5
+,,CHAOS_DWARFS,DWARF,Bull Centaur Champion,23,OOOOOOOOOOOOOOOOOOOOOOO,8,5,3+,5,4(6),4,3,1060,2,2D6,Fear 7; Magic Resistance 5+; Magic Armour; Magic Item; Magic Weapon,2,2,3,3,4,4,4,4,4,4
+,,CHAOS_DWARFS,DWARF,Bull Centaur Hero,32,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,8,6,2+,5,5(8),5,4,2320,3,3D6/4D6(5+),Fear 7; Magic Resistance 5+; Magic Armour; 2 x Magic Item; Magic Weapon,2,2,3,3,3,4,4,4,4,4
+,,CHAOS_DWARFS,DWARF,Bull Centaur Lord,42,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,8,7,1+,5,5(8),6,5,3680,3,4D6/5D6(5+),Fear 7; Magic Resistance 4+; Magic Armour; 3 x Magic Item; Magic Weapon,2,2,2,3,3,3,4,4,4,4
+,,GREENSKINS,MONSTER ,Wild Cave Squig,3,OOO,Spec.,4,-,5,3,5,2,200,-,1D6,Never Pinned; Sqiud Wild Attack,2,3,3,4,4,4,4,4,5,5
+,,GREENSKINS,MONSTER ,Trained Cave Squig,3,OOO,Spec.,4,-,5,3,5,2,200,-,1D6,Never Pinned,2,3,3,4,4,4,4,4,5,5
+,,MONSTER,BEAST_HUMANOID ,Centaur,12,OOOOOOOOOOOO,8,3,3+,4,3,3,2,300,-,2D6,Armed With Bows (Str 4); Fear 4,2,3,4,4,4,4,5,5,5,6
+,,MONSTER,BEAST_HUMANOID ,Centaur Champion,27,OOOOOOOOOOOOOOOOOOOOOOOOOOO,8,4,2+,5,3(5),5,3,1000,2,2D6/3D6(5+),Armed With Bows (Str 7); Fear 8; Magic Armour; Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,MONSTER,BEAST_HUMANOID ,Centaur Hero,40,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,8,5,1+,5,4(8),5,4,2200,4,3D6,Armed With Bows (Str 8); Fear 9; Magic Armour; Magic Item; Magic Weapon,2,2,3,3,4,4,4,4,4,4
+,,MONSTER,MONSTER ,Chimera,60,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,4,-,7,6(9),4,6,2500,3,3D6/4D6(5+),Breathe Fire 4 (Ambush Auto); Ignore Blows 5+; Ignore Pain 7; Large Monster; Sting (3D6); Terror 11,2,3,3,4,4,4,4,4,5,5
+,,MONSTER,MONSTER ,Cockatrice,26,OOOOOOOOOOOOOOOOOOOOOOOOOO,4,3,-,4,4,4,3,1500,-,3D6/4D6(5+),Fear 10; Fly; Petrify,2,3,4,4,4,4,5,5,5,6
+,,MONSTER,BEAST_HUMANOID ,Dragon Ogre,40,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,4,5+,5,5(7),2,3,870,2,2D6,Fear 8,2,3,3,4,4,4,4,4,5,5
+,,MONSTER,BEAST_HUMANOID ,Dragon Ogre Champion,44,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,5,4+,6,5(7),3,4,1550,2,2D6,Fear 8; Magic Armour; Magic Weapon,2,2,3,3,4,4,4,4,4,4
+,,MONSTER,BEAST_HUMANOID ,Dragon Ogre Hero,53,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,6,3+,6,6(8),4,5,3300,2,3D6,Fear 9; Magic Weapon; Magic Item; Magic Armour,2,2,3,3,3,4,4,4,4,4
+,,MONSTER,MONSTER ,Dragon,74,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,6,-,6,6(12),8,7,4500,6,6D6,"Dragon Breath (Ambush, Magic Auto); Fly; Ignore Blows 5+; Ignore Pain 7; Large Monster; Terror 12; Treasure Horde +0",2,2,3,3,3,4,4,4,4,4
+,,MONSTER,MONSTER ,Great Dragon,84,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,7,-,7,7(11),7,8,6000,7,6D6/7D6(5+),"Dragon Breath (Ambush, Magic Auto); Fly; Ignore Blows 4+; Ignore Pain 7; Large Monster; Chaos Magic 1; Terror 13; Treasure Horde +1",2,2,2,3,3,3,4,4,4,4
+,,MONSTER,MONSTER ,Emperor Dragon,94,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,8,-,8,8(13),6,9,7500,8,8D6,"Dragon Breath (Ambush, Magic Auto); Fly; Ignore Blows 4+; Ignore Pain 3D6; Large Monster; Chaos Magic 2; Terror 14; Treasure Horde +2",2,2,2,3,3,3,3,4,4,4
+,,MONSTER,MONSTER ,Giant Bats,1,O,8,2,-,2,2,-,1,15,-,1D6,Ambush Auto; Fly,3,4,4,4,5,5,6,6,6,6
+,,MONSTER,MONSTER ,Giant Rats,1,O,6,2,-,3,3,4,1,25,-,Spec.,Deathleap (2D6+2),3,4,4,4,5,5,6,6,6,6
+,,MONSTER,MONSTER ,Giant Scorpions,20,OOOOOOOOOOOOOOOOOOOO,5,3,-,5,6,1,2,450,-,2,Sting (2D6),2,3,4,4,4,4,5,5,5,6
+,,MONSTER,MONSTER ,Giant Spider,1,O,6,2,-,Spec.,2,-,1,15,-,1,Web (1D3),3,4,4,4,5,5,6,6,6,6
+,,MONSTER,MONSTER ,Gigantic Spider,20,OOOOOOOOOOOOOOOOOOOO,5,3,-,Spec.,4,1,2,450,-,2D6,Web (1D6),2,3,4,4,4,4,5,5,5,6
+,,MONSTER,MONSTER ,Gorgon,35,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,2,4+,3,3,5,1,1100,-,2D6,Fear 9; Petrify,3,4,4,4,5,5,6,6,6,6
+,,MONSTER,MONSTER ,Great Taurus,50,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,6,-,6,6(9),7,4,2250,3,4D6,Breathe Fire; Fly; Terror 10,2,2,3,3,3,4,4,4,4,4
+,,MONSTER,MONSTER ,Griffon,52,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,5,-,6,5,7,4,1500,-,4D6,Fly; Terror 10,2,2,3,3,4,4,4,4,4,4
+,,MONSTER,MONSTER ,Hippogriff,55,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,8,5,-,6,5,6,3,1450,-,3D6/4D6(5+),Fly; Terror 10,2,2,3,3,4,4,4,4,4,4
+,,MONSTER,MONSTER ,Hydra,70,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,3,-,5,6(9),3,5,2250,3,4D6,Breathe Fire 4 (Ambush Auto); Ignore Blows 5+; Ignore Pain 7; Large Monster; Magic Resistance 5+; Never Pinned; Terror 11,2,3,4,4,4,4,5,5,5,6
+,,MONSTER,MONSTER ,Lammasu,50,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,6,-,6,7,6,3,2000,-,4D6,Fly; Magic Resistance 4+; Sorcerous Exhalation; Terror 10,2,2,3,3,3,4,4,4,4,4
+,,MONSTER,MONSTER ,Manticore,50,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,6,-,7,7,4,4,2000,-,4D6,Fly; Manticore Sting (Ambush; Magic Auto); Terror 11,2,2,3,3,3,4,4,4,4,4
+,,MONSTER,BEAST_HUMANOID ,Minotaur,15,OOOOOOOOOOOOOOO,6,4,4+,4,4,3,2,440,-,2D6,Fear 5,2,3,3,4,4,4,4,4,5,5
+,,MONSTER,BEAST_HUMANOID ,Minotaur Champion,34,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,5,3+,6,5,5,3,1100,1,3D6,Fear 6; Magic Weapon,2,2,3,3,4,4,4,4,4,4
+,,MONSTER,BEAST_HUMANOID ,Minotaur Hero,48,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,6,2+,5,5,5,4,2400,2,3D6/4D6(5+),Fear 9; 2 x Magic Item; Magic Weapon,2,2,3,3,3,4,4,4,4,4
+,,MONSTER,OGRE,Ogre,13,OOOOOOOOOOOOO,6,3,5+,4,5,3,2,400,-,1D6/2D6(5+),Fear 5,2,3,4,4,4,4,5,5,5,6
+,,MONSTER,MONSTER ,Rat Ogre,20,OOOOOOOOOOOOOOOOOOOO,6,4,-,5,5,5,2,500,-,2D6,Fear 5,2,3,3,4,4,4,4,4,5,5
+,,MONSTER,MONSTER ,Troll,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,3,6+,5,4,1,3,650,-,2D6,Fear 6; Regenerate 2; Vomit,2,3,4,4,4,4,5,5,5,6
+,,MONSTER,MONSTER ,Stone Troll,25,OOOOOOOOOOOOOOOOOOOOOOOOO,6,3,6+,5,4,1,3,650,-,2D6,Fear 6; Magic Drain 6+; Regenerate 2,2,3,4,4,4,4,5,5,5,6
+,,MONSTER,MONSTER ,Warhound,6,OOOOOO,6,5,4,-,3,3,6,1,130,1D6,Ambush 5+; Gang Up,2,3,3,4,4,4,4,4,5,5
+,,MONSTER,MONSTER ,Wyvern,46,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,5,-,5,6(9),4,3,1800,3,3D6/4D6(5+),Drag and Rend; Fly; Ignore blows 5+; Ignore Pain 6; Large Monster; Never Pinned; Sting (3D6); Terror 10,2,2,3,3,4,4,4,4,4,4
+,,SKAVEN,SKAVEN,Skaven Clanrat,3,OOOOOO,5,3,4+,3,3,4,1,40,-,1D6,None,2,3,4,4,4,4,5,5,5,6
+,,SKAVEN,SKAVEN,Skaven Clanrat Champion,11,OOOOOOOOOO,5,4,3+,4,3(5),5,2,270,2,2D6,Magic Weapon; Never Pinned2,3,3,4,4,4,4,4,4,5,5
+,,SKAVEN,SKAVEN,Skaven Chieftain,20,OOOOOOOOOOOOOOOOOOOO,5,5,2+,4,4(6),6,3,590,2,2D6,Dodge 5+; Never Pinned; Weeping Blade,2,2,3,3,4,4,4,4,4,4
+,,SKAVEN,SKAVEN,Skaven Gutter Runner,5,OOOOO,6,4,3+,4,3,5,1,120,-,1D6,Ambush 4+,2,3,3,4,4,4,4,4,5,5
+,,SKAVEN,SKAVEN,Skaven Assassin,7,OOOOOOO,6,5,3+,6,3,5,2,300,-,1D6,Ambush Auto; Assassinate 6+; Dodge 5+; Weeping Blade,2,2,3,3,4,4,4,4,4,4
+,,SKAVEN,SKAVEN,Skaven Deathmaster,32,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,8,1+,4,4,10,5,2300,-,4D6,"Ambush, Magic Auto; Assassinate 4+; Dodge 4+; Magic Resistance 5+; Magic Weapon; Weeping Blade",2,2,2,3,3,3,3,4,4,4
+,,SKAVEN,SKAVEN,Warpfire Thrower Team,3,OOO,4,3,5+,3,3(4),4,1,700,1,Spec.,Armed With Warpfire Thrower; (Missle Troops),2,3,4,4,4,4,5,5,5,6
+,,SKAVEN,SKAVEN,Skaven Jezzails,6,OOOOOO,5,3,4+,3,3(4),4,1,300,1,1D6,"Armed With Jezzail (Str 5, Ignore 3 points of Armour)",2,3,4,4,4,4,5,5,5,6
+,,SKAVEN,SKAVEN,Skaven Vermin Lord,75,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,8,8,Auto,8,7(13),10,8,6000,6,6D6,"Ambush, Magic Auto; Armed With Doom Glaive; Dodge 3+; Frenzy 5+; Greater Daemon 14; Ignore Pain 6; Large Monster; Skaven Magic 4*; Magic Dispel 4+; Magic Resistance 4+; Skitterleap",2,2,2,3,3,3,3,4,4,4
+,,SKAVEN,SKAVEN,Skaven Stormvermin,5,OOOOO,5,4,4+,4,3(4),5,1,95,1,1D6,,2,3,3,4,4,4,4,4,5,5
+,,SKAVEN,SKAVEN,Skaven Stormvermin Champion,10,OOOOOOOOOO,5,4,4+,4,3(4),5,1,110,1,1D6,Armed With Halberds; Fight In Ranks,2,3,3,4,4,4,4,4,5,5
+,,SKAVEN,SKAVEN,Skaven Warlord,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,6,1+,4,4(7),7,4,900,3,2D6,Dodge 5+; Magic Resistance 5+; Magic Armour; Magic Item; Magic Weapon,2,2,3,3,3,4,4,4,4,4
+,,SKAVEN,SKAVEN,Plague Censer Bearers,4,OOOO,5,4,-,4,4,4,1,150,-,Spec.,Armed With Plague Censers,2,3,3,4,4,4,4,4,5,5
+,,SKAVEN,SKAVEN,Skaven Plague Monks,5,OOOOO,5,3,4+,3,4,4,1,60,-,1D6,Frenzy 5+; Weeping Blade,2,3,4,4,4,4,5,5,5,6
+,,SKAVEN,SKAVEN,Skaven Plague Priest,23,OOOOOOOOOOOOOOOOOOOOOOO,5,5,2+,4,5,6,3,730,-,1D6,"Ambush, Magic Auto; Frenzy 4+; Magic Weapon; Weeping Blade",2,2,3,3,4,4,4,4,4,4
+,,SKAVEN,SKAVEN,Skaven Plague Lord,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,6,2+,4,5,7,4,2250,-,3D6,Death Fog; Dodge 3+; Frenzy 3+; Magic Resistance 3+; 3 x Magic Items; Magic Weapon; Never Pinned; Terror 10; Weeping Blade,2,2,3,3,3,4,4,4,4,4
+,,SKAVEN,SKAVEN,Skaven Poison Globadiers,4,OOOO,5,3,4+,3,3,4,1,200,-,Spec.,Armed With Poison Wind Globes,2,3,4,4,4,4,5,5,5,6
+,,SKAVEN,SKAVEN,Skaven Warlock,15,OOOOOOOOOOOOOOO,5,3,4+,3,4,5,1,560,-,2D6,Dodge 5+; Skaven Magic 1; Magic Dispel 6+,2,3,4,4,4,4,5,5,5,6
+,,SKAVEN,SKAVEN,Skaven Warlock Champion,18,OOOOOOOOOOOOOOOOOO,5,3,4+,4,4,5,1,1180,2,2D6,Skaven Magic 2; Magic Dispel 5+; Magic Resistance 5+; Magic Item; Weeping Blade,2,3,4,4,4,4,5,5,5,6
+,,SKAVEN,SKAVEN,Skaven Master Warlock,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,3,4+,4,4,6,2,1900,-,2D6,Skaven Magic 3; Magic Resistance 4+; 3 x Magic Items; Magic Weapon,2,3,4,4,4,4,5,5,5,6
+,,SKAVEN,SKAVEN,Skaven Grey Seer,43,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,6,1+,4,4,7,4,3400,-,3D6,Skaven Magic 4; Magic Dispel 4+; Magic Resistance 4+; 4 x Magic Items; Magic Weapon,2,2,3,3,3,4,4,4,4,4
+,,UNDEAD,UNDEAD ,Ghost,16,OOOOOOOOOOOOOOOO,4,2,-,-,3,3,1,-,-,Spec.,Chill 1; Ethereal -1; Fear 6,3,4,4,4,5,5,6,6,6,6
+,,UNDEAD,UNDEAD ,Liche,40,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,7,Auto,5,4,6,5,3500,-,4D6,Fear 10; Necromantic Magic 3 (See Necromancer Entry); 2 x Magic Items; Magic Weapon; Regenerate 2,2,2,2,3,3,3,4,4,4,4
+,,UNDEAD,UNDEAD ,Liche King,63,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,7,Auto,7,6(12),4,5,7500,6,6D6,Chaos Magic 2; Large Monster; Necromantic Magic 3; Magic Armour; Magic Dispel 4+; Magic Resistance 4+; 3 x Magic Items; Magic Weapon; Terror 14; Regenerate 2,2,2,2,3,3,3,4,4,4,4
+,,UNDEAD,UNDEAD ,Ghoul,4,OOOO,4,2,-,3,4,3,2,80,-,1D6,Break; Fear 4,3,4,4,4,5,5,6,6,6,6
+,,UNDEAD,UNDEAD ,Mummy,40,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,3,3,-,4,5,3,2,450,-,2D6,Fear 7; Tomb Rot (1D3),2,3,4,4,4,4,5,5,5,6
+,,UNDEAD,UNDEAD ,Tomb King,45,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,3,4,-,5,5(7),4,3,1000,2,3D6,Fear 7; Magic Armour; Magic Item; Magic Weapon; Tomb Rot (1D6),2,3,3,4,4,4,4,4,5,5
+,,UNDEAD,UNDEAD ,Necromancer,25,OOOOOOOOOOOOOOOOOOOOOOOOO,4,4,3+,4,3,3,2,680,-,2D6,Necromantic Magic 1; Magic Resistance 5+; Magic Weapon; Regenerate 2,2,3,3,4,4,4,4,4,5,5
+,,UNDEAD,UNDEAD ,Necromancer Champion,29,OOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,5,2+,4,3,4,3,1630,-,2D6,Necromantic Magic 2; Magic Resistance 4+; 2 x Magic Items; Magic Weapon; Regenerate 2,2,2,3,3,4,4,4,4,4,4
+,,UNDEAD,UNDEAD ,Master Necromancer,34,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,6,1+,5,4,5,4,2780,3,3D6,Necromantic Magic 3; Magic Dispel 4+; Magic Resistance 4+; 3 x Magic Items; Magic Weapon; Regenerate 2,2,2,3,3,3,4,4,4,4,4
+,,UNDEAD,UNDEAD ,Necromancer Lord,39,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,7,Auto,5,4,6,5,4100,4,3D6,"Ambush, Magic Auto; Necromantic Magic 4; Magic Dispel 4+; Magic Resistance 4+; 4 x Magic Items; Magic Weapon; Regenerate 2",2,2,2,3,3,3,4,4,4,4
+,,UNDEAD,UNDEAD ,Skeleton,5,OOOOO,4,2,5+,3,3,2,1,80,-,1D6,Armed With [1-3] Bows (Str 3) or [4-6] Swords; Fear 5; Regenerate 1,3,4,4,4,5,5,6,6,6,6
+,,UNDEAD,UNDEAD ,Tomb Guardian,15,OOOOOOOOOOOOOOO,4,3,6+,3,3(4),2,1,110,1,2D6,Fear 5; Regenerate 1,2,3,4,4,4,4,5,5,5,6
+,,UNDEAD,UNDEAD ,Zombie,5,OOOOO,4,2,-,3,3,1,1,40,-,1D6,Fear 3,3,4,4,4,5,5,6,6,6,6
+,,UNDEAD,UNDEAD ,Wraith,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,3,-,3,4,3,2,750,-,Spec.,Chill 2; Ethereal -1; Terror 8,2,3,4,4,4,4,5,5,5,6
+,,UNDEAD,UNDEAD ,Vampire Count,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,7,2+,7,6(9),8,3,2000,3,2D6/3D6(5+),"Ambush, Magic Auto; Fly; Necromantic Magic 2; Magic Resistance 5+; Vampire",2,2,2,3,3,3,4,4,4,4
+,,UNDEAD,UNDEAD ,Vampire Lord,42,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,8,1+,7,6(9),9,4,3750,3,3D6,"Ambush, Magic Auto; Fly; Necromantic Magic 3; Magic Resistance 5+; Vampire",2,2,2,3,3,3,3,4,4,4
+,,UNDEAD,UNDEAD ,Vampire Lord Necromancer,38,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,7,2+,6,5(9),8,3,4750,4,4D6,"Ambush, Magic Auto; Dispel 4+; Fly; Necromantic Magic 4; Magic Resistance 4+; Magic Armour; 2 x Magic Items; Magic Weapon; Vampire",2,2,2,3,3,3,4,4,4,4
+,,UNDEAD,UNDEAD ,Wight,14,OOOOOOOOOOOOOO,4,3,-,3,4(6),3,1,370,2,2D6,Fear 7,2,3,4,4,4,4,5,5,5,6
+,,UNDEAD,UNDEAD ,Wight Lord,35,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,4,-,4,4(6),4,2,650,2,2D6,Fear 8; Magic Armour; Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,GREENSKINS,GOBLIN ,Goblin Boss,6,OOOOOO,4,3,3+,4,3(5),3,2,150,2,1D6,Magic Weapon,2,3,4,4,4,4,5,5,5,6
+,,GREENSKINS,GOBLIN ,Goblin Big Boss,12,OOOOOOOOOOOO,4,4,2+,4,4(6),4,3,330,2,1D6,Magic Weapon; Magic Resistance 5+ (Ring),2,3,3,4,4,4,4,4,5,5
+,,GREENSKINS,GOBLIN ,Goblin Netter,2,OO,4,2,5+,3,3,2,1,35,-,Special,Armed with Nets,3,4,4,4,5,5,6,6,6,6
+,,GREENSKINS,GOBLIN ,Goblin Fanatic,2,OO,4,2,5+,3,3,2,1,300,-,Special,Armed with Ball and Chain; Never Pinned,3,4,4,4,5,5,6,6,6,6
+,,GREENSKINS,GOBLIN ,Goblin Squig Hunters,2,OO,4,2,5+,3,3,2,1,25,-,1D6,Herd Squigs,3,4,4,4,5,5,6,6,6,6
+,,GREENSKINS,GOBLIN ,Goblin Shaman,3,OOO,4,2,5+,3,4,3,1,280,-,1D6,Goblin Magic 1; Magic Resistance 5+ (Ring),3,4,4,4,5,5,6,6,6,6
+,,GREENSKINS,HOBGOBLIN ,Hobgoblins,4,OOOO,4,3,4+,3,3(4),2,1,50,1,1D6,Ambush; Magic Auto; Break,2,3,4,4,4,4,5,5,5,6
+,,GREENSKINS,ORC,Orc,3,OOO,4,3,4+,3,4,2,1,55,-,1D6,Armed with [1-3] Bows (Str 3) or [4-6] Swords,2,3,4,4,4,4,5,5,5,6
+,,GREENSKINS,ORC,Orc Boss,18,OOOOOOOOOOOOOOOOOO,4,4,3+,4,4(6),3,2,330,2,2D6,Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,GREENSKINS,ORC,Orc Big Boss,25,OOOOOOOOOOOOOOOOOOOOOOOOO,4,5,2+,4,5(8),4,3,720,3,2D6,Ignore Pain 6+; Magic Armour; Magic Weapon,2,2,3,3,4,4,4,4,4,4
+,,GREENSKINS,ORC,Orc War Boss,33,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,6,1+,4,5(8),5,4,1100,3,2D6/3D6(5+),Ignore Pain 5+; Magic Armour; 2 x Magic Items; Magic Weapon,2,2,3,3,3,4,4,4,4,4
+,,GREENSKINS,ORC,Black Orc,7,OOOOOOO,4,4,4+,4,4(5),2,1,90,1,1D6,,2,3,3,4,4,4,4,4,5,5
+,,GREENSKINS,ORC,Black Orc Champion,10,OOOOOOOOOO,4,4,4+,4,4(6),2,2,140,2,1D6/2D6(5+),Armed with [1-3] Bows (Str 4) or [4-6] Swords,2,3,3,4,4,4,4,4,5,5
+,,GREENSKINS,ORC,Black Orc Boss,20,OOOOOOOOOOOOOOOOOOOO,4,5,3+,5,4(6),3,2,420,2,2D6,Magic Weapon,2,2,3,3,4,4,4,4,4,4
+,,GREENSKINS,ORC,Black Orc Big Boss,23,OOOOOOOOOOOOOOOOOOOOOOO,4,6,2+,5,5(8),4,3,910,3,2D6,Magic Armour; Magic Weapon,2,2,3,3,4,4,4,4,4,4
+,,GREENSKINS,ORC,Savage Orc,5,OOOOO,4,3,4+,3,4*,2,1,65,Special,1D6,Armed with Bows (Str 4); Tattoos* 6+,2,3,4,4,4,4,5,5,5,6
+,,GREENSKINS,ORC,Orc Shaman,16,OOOOOOOOOOOOOOOO,4,3,4+,3,5,3,1,590,-,1D6,Orc Magic 1; Magic Resistance 6+; Magic Weapon,2,3,4,4,4,4,5,5,5,6
+,,GREENSKINS,ORC,Orc Shaman Champion,20,OOOOOOOOOOOOOOOOOOOO,4,3,4+,4,5(7),3,1,1180,2,1D6/2D6(5+),Orc Magic 3; Magic Resistance 5+; Magic Weapon,2,3,4,4,4,4,5,5,5,6
+,,GREENSKINS,ORC,Orc Shaman-Lord,42,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,3,5+,4,5(7),5,3,2870,2,2D6/3D6(5+),Orc Magic 3; Magic Dispel 5+; Magic Item; Magic Weapon; Magic Resistance 4+,2,3,4,4,4,4,5,5,5,6
+,,GREENSKINS,ORC,Savage Orc Shaman,16,OOOOOOOOOOOOOOOO,4,3,4+,3,5*,3,1,590,Special,1D6,Orc Magic 1; Magic Resistance 6+; Tattoos* 5+; Magic Weapon,2,3,4,4,4,4,5,5,5,6
+,,GREENSKINS,GOBLIN ,Snotlings,1,O,4,1,-,1,1,1,1,10,-,Special,Ambush; Magic Auto; Gang Up,4,4,5,6,6,6,6,6,6,6

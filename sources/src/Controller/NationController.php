@@ -4,14 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Nation;
 use App\Form\NationType;
+use App\Manager\NationManager;
 use App\Repository\NationRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use Swagger\Annotations as SWG;
 
 class NationController extends AbstractFOSRestController
 {
@@ -34,6 +32,17 @@ class NationController extends AbstractFOSRestController
 
         return $this->handleView($view);
     }
+
+    /**
+     * @Route("/api/unitGeneric/{unitGenericId}/nation/", name="api_nation_by_unitGeneric", methods={"GET"})
+     */
+    public function apiGetByUnitGenericId(NationManager $nationManager,$unitGenericId): Response
+    {
+        $view = $this->view($nationManager->findByUnitGeneric($unitGenericId), 200);
+
+        return $this->handleView($view);
+    }
+
 
     /**
      * @Route("/nation/new", name="nation_new", methods={"GET","POST"})

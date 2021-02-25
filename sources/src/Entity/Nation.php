@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass=NationRepository::class)
@@ -22,9 +23,24 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *          parameters = { "id" = "expr(object.getId())" }
  *      )
  * )
+   * @Hateoas\Relation(
+ *      "unitGenerics",
+ *      href = @Hateoas\Route(
+ *          "api_unitGeneric_by_nation",
+ *          parameters = { "nationId" = "expr(object.getId())" }
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(excludeIf = "expr([] === object.getUnitGenerics())")
+ * )
  */
 class Nation
 {
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
+
+    use LinkableTrait{
+        LinkableTrait::__construct as private __linkableTraitConstruct;
+    }
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
@@ -38,7 +54,8 @@ class Nation
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=UnitGeneric::class, mappedBy="nation")
+     * @JMS\Exclude()
+     * @ORM\ManyToMany(targetEntity=UnitGeneric::class, mappedBy="nations")
      */
     private $unitGenerics;
 
@@ -54,14 +71,6 @@ class Nation
      * @ORM\ManyToMany(targetEntity=ExternalLink::class)
      */
     private $externalLinks;
-
-    use TaggableTrait {
-        TaggableTrait::__construct as private __taggableTraitConstruct;
-    }
-
-    use LinkableTrait{
-        LinkableTrait::__construct as private __linkableTraitConstruct;
-    }
 
     public function __construct()
     {
@@ -124,7 +133,7 @@ class Nation
     {
         if (!$this->unitGenerics->contains($unitGeneric)) {
             $this->unitGenerics[] = $unitGeneric;
-            $unitGeneric->setNation($this);
+            $unitGeneric->addNation($this);
         }
 
         return $this;
@@ -134,8 +143,8 @@ class Nation
     {
         if ($this->unitGenerics->removeElement($unitGeneric)) {
             // set the owning side to null (unless already changed)
-            if ($unitGeneric->getNation() === $this) {
-                $unitGeneric->setNation(null);
+            if ($unitGeneric->getNations()->contains($this)) {
+                $unitGeneric->removeNation($this);
             }
         }
 
@@ -148,6 +157,4 @@ class Nation
 
         return $this;
     }
-
-   
 }

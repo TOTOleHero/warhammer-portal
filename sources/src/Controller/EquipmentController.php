@@ -6,13 +6,11 @@ use App\Entity\Equipment;
 use App\Form\EquipmentType;
 use App\Repository\EquipmentRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use Swagger\Annotations as SWG;
 
 class EquipmentController extends AbstractFOSRestController
 {
@@ -78,7 +76,7 @@ class EquipmentController extends AbstractFOSRestController
         ]);
     }
 
-     /**
+    /**
      * @Route("/api/equipment/{id}", name="api_equipment_show", methods={"GET"})
      * @SWG\Response(
      *     response=200,
@@ -86,7 +84,7 @@ class EquipmentController extends AbstractFOSRestController
      *     @SWG\Schema(
      *         @Model(type=Equipment::class)
      *     )
-     * ) 
+     * )
      * @SWG\Tag(name="equipment")
      */
     public function apiShow(Equipment $equipment): Response

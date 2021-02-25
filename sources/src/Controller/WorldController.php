@@ -9,10 +9,6 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use Swagger\Annotations as SWG;
-
 
 class WorldController extends AbstractFOSRestController
 {
@@ -21,8 +17,6 @@ class WorldController extends AbstractFOSRestController
      */
     public function index(WorldRepository $worldRepository, $embedType = false): Response
     {
-       
-       
         $templateBase = 'world/';
         $template = 'index.html.twig';
         switch ($embedType) {
@@ -41,7 +35,7 @@ class WorldController extends AbstractFOSRestController
                     'class' => __CLASS__,
                 ]);
         }
-       
+
         return $this->render($templateBase.$template, [
             'worlds' => $worldRepository->findAll(),
         ]);
@@ -52,13 +46,10 @@ class WorldController extends AbstractFOSRestController
      */
     public function apiIndex(WorldRepository $worldRepository): Response
     {
-        
         $view = $this->view($worldRepository->findAll(), 200);
 
         return $this->handleView($view);
     }
-
-
 
     /**
      * @Route("/contribute/world/new", name="world_new", methods={"GET","POST"})
@@ -93,13 +84,11 @@ class WorldController extends AbstractFOSRestController
         ]);
     }
 
-
     /**
      * @Route("/api/world/{id}", name="api_world_show", methods={"GET"})
      */
     public function apiShow(World $world): Response
     {
-        
         $view = $this->view($world, 200);
 
         return $this->handleView($view);

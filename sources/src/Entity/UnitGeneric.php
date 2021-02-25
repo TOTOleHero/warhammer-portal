@@ -10,6 +10,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Hateoas\Configuration\Annotation as Hateoas;
+use Hateoas\Configuration\Metadata\ClassMetadataInterface;
+use Hateoas\Configuration\Relation;
+use Hateoas\Configuration\Route;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
@@ -25,15 +28,36 @@ use Symfony\Component\Uid\Uuid;
  *      )
  * )
  * @Hateoas\Relation(
- *      "nation",
+ *      "race",
  *      href = @Hateoas\Route(
- *          "api_nation_show",
- *          parameters = { "id" = "expr(object.getNation().getId())" }
- *      )
+ *          "api_race_show",
+ *          parameters = { "id" = "expr(object.getRace().getId())" }
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(excludeIf = "expr(null === object.getRace())")
+ * )
+  * @Hateoas\Relation(
+ *      "unitGameSystems",
+ *      href = @Hateoas\Route(
+ *          "api_unitGameSystem_by_unitGeneric",
+ *          parameters = { "unitGenericId" = "expr(object.getId())" }
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(excludeIf = "expr([] === object.getUnitGameSystems())")
+ * )
+
+  * @Hateoas\Relation(
+ *      "nations",
+ *      href = @Hateoas\Route(
+ *          "api_nation_by_unitGeneric",
+ *          parameters = { "unitGenericId" = "expr(object.getId())" }
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(excludeIf = "expr([] === object.getNations())")
  * )
  */
 class UnitGeneric
 {
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
     /**
      * @ORM\Id
      * @JMS\Type("string")
@@ -50,57 +74,58 @@ class UnitGeneric
     private $baseName;
 
     /**
-     * @JMS\Type("string")
-     * @ORM\ManyToOne(targetEntity=Nation::class, inversedBy="unitGenerics")
-     * @ORM\JoinColumn(nullable=false)
+     * @JMS\Exclude()
+     * @ORM\ManyToMany(targetEntity=Nation::class, inversedBy="unitGenerics")
      */
-    private $nation;
+    private $nations;
 
     /**
+     * @JMS\Exclude() 
      * @ORM\ManyToOne(targetEntity=Race::class)
+
      */
     private $race;
 
     /**
+     * @JMS\Exclude() 
      * @ORM\OneToMany(targetEntity=UnitGameSystem::class, mappedBy="unitGeneric")
      */
     private $unitGameSystems;
-
-    use TaggableTrait {
-        TaggableTrait::__construct as private __taggableTraitConstruct;
-    }
 
     public function __construct()
     {
         $this->__taggableTraitConstruct();
         $this->unitGameSystems = new ArrayCollection();
+        $this->nations = new ArrayCollection();
     }
 
     public function getAllTags()
     {
-        return array_merge(
+        $allTags = array_merge(
             $this->getTags()->toArray(),
             $this->getRace()->getAllTags(),
-            $this->getNation()->getAllTags()
         );
-    }
 
-    /**
-     * @return GameSystem
-     */
-    public function getGameSystem($gameSystemId): GameSystem
-    {
-       
-        foreach ($this->getGameSystems() as $gameSystem) {
-            if($gameSystemId == $gameSystem->getId())
-            {
-                return $gameSystem;
-            }
-            
+        foreach($this->getNations() as $nation)
+        {
+            $allTags = array_merge($allTags,$nation->getAllTags());
         }
 
-        throw new GameSystemNotFoundException(sprintf('No GameSystem exit with gameSystem "%s"',$gameSystemId));
-        
+        return $allTags;
+    }
+
+
+
+
+    public function getGameSystem($gameSystemId): GameSystem
+    {
+        foreach ($this->getGameSystems() as $gameSystem) {
+            if ($gameSystemId == $gameSystem->getId()) {
+                return $gameSystem;
+            }
+        }
+
+        throw new GameSystemNotFoundException(sprintf('No GameSystem exit with gameSystem "%s"', $gameSystemId));
     }
 
     /**
@@ -122,20 +147,15 @@ class UnitGeneric
         return $gameSystems;
     }
 
-
-    /**
-     * @return UnitGameSystem
-     */
     public function findUnitGamesSystemByGameSystemId($gameSystemId): UnitGameSystem
     {
         foreach ($this->getUnitGameSystems() as $unitGameSystem) {
-            if($unitGameSystem->getGameSystem()->getId() == $gameSystemId)
-            {
-               return $unitGameSystem;
+            if ($unitGameSystem->getGameSystem()->getId() == $gameSystemId) {
+                return $unitGameSystem;
             }
         }
 
-        throw new GameSystemNotFoundException(sprintf('No UnitGameSystem exit with gameSystem "%s"',$gameSystemId));
+        throw new GameSystemNotFoundException(sprintf('No UnitGameSystem exit with gameSystem "%s"', $gameSystemId));
     }
 
     /**
@@ -182,14 +202,35 @@ class UnitGeneric
         return $this;
     }
 
-    public function getNation(): ?Nation
+    public function addNation(Nation $nation)
     {
-        return $this->nation;
+        if(!$this->nations->contains($nation))
+                          {
+                              $this->nations->add($nation);
+                          }
+
+                          return $this;
     }
 
-    public function setNation(?Nation $nation): self
+
+    public function removeNation(Nation $nation)
     {
-        $this->nation = $nation;
+        if(!$this->nations->contains($nation))
+                          {
+                              $this->nations->remove($nation);
+                          }
+
+                          return $this;
+    }
+
+    public function getNations()
+    {
+        return $this->nations;
+    }
+    
+    public function setNations($nations): self
+    {
+        $this->nations = $nations;
 
         return $this;
     }

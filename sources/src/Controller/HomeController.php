@@ -3,14 +3,9 @@
 namespace App\Controller;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use Hateoas\Hateoas;
-use Hateoas\HateoasBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use Swagger\Annotations as SWG;
 
 class HomeController extends AbstractFOSRestController
 {
@@ -29,31 +24,27 @@ class HomeController extends AbstractFOSRestController
      */
     public function apiIndex(RouterInterface $router): Response
     {
-
         $baseLinks = [
-            '_links' =>[
-                "nations" => [
-                    'href' => $router->generate('api_nation_index')
+            '_links' => [
+                'nations' => [
+                    'href' => $router->generate('api_nation_index'),
                 ],
-                "races" => [
-                    'href' => $router->generate('api_race_index')
-                ]
-                ,
-                "gameSystems" => [
-                    'href' => $router->generate('api_game_system_index')
+                'races' => [
+                    'href' => $router->generate('api_race_index'),
                 ],
-                "equipmentTypes" => [
-                    'href' => $router->generate('api_equipment_type_index')
-                ]
-                ,
-                "equipments" => [
-                    'href' => $router->generate('api_equipment_index')
-                ]
-                ,
-                "worlds" => [
-                    'href' => $router->generate('api_world_index')
-                ]
-            ]
+                'gameSystems' => [
+                    'href' => $router->generate('api_game_system_index'),
+                ],
+                'equipmentTypes' => [
+                    'href' => $router->generate('api_equipment_type_index'),
+                ],
+                'equipments' => [
+                    'href' => $router->generate('api_equipment_index'),
+                ],
+                'worlds' => [
+                    'href' => $router->generate('api_world_index'),
+                ],
+            ],
         ];
 
         $view = $this->view($baseLinks, 200);

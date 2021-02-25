@@ -18,8 +18,9 @@ use App\Repository\RuleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use League\Csv\Reader;
 
-class UnitFixtures extends Fixture implements DependentFixtureInterface
+class WHQUnitFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * @var TagManager
@@ -43,136 +44,100 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
         $this->ruleRepository = $ruleRepository;
     }
 
-    protected $data = [
-        'High elf warrior / citizen / militia' => [
-            'race' => 'ELVE',
-            'nation' => 'HIGH_ELVES',
-            'tags' => [
-                'High elf warrior', 'High elf citizen', 'High elf militia',
-            ],
-            'profiles' => [
-                'WFBV3' => [
-                    ['Elf', 5, 4, 4, 3, 3, 1, 6, 1, 8, 9, 9, 8],
-                ],
-                'WFBV4' => [
-                    [
-                        'High elf spearmen', 5, 4, 4, 3, 3, 1, 6, 1, 8, 'equipments' => ['Spear', 'Sword', 'Shield', 'Light armour'],
-                    ],
-                    ['High elf warrior', 5, 4, 4, 3, 3, 1, 6, 1, 8, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                    ['Archer', 5, 4, 4, 3, 3, 1, 6, 1, 8, 'equipments' => ['Spear', 'Hand weapon', 'Shield', 'Light armour']],
-                    ['Champion', 5, 5, 5, 4, 3, 1, 7, 2, 8],
-                ],
-                'MHV1' => [
-                   ['High elf warrior', 4, 3, 4, 3, 3, 1, 4, 1, 9, 'equipments' => [
-                    'Knife',
-                    'Mace',
-                    'Sword',
-                    'Double-handed weapon',
-                    'Flail',
-                    'Light armour',
-                    'Heavy armour',
-                    'Shield',
-                    'Helmet',
-                    'Buckler',
-                    'Ithilmar armour',
-                   ]],
-                   ['High elf archer', 4, 3, 4, 3, 3, 1, 4, 1, 9, 'equipments' => [
-                    'Knife',
-                    'Mace',
-                    'Sword',
-                    'Spear',
-                    'Bow',
-                    'Short bow',
-                    'Long bow',
-                    'Elf bow',
-                    'Light armour',
-                    'Shield',
-                    'Helmet',
-                   ]],
-                ],
-                'WFBV5' => [
-                    [
-                        'Elven spearmen', 5, 4, 4, 3, 3, 1, 6, 1, 8, 'equipments' => ['Spear', 'Shield', 'Light armour'], 'rules' => ['Citizen levy'],
-                    ],
-                    ['Champion', 5, 5, 5, 4, 3, 1, 7, 2, 8, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                    ['Archer', 5, 4, 4, 3, 3, 1, 6, 1, 8],
-                ],
-                'WFBV6' => [
-                    [
-                        'Spearmen', 5, 4, 4, 3, 3, 1, 5, 1, 8, 'equipments' => ['Spear', 'Hand weapon', 'Shield', 'Light armour'], 'rules' => ['Fight in three ranks with spears'],
-                    ],
-                    ['Champion', 5, 4, 4, 3, 3, 1, 5, 2, 8],
-                    ['Archer', 5, 4, 4, 3, 3, 1, 5, 1, 8],
-                ],
-                'WFBV7' => [
-                    [
-                        'Spearmen', 5, 4, 4, 3, 3, 1, 5, 1, 8, 'equipments' => ['Spear', 'Hand weapon', 'Shield', 'Light armour'], 'rules' => ['Valour of ages', 'Speed of suryan', 'Martial Prowess'],
-                    ],
-                    ['Sentinel', 5, 4, 4, 3, 3, 1, 5, 2, 8, 'equipments' => ['Spear', 'Hand weapon', 'Shield', 'Light armour']],
-                    ['Archer', 5, 4, 4, 3, 3, 1, 5, 1, 8],
-                    ['Hawkeyes', 5, 4, 4, 3, 3, 1, 5, 1, 8],
-                ],
-                'WFBV8' => [
-                    ['Spearmen', 5, 4, 4, 3, 3, 1, 5, 1, 8, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                    ['Sentinel', 5, 4, 4, 3, 3, 1, 5, 2, 8, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                    ['Archer', 5, 4, 4, 3, 3, 1, 5, 1, 8],
-                    ['Hawkeyes', 5, 4, 5, 3, 3, 1, 5, 1, 8],
-                ],
-                'T9AV2' => [
-                    ['Citizen Spears', 5, 10, 8, 1, 4, 3, 0, 1, 4, 3, 0, 5, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                    ['Citizen Archers', 5, 10, 8, 1, 4, 3, 0, 1, 4, 3, 0, 5, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                ],
-                'WHQV1' => [
-                    // name + title , battle level, gold,M,WS,BS,S,DiceDamage, T, W,I, A, Luck, WillPower, Skills, Pin
-                    ['Ranger elf novice', 1, 0, 4, 4, '5+', 3, 1, 3, '1D6+7', 5, 1, 0, 2, '-', '3+'],
-                    ['Ranger elf champion', 2, 2000, 4, 5, '5+', 3, 1, 3, '2D6+8', 6, 1, 0, 3, 1, '3+'],
-                ],
-                'AOSV1' => [
-                    ['Highborn spearmen', 6, 1, 6, '5+', 'equipments' => ['Silverwood Spear', 'Aelven Shield']],
-                    ['Highborn archer', 6, 1, 6, '5+'],
-                ],
-            ],
-        ],
-    ];
-
     public function load(ObjectManager $manager)
     {
         $gameSystemRepository = $manager->getRepository(GameSystem::class);
         $nationRepository = $manager->getRepository(Nation::class);
         $raceRepository = $manager->getRepository(Race::class);
 
-        foreach ($this->data as $unitName => $unitData) {
+        $csv = Reader::createFromPath(__DIR__.'/whq.csv', 'r');
+        $csv->setHeaderOffset(0);
+
+        $header = $csv->getHeader();
+        $data = $csv->getRecords();
+
+        foreach ($data as $unitData) {
+            $unitName = $unitData['Monster Name'];
+
             $object = new UnitGeneric();
             $object->setBaseName($unitName);
-            foreach ($unitData['tags'] as $tag) {
-                $object->addTag($this->tagManager->loadOrCreate($tag));
-            }
 
-            $object->addNation($nationRepository->find($unitData['nation']));
-            $object->setRace($raceRepository->find($unitData['race']));
-            foreach ($unitData['profiles'] as $gameSystemCode => $profileData) {
-                $gameSystem = $gameSystemRepository->find($gameSystemCode);
-
-                if (null == $gameSystem) {
-                    throw new \Exception(sprintf('Games system %s not found for %s unit', $gameSystemCode, $unitName));
-                }
-
-                $unitGamesSystem = (new UnitGameSystem())
-                    ->setGameSystem($gameSystem)
-                    ->setName($unitName)
-                    ->addTag($this->tagManager->loadOrCreate($unitName));
-
-                foreach ($profileData as $oneProfileData) {
-                    $profile = $this->createProfileByGameSystem($gameSystem, $oneProfileData);
-
-                    $manager->persist($profile);
-                    $unitGamesSystem->addProfile($profile);
-                    $object->addUnitGameSystem($unitGamesSystem);
-                    $manager->persist($unitGamesSystem);
-
-                    $manager->persist($object);
+            if (array_key_exists('tags', $unitData)) {
+                foreach ($unitData['tags'] as $tag) {
+                    $object->addTag($this->tagManager->loadOrCreate($tag));
                 }
             }
+            $nation = $nationRepository->find($unitData['Type']);
+            if($nation == null)
+            {
+                var_dump($unitData['Type']);die;
+            }
+            $object->addNation($nation);
+            
+                        
+            $object->setRace($raceRepository->find($unitData['Race']));
+            $gameSystemCode = 'WHQV1';
+            $profileData = [[
+                $unitData['Monster Name']
+                /*
+                    ->setBattleLevel($profileData[1])
+                    ->setGold($profileData[2])
+                    ->setMovement($profileData[3])
+                    ->setWeaponSkill($profileData[4])
+                    ->setBallisticSkill($profileData[5])
+                    ->setStrength($profileData[6])
+                    ->setDamageDice($profileData[7])
+                    ->setToughness($profileData[8])
+                    ->setWounds($profileData[9])
+                    ->setInitiative($profileData[10])
+                    ->setAttacks($profileData[11])
+                    ->setLuck($profileData[12])
+                    ->setWillPower($profileData[13])
+                    ->setSkills($profileData[14])
+                    ->setEscapePinning($profileData[15]);
+                */
+                ,
+                $unitData['Level'],
+                $unitData['Gold (Each)'], 
+                $unitData['Move'],
+                $unitData['WS'],
+                $unitData['BS'],
+                $unitData['Strength'],
+                $unitData['Damage'],
+                $unitData['T'],
+                $unitData['Wounds'],
+                $unitData['Initiative'],
+                $unitData['Attacks'],
+                $unitData['Monster Name'],
+                $unitData['Monster Name'],
+                $unitData['Monster Name'],
+                '' /*$unitData[''] */,
+                '' /*$unitData[''] */,
+                '' /*$unitData[''] */,
+                ]];
+            
+            $gameSystem = $gameSystemRepository->find($gameSystemCode);
+
+            if (null == $gameSystem) {
+                throw new \Exception(sprintf('Games system %s not found for %s unit', $gameSystemCode, $unitName));
+            }
+
+            $unitGamesSystem = (new UnitGameSystem())
+                ->setGameSystem($gameSystem)
+                ->setName($unitName)
+                ->addTag($this->tagManager->loadOrCreate($unitName));
+
+            foreach ($profileData as $oneProfileData) {
+                $profile = $this->createProfileByGameSystem($gameSystem, $oneProfileData);
+
+                $manager->persist($profile);
+                $unitGamesSystem->addProfile($profile);
+                $object->addUnitGameSystem($unitGamesSystem);
+                $manager->persist($unitGamesSystem);
+
+                $manager->persist($object);
+            }
+            
         }
         $manager->flush();
     }

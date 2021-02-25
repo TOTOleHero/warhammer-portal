@@ -8,9 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
-use JMS\Serializer\Annotation as JMS;
-use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
-use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Entity(repositoryClass=WorldRepository::class)
@@ -24,6 +21,9 @@ use Symfony\Component\Uid\Uuid;
  */
 class World
 {
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
@@ -40,9 +40,6 @@ class World
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-    use TaggableTrait {
-        TaggableTrait::__construct as private __taggableTraitConstruct;
-    }
 
     public function __construct()
     {
@@ -78,9 +75,9 @@ class World
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
-
 
     /**
      * @return Collection|GameSystem[]

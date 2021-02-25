@@ -6,7 +6,6 @@ use App\Repository\RaceRepository;
 use App\Traits\LinkableTrait;
 use App\Traits\TaggableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
@@ -31,6 +30,13 @@ use Hateoas\Configuration\Annotation as Hateoas;
  */
 class Race
 {
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
+
+    use LinkableTrait{
+        LinkableTrait::__construct as private __linkableTraitConstruct;
+    }
     /**
      * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
@@ -52,7 +58,6 @@ class Race
      */
     protected $locale;
 
-
     /**
      * Sets translatable locale.
      *
@@ -70,19 +75,11 @@ class Race
         return $this->getId().' - '.$this->getName();
     }
 
-    use TaggableTrait {
-        TaggableTrait::__construct as private __taggableTraitConstruct;
-    }
-
-    use LinkableTrait{
-        LinkableTrait::__construct as private __linkableTraitConstruct;
-    }
-
     public function __construct()
     {
         $this->__linkableTraitConstruct();
         $this->__taggableTraitConstruct();
-        
+
         $this->units = new ArrayCollection();
         $this->nations = new ArrayCollection();
         $this->externalLinks = new ArrayCollection();
@@ -118,5 +115,4 @@ class Race
 
         return $this;
     }
-
 }

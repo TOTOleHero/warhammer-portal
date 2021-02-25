@@ -6,7 +6,6 @@ use App\Repository\GameSystemRepository;
 use App\Traits\LinkableTrait;
 use App\Traits\TaggableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
@@ -31,6 +30,13 @@ use Hateoas\Configuration\Annotation as Hateoas;
  */
 class GameSystem implements Translatable
 {
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
+
+    use LinkableTrait{
+        LinkableTrait::__construct as private __linkableTraitConstruct;
+    }
     /**
      * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
@@ -67,17 +73,6 @@ class GameSystem implements Translatable
      * @ORM\ManyToOne(targetEntity=World::class, inversedBy="gameSystems")
      */
     private $world;
-
-
-
-    use TaggableTrait {
-        TaggableTrait::__construct as private __taggableTraitConstruct;
-    }
-
-
-    use LinkableTrait{
-        LinkableTrait::__construct as private __linkableTraitConstruct;
-    }
 
     public function __construct()
     {
@@ -177,8 +172,4 @@ class GameSystem implements Translatable
 
         return $this;
     }
-
-
-    
-    
 }

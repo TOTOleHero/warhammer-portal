@@ -6,13 +6,12 @@ use App\Repository\EquipmentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as JMS;
-use Gedmo\Translatable\Translatable;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
-
 
 /**
  * @ORM\Entity(repositoryClass=EquipmentRepository::class)
@@ -32,7 +31,6 @@ use Symfony\Component\Uid\Uuid;
  */
 class Equipment implements Translatable
 {
-
     /**
      * @ORM\Id
      * @JMS\Type("string")
@@ -77,7 +75,7 @@ class Equipment implements Translatable
      *
      * @Gedmo\Locale
      */
-    protected $locale;    
+    protected $locale;
 
     /**
      * Sets translatable locale.
@@ -106,7 +104,6 @@ class Equipment implements Translatable
         return $this->getName();
     }
 
- 
     public function getName(): ?string
     {
         return $this->name;

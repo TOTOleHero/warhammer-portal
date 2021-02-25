@@ -4,9 +4,10 @@ namespace App\Entity;
 
 use App\Repository\EquipmentTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 use Hateoas\Configuration\Annotation as Hateoas;
-use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * @ORM\Entity(repositoryClass=EquipmentTypeRepository::class)
  * @Hateoas\Relation(
@@ -25,7 +26,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class EquipmentType implements Translatable
 {
-   /**
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\Column(type="string", length=255, unique=true)
@@ -37,7 +38,6 @@ class EquipmentType implements Translatable
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-
 
     /**
      * Post locale
@@ -52,13 +52,12 @@ class EquipmentType implements Translatable
         return $this->id;
     }
 
-    public function setId($id): ? EquipmentType
+    public function setId($id): ?EquipmentType
     {
         $this->id = $id;
+
         return $this;
     }
-
-
 
     public function getName(): ?string
     {

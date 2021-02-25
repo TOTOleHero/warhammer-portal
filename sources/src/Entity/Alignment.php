@@ -14,6 +14,9 @@ use Gedmo\Translatable\Translatable;
  */
 class Alignment
 {
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
@@ -38,10 +41,6 @@ class Alignment
      * @Gedmo\Locale
      */
     protected $locale;
-
-    use TaggableTrait {
-        TaggableTrait::__construct as private __taggableTraitConstruct;
-    }
 
     public function __construct()
     {

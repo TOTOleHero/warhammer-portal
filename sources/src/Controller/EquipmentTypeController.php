@@ -6,13 +6,11 @@ use App\Entity\EquipmentType;
 use App\Form\EquipmentTypeType;
 use App\Repository\EquipmentTypeRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use Swagger\Annotations as SWG;
 
 class EquipmentTypeController extends AbstractFOSRestController
 {
@@ -25,7 +23,6 @@ class EquipmentTypeController extends AbstractFOSRestController
             'equipment_types' => $equipmentTypeRepository->findAll(),
         ]);
     }
-
 
     /**
      * @Route("/api/equipmentType/", name="api_equipment_type_index", methods={"GET"})
@@ -45,7 +42,6 @@ class EquipmentTypeController extends AbstractFOSRestController
 
         return $this->handleView($view);
     }
-
 
     /**
      * @Route("/equipmentType/new", name="equipment_type_new", methods={"GET","POST"})
@@ -80,7 +76,6 @@ class EquipmentTypeController extends AbstractFOSRestController
         ]);
     }
 
-
     /**
      * @Route("/api/equipmentType/{id}", name="api_equipment_type_show", methods={"GET"})
      * @SWG\Response(
@@ -89,7 +84,7 @@ class EquipmentTypeController extends AbstractFOSRestController
      *     @SWG\Schema(
      *         @Model(type=EquipmentType::class)
      *     )
-     * ) 
+     * )
      * @SWG\Tag(name="equipment")
      */
     public function apiShow(EquipmentType $equipmentType): Response

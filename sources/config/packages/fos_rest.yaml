@@ -27,3 +27,4 @@ fos_rest:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
     allowed_methods_listener: true
     body_listener: true
+    

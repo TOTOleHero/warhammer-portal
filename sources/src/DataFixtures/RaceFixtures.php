@@ -21,7 +21,7 @@ class RaceFixtures extends Fixture
      */
     protected $externalLinkCategoryManager;
 
-    public function __construct(TagManager $tagManager,ExternalLinkCategoryManager $externalLinkCategoryManager)
+    public function __construct(TagManager $tagManager, ExternalLinkCategoryManager $externalLinkCategoryManager)
     {
         $this->tagManager = $tagManager;
         $this->externalLinkCategoryManager = $externalLinkCategoryManager;
@@ -29,37 +29,28 @@ class RaceFixtures extends Fixture
 
     protected $data = [
         ['ELVE', 'en_US', 'Elve',
-    
-        'externalLinks'=>
-        [
+        'externalLinks' => [
             [
-                'category' => 'communityDescription'
-                ,'href'=>'https://warhammerfantasy.fandom.com/wiki/Elves',
-                'locale' => 'en_US'
-            ]
-        ]
-
-
-
-        
+                'category' => 'communityDescription', 'href' => 'https://warhammerfantasy.fandom.com/wiki/Elves',
+                'locale' => 'en_US',
+            ],
+        ],
     ],
         ['DWARF', 'en_US', 'Dwarf'],
         ['HUMAN', 'en_US', 'Human'],
         ['ELEMENTAL', 'en_US', 'Elemental'],
         ['HALFING', 'en_US', 'Halfing'],
         ['BEAST_HUMANOID', 'en_US', 'Beast-humanoid'],
-        ['LIZARD', 'en_US', 'Lizard'
-                ,'externalLinks'=>
-                [
+        ['LIZARD', 'en_US', 'Lizard', 'externalLinks' => [
                     [
-                        'category' => 'forum'
-                        ,'href'=>'https://www.lustria-online.com/',
-                        'locale' => 'en_US'
-                    ]
-                ]
+                        'category' => 'forum', 'href' => 'https://www.lustria-online.com/',
+                        'locale' => 'en_US',
+                    ],
+                ],
         ],
         ['ORC', 'en_US', 'Orc'],
         ['GOBLIN', 'en_US', 'Goblin'],
+        ['HOBGOBLIN', 'en_US', 'Hobgoblin'],
         ['MONSTER', 'en_US', 'Monster'],
         ['GIANT', 'en_US', 'Giant'],
         ['TROLL', 'en_US', 'Troll'],
@@ -68,8 +59,7 @@ class RaceFixtures extends Fixture
         ['DAEMON', 'en_US', 'Daemon'],
         ['ANIMATED_THING', 'en_US', 'Animated thing'],
         ['FIMIR', 'en_US', 'Fimir'],
-        ['NATURAL_SPIRIT', 'en_US', 'NAtural spirit'],
-
+        ['NATURAL_SPIRIT', 'en_US', 'Natural spirit'],
     ];
 
     public function load(ObjectManager $manager)
@@ -80,10 +70,8 @@ class RaceFixtures extends Fixture
             $object->setName($data[2]);
             $object->addTag($this->tagManager->loadOrCreate($data[2]));
 
-            if(array_key_exists('externalLinks',$data))
-            {
-                foreach($data['externalLinks'] as $externalLinkData)
-                {
+            if (array_key_exists('externalLinks', $data)) {
+                foreach ($data['externalLinks'] as $externalLinkData) {
                     $externalLink = new ExternalLink();
                     $externalLink->setHref($externalLinkData['href']);
                     $externalLink->setCategory($this->externalLinkCategoryManager->loadOrCreate($externalLinkData['category']));
@@ -96,4 +84,3 @@ class RaceFixtures extends Fixture
         $manager->flush();
     }
 }
-

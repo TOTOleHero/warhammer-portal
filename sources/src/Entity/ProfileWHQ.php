@@ -4,13 +4,11 @@ namespace App\Entity;
 
 use App\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
-
-use Swagger\Annotations as SWG;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
+use Swagger\Annotations as SWG;
 
 /**
-  * @SWG\Definition(
+ * @SWG\Definition(
  *      allOf={
  *          @SWG\Schema(ref=@Model(type=Profile::class))
  *      }

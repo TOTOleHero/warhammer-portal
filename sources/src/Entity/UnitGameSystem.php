@@ -10,11 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as JMS;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use Swagger\Annotations as SWG;
 
 /**
  * @Gedmo\TranslationEntity(class="App\Entity\UnitGameSystemTranslation")
@@ -29,6 +28,13 @@ use Swagger\Annotations as SWG;
  */
 class UnitGameSystem
 {
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
+
+    use LinkableTrait{
+        LinkableTrait::__construct as private __linkableTraitConstruct;
+    }
     /**
      * @ORM\Id
      * @JMS\Type("string")
@@ -66,9 +72,6 @@ class UnitGameSystem
      */
     private $options;
 
-  
-
-    
     /**
      * @ORM\ManyToOne(targetEntity=UnitGeneric::class, inversedBy="unitGameSystems")
      * @ORM\JoinColumn(nullable=false)
@@ -85,14 +88,6 @@ class UnitGameSystem
      * @ORM\ManyToMany(targetEntity=ExternalLink::class)
      */
     private $externalLinks;
-
-    use TaggableTrait {
-        TaggableTrait::__construct as private __taggableTraitConstruct;
-    }
-
-    use LinkableTrait{
-        LinkableTrait::__construct as private __linkableTraitConstruct;
-    }
 
     public function __construct()
     {
@@ -189,9 +184,6 @@ class UnitGameSystem
         return $this;
     }
 
-    
-   
-
     public function getUnitGeneric(): ?UnitGeneric
     {
         return $this->unitGeneric;
@@ -215,6 +207,4 @@ class UnitGameSystem
 
         return $this;
     }
-
-    
 }

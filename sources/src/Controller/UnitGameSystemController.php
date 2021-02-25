@@ -6,13 +6,11 @@ use App\Entity\UnitGameSystem;
 use App\Form\UnitGameSystemType;
 use App\Repository\UnitGameSystemRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use Swagger\Annotations as SWG;
-
 
 class UnitGameSystemController extends AbstractFOSRestController
 {
@@ -26,7 +24,6 @@ class UnitGameSystemController extends AbstractFOSRestController
         ]);
     }
 
-
     /**
      * @Route("/api/unitGameSystem/", name="api_unitGameSystem_index", methods={"GET"})
      * @SWG\Response(
@@ -37,7 +34,7 @@ class UnitGameSystemController extends AbstractFOSRestController
      *         @SWG\Items(ref=@Model(type=UnitGameSystem::class))
      *     )
      * )
-     * @SWG\Tag(name="unti") 
+     * @SWG\Tag(name="unti")
      */
     public function apiIndex(UnitGameSystemRepository $unitGameSystemRepository): Response
     {
@@ -45,6 +42,25 @@ class UnitGameSystemController extends AbstractFOSRestController
 
         return $this->handleView($view);
     }
+
+    /**
+     * @Route("/api/unitGeneric/{unitGenericId}/unitGameSystem/", name="api_unitGameSystem_by_unitGeneric", methods={"GET"})
+     * @SWG\Response(
+     *     response=200,
+     *     description="All UnitGameSystem",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @SWG\Items(ref=@Model(type=UnitGameSystem::class))
+     *     )
+     * )
+     * @SWG\Tag(name="unti")
+     */
+    public function apiGetAllByUnitGenericId(UnitGameSystemRepository $unitGameSystemRepository,$unitGenericId): Response
+    {
+        $view = $this->view($unitGameSystemRepository->findByUnitGeneric($unitGenericId), 200);
+
+        return $this->handleView($view);
+    }    
 
     /**
      * @Route("/unitGameSystem/new", name="unitGameSystem_new", methods={"GET","POST"})

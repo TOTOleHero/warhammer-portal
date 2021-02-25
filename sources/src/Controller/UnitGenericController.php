@@ -4,14 +4,12 @@ namespace App\Controller;
 
 use App\Entity\UnitGeneric;
 use App\Form\UnitGenericType;
+use App\Manager\UnitGenericManager;
 use App\Repository\UnitGenericRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use Swagger\Annotations as SWG;
 
 class UnitGenericController extends AbstractFOSRestController
 {
@@ -26,7 +24,7 @@ class UnitGenericController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/api/unitGeneric/", name="api_unitGeneric_index", methods={"GET"}) 
+     * @Route("/api/unitGeneric/", name="api_unitGeneric_index", methods={"GET"})
      */
     public function apiIndex(UnitGenericRepository $unitGenericRepository): Response
     {
@@ -34,6 +32,16 @@ class UnitGenericController extends AbstractFOSRestController
 
         return $this->handleView($view);
     }
+
+    /**
+     * @Route("/api/nation/{nationId}/unitGeneric/", name="api_unitGeneric_by_nation", methods={"GET"})
+     */
+    public function apigetAllByNationId(UnitGenericManager $unitGenericManager,$nationId): Response
+    {
+        $view = $this->view($unitGenericManager->findByNationId($nationId), 200);
+
+        return $this->handleView($view);
+    }    
 
     /**
      * @Route("/unitGeneric/new", name="unitGeneric_new", methods={"GET","POST"})

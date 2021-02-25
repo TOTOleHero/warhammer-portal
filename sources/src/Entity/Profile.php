@@ -46,6 +46,9 @@ use Symfony\Component\Uid\Uuid;
  */
 abstract class Profile
 {
+    use TaggableTrait {
+        TaggableTrait::__construct as private __taggableTraitConstruct;
+    }
     protected const PROFILE_TYPE_WFB12 = 'profileWFB12';
     protected const PROFILE_TYPE_WFB9 = 'profileWFB9';
     protected const PROFILE_TYPE_AOS4 = 'profileAOS4';
@@ -80,22 +83,15 @@ abstract class Profile
      */
     private $name;
 
-
     /**
      * @ORM\ManyToMany(targetEntity=Equipment::class)
      */
     private $equipments;
 
-  /**
+    /**
      * @ORM\ManyToMany(targetEntity=Rule::class)
      */
     private $rules;
-
-
-
-    use TaggableTrait {
-        TaggableTrait::__construct as private __taggableTraitConstruct;
-    }
 
     public function __construct()
     {
@@ -147,7 +143,6 @@ abstract class Profile
         return $this;
     }
 
-
     /**
      * @return Collection|Equipment[]
      */
@@ -172,7 +167,6 @@ abstract class Profile
         return $this;
     }
 
-    
     /**
      * @return Collection|Rule[]
      */
@@ -196,6 +190,4 @@ abstract class Profile
 
         return $this;
     }
-
-
 }

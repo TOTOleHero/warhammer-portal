@@ -6,8 +6,6 @@ use App\Repository\ExternalLinkCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use function Symfony\Component\String\u;
 
-
-
 /**
  * @ORM\Entity(repositoryClass=ExternalLinkCategoryRepository::class)
  */
@@ -24,7 +22,6 @@ class ExternalLinkCategory
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-
 
     public function __construct($categoryName = null)
     {
@@ -45,6 +42,7 @@ class ExternalLinkCategory
     {
         $this->name = $name;
         $this->id = u($name)->snake();
+
         return $this;
     }
 }

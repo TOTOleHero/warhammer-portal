@@ -36,7 +36,7 @@ class ProfileType
 
     public function __toString()
     {
-        return  implode(',', $this->getGameSystems()->map(function ($gs) {
+        return implode(',', $this->getGameSystems()->map(function ($gs) {
             return $gs->getid();
         })->toArray());
     }
