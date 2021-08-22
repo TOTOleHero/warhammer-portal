@@ -35,7 +35,7 @@ use Symfony\Component\Uid\Uuid;
  *      ),
  *      exclusion = @Hateoas\Exclusion(excludeIf = "expr(null === object.getRace())")
  * )
-  * @Hateoas\Relation(
+ * @Hateoas\Relation(
  *      "unitGameSystems",
  *      href = @Hateoas\Route(
  *          "api_unitGameSystem_by_unitGeneric",
