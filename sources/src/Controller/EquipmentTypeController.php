@@ -44,7 +44,7 @@ class EquipmentTypeController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/equipmentType/new", name="equipment_type_new", methods={"GET","POST"})
+     * @Route("/contribute/equipmentType/new", name="equipment_type_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -93,7 +93,7 @@ class EquipmentTypeController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/equipmentType/{id}/edit", name="equipment_type_edit", methods={"GET","POST"})
+     * @Route("/contribute/equipmentType/{id}/edit", name="equipment_type_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, EquipmentType $equipmentType): Response
     {
@@ -113,7 +113,7 @@ class EquipmentTypeController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/equipmentType/{id}", name="equipment_type_delete", methods={"DELETE"})
+     * @Route("/contribute/equipmentType/{id}", name="equipment_type_delete", methods={"DELETE"})
      */
     public function delete(Request $request, EquipmentType $equipmentType): Response
     {

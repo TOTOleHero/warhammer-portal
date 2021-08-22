@@ -23,7 +23,7 @@ class ProfileWFB9Controller extends AbstractController
     }
 
     /**
-     * @Route("/profileWFB9/new", name="profileWFB9_new", methods={"GET","POST"})
+     * @Route("/contribute/profileWFB9/new", name="profileWFB9_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -56,7 +56,7 @@ class ProfileWFB9Controller extends AbstractController
     }
 
     /**
-     * @Route("/profileWFB9/{id}/edit", name="profileWFB9_edit", methods={"GET","POST"})
+     * @Route("/contribute/profileWFB9/{id}/edit", name="profileWFB9_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, ProfileWFB9 $profileWFB9): Response
     {
@@ -76,7 +76,7 @@ class ProfileWFB9Controller extends AbstractController
     }
 
     /**
-     * @Route("/profileWFB9/{id}", name="profileWFB9_delete", methods={"DELETE"})
+     * @Route("/contribute/profileWFB9/{id}", name="profileWFB9_delete", methods={"DELETE"})
      */
     public function delete(Request $request, ProfileWFB9 $profileWFB9): Response
     {

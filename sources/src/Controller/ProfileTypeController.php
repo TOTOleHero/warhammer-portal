@@ -23,7 +23,7 @@ class ProfileTypeController extends AbstractController
     }
 
     /**
-     * @Route("/profileType/new", name="profile_type_new", methods={"GET","POST"})
+     * @Route("/contribute/profileType/new", name="profile_type_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -56,7 +56,7 @@ class ProfileTypeController extends AbstractController
     }
 
     /**
-     * @Route("/profileType/{id}/edit", name="profile_type_edit", methods={"GET","POST"})
+     * @Route("/contribute/profileType/{id}/edit", name="profile_type_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, ProfileType $profileType): Response
     {
@@ -76,7 +76,7 @@ class ProfileTypeController extends AbstractController
     }
 
     /**
-     * @Route("/profileType/{id}", name="profile_type_delete", methods={"DELETE"})
+     * @Route("/contribute/profileType/{id}", name="profile_type_delete", methods={"DELETE"})
      */
     public function delete(Request $request, ProfileType $profileType): Response
     {

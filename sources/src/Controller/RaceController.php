@@ -53,7 +53,7 @@ class RaceController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/race/new", name="race_new", methods={"GET","POST"})
+     * @Route("/contribute/race/new", name="race_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -97,7 +97,7 @@ class RaceController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/race/{id}/edit", name="race_edit", methods={"GET","POST"})
+     * @Route("/contribute/race/{id}/edit", name="race_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Race $race): Response
     {
@@ -117,7 +117,7 @@ class RaceController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/race/{id}", name="race_delete", methods={"DELETE"})
+     * @Route("/contribute/race/{id}", name="race_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Race $race): Response
     {

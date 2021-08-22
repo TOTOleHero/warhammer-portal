@@ -96,7 +96,7 @@ class GameSystemController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/game-system/{id}/edit", name="game_system_edit", methods={"GET","POST"})
+     * @Route("/contribute/game-system/{id}/edit", name="game_system_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, GameSystem $gameSystem): Response
     {

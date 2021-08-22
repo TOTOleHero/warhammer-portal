@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileAOS4Controller extends AbstractController
 {
     /**
-     * @Route("profileAOS4/", name="profile_aos4_index", methods={"GET"})
+     * @Route("/profileAOS4/", name="profile_aos4_index", methods={"GET"})
      */
     public function index(ProfileRepository $profileRepository): Response
     {
@@ -23,7 +23,7 @@ class ProfileAOS4Controller extends AbstractController
     }
 
     /**
-     * @Route("profileAOS4/new", name="profile_aos4_new", methods={"GET","POST"})
+     * @Route("/contribute/profileAOS4/new", name="profile_aos4_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -46,7 +46,7 @@ class ProfileAOS4Controller extends AbstractController
     }
 
     /**
-     * @Route("profileAOS4/{id}", name="profile_aos4_show", methods={"GET"})
+     * @Route("/profileAOS4/{id}", name="profile_aos4_show", methods={"GET"})
      */
     public function show(ProfileAOS4 $profileAOS4): Response
     {
@@ -56,7 +56,7 @@ class ProfileAOS4Controller extends AbstractController
     }
 
     /**
-     * @Route("profileAOS4/{id}/edit", name="profile_aos4_edit", methods={"GET","POST"})
+     * @Route("/contribute/profileAOS4/{id}/edit", name="profile_aos4_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, ProfileAOS4 $profileAOS4): Response
     {
@@ -76,7 +76,7 @@ class ProfileAOS4Controller extends AbstractController
     }
 
     /**
-     * @Route("profileAOS4/{id}", name="profile_aos4_delete", methods={"DELETE"})
+     * @Route("/contribute/profileAOS4/{id}", name="profile_aos4_delete", methods={"DELETE"})
      */
     public function delete(Request $request, ProfileAOS4 $profileAOS4): Response
     {

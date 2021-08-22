@@ -64,7 +64,7 @@ class NationController extends AbstractFOSRestController
 
 
     /**
-     * @Route("/nation/new", name="nation_new", methods={"GET","POST"})
+     * @Route("/contribute/nation/new", name="nation_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -108,7 +108,7 @@ class NationController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/nation/{id}/edit", name="nation_edit", methods={"GET","POST"})
+     * @Route("/contribute/nation/{id}/edit", name="nation_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Nation $nation): Response
     {
@@ -128,7 +128,7 @@ class NationController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/nation/{id}", name="nation_delete", methods={"DELETE"})
+     * @Route("/contribute/nation/{id}", name="nation_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Nation $nation): Response
     {

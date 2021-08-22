@@ -33,7 +33,7 @@ class ProfileController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/profile/new", name="profile_new", methods={"GET","POST"})
+     * @Route("/contribute/profile/new", name="profile_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -76,7 +76,7 @@ class ProfileController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/profile/{id}/edit", name="profile_edit", methods={"GET","POST"})
+     * @Route("/contribute/profile/{id}/edit", name="profile_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Profile $profile): Response
     {
@@ -96,7 +96,7 @@ class ProfileController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/profile/{id}", name="profile_delete", methods={"DELETE"})
+     * @Route("/contribute/profile/{id}", name="profile_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Profile $profile): Response
     {

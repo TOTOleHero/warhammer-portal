@@ -44,7 +44,7 @@ class UnitGenericController extends AbstractFOSRestController
     }    
 
     /**
-     * @Route("/unitGeneric/new", name="unitGeneric_new", methods={"GET","POST"})
+     * @Route("/contribute/unitGeneric/new", name="unitGeneric_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -87,7 +87,7 @@ class UnitGenericController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/unitGeneric/{id}/edit", name="unitGeneric_edit", methods={"GET","POST"})
+     * @Route("/contribute/unitGeneric/{id}/edit", name="unitGeneric_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, UnitGeneric $unitGeneric): Response
     {
@@ -107,7 +107,7 @@ class UnitGenericController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/unitGeneric/{id}", name="unitGeneric_delete", methods={"DELETE"})
+     * @Route("/contribute/unitGeneric/{id}", name="unitGeneric_delete", methods={"DELETE"})
      */
     public function delete(Request $request, UnitGeneric $unitGeneric): Response
     {

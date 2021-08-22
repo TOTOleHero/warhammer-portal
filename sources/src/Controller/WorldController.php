@@ -52,7 +52,7 @@ class WorldController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/contribute/world/new", name="world_new", methods={"GET","POST"})
+     * @Route("/contribute/contribute/world/new", name="world_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -95,7 +95,7 @@ class WorldController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/world/{id}/edit", name="world_edit", methods={"GET","POST"})
+     * @Route("/contribute/world/{id}/edit", name="world_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, World $world): Response
     {
@@ -115,7 +115,7 @@ class WorldController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/world/{id}", name="world_delete", methods={"DELETE"})
+     * @Route("/contribute/world/{id}", name="world_delete", methods={"DELETE"})
      */
     public function delete(Request $request, World $world): Response
     {

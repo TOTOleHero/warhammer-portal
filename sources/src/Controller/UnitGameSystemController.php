@@ -64,7 +64,7 @@ class UnitGameSystemController extends AbstractFOSRestController
     }    
 
     /**
-     * @Route("/unitGameSystem/new", name="unitGameSystem_new", methods={"GET","POST"})
+     * @Route("/contribute/unitGameSystem/new", name="unitGameSystem_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -116,7 +116,7 @@ class UnitGameSystemController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/unitGameSystem/{id}/edit", name="unitGameSystem_edit", methods={"GET","POST"})
+     * @Route("/contribute/unitGameSystem/{id}/edit", name="unitGameSystem_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, UnitGameSystem $unitGameSystem): Response
     {
@@ -136,7 +136,7 @@ class UnitGameSystemController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/unitGameSystem/{id}", name="unitGameSystem_delete", methods={"DELETE"})
+     * @Route("/contribute/unitGameSystem/{id}", name="unitGameSystem_delete", methods={"DELETE"})
      */
     public function delete(Request $request, UnitGameSystem $unitGameSystem): Response
     {
