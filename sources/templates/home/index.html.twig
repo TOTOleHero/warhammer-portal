@@ -31,15 +31,21 @@
                     'App\\Controller\\RaceController::index',
                     { 'embedType': 'groupListContainer' }
                 )) }}
-            <h2>Worlds</h2>
+            
+        </div>
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-3">
+        <h2>Worlds</h2>
             {{ render(controller(
                     'App\\Controller\\WorldController::index',
                     { 'embedType': 'groupListContainer' }
                 )) }}
-        </div>
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-3">TOTO
+        <h2>Nations</h2>
+            {{ render(controller(
+                    'App\\Controller\\NationController::index',
+                    { 'embedType': 'groupListContainer' }
+                )) }}
         </div>
     </div>
 

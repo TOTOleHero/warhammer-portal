@@ -17,9 +17,27 @@ class NationController extends AbstractFOSRestController
     /**
      * @Route("/nation/", name="nation_index", methods={"GET"})
      */
-    public function index(NationRepository $nationRepository): Response
+    public function index(NationRepository $nationRepository, $embedType = false): Response
     {
-        return $this->render('nation/index.html.twig', [
+        $templateBase = 'nation/';
+        $template = 'index.html.twig';
+        switch ($embedType) {
+            case 'groupListContainer':
+                $template = 'list_group.html.twig';
+                break;
+            case 'dropdownList':
+                $template = 'dropdown.html.twig';
+                break;
+            case false:
+                break;
+            default:
+                return $this->render('embedTypeNotFound.html.twig', [
+                    'embedType' => $embedType,
+                    'method' => __METHOD__,
+                    'class' => __CLASS__,
+                ]);
+        }
+        return $this->render($templateBase.$template, [
             'nations' => $nationRepository->findAll(),
         ]);
     }
