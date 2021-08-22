@@ -155,7 +155,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
             __DIR__.'/warhammer-armies-project'
         );
         $filesystem = new Filesystem($adapter);
-        $allFiles = $filesystem->listContents('/')->filter(fn (StorageAttributes $attributes) => $attributes->isFile());
+        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
         foreach ($allFiles as $item) {
             if($item->isFile() && pathinfo($item->path(),PATHINFO_EXTENSION) == 'cat')
             {
