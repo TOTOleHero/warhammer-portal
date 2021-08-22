@@ -32,7 +32,7 @@ class World
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=GameSystem::class, mappedBy="world")
+     * @ORM\OneToMany(targetEntity=GameSystem::class, mappedBy="world", fetch="EXTRA_LAZY")
      */
     private $gameSystems;
 

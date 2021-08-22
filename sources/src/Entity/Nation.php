@@ -55,7 +55,7 @@ class Nation
 
     /**
      * @JMS\Exclude()
-     * @ORM\ManyToMany(targetEntity=UnitGeneric::class, mappedBy="nations")
+     * @ORM\ManyToMany(targetEntity=UnitGeneric::class, mappedBy="nations", fetch="EXTRA_LAZY")
      */
     private $unitGenerics;
 
