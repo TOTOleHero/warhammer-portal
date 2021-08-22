@@ -43,6 +43,8 @@ class WorldController extends AbstractFOSRestController
 
     /**
      * @Route("/api/world/", name="api_world_index", methods={"GET"})
+     * 
+     * @OA\Tag(name="world")
      */
     public function apiIndex(WorldRepository $worldRepository): Response
     {
@@ -86,6 +88,8 @@ class WorldController extends AbstractFOSRestController
 
     /**
      * @Route("/api/world/{id}", name="api_world_show", methods={"GET"})
+     * 
+     * @OA\Tag(name="world")
      */
     public function apiShow(World $world): Response
     {

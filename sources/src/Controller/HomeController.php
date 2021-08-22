@@ -21,6 +21,8 @@ class HomeController extends AbstractFOSRestController
 
     /**
      * @Route("/api/", name="api_index", methods={"GET"})
+     * 
+     * @OA\Tag(name="root")
      */
     public function apiIndex(RouterInterface $router): Response
     {

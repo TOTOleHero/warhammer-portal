@@ -44,6 +44,8 @@ class RaceController extends AbstractFOSRestController
 
     /**
      * @Route("/api/race/", name="api_race_index", methods={"GET"})
+     *  
+     * @OA\Tag(name="race")
      */
     public function apiIndex(RaceRepository $raceRepository): Response
     {
@@ -88,6 +90,8 @@ class RaceController extends AbstractFOSRestController
 
     /**
      * @Route("/api/race/{id}", name="api_race_show", methods={"GET"})
+     *  
+     * @OA\Tag(name="race")
      */
     public function apiShow(Race $race): Response
     {

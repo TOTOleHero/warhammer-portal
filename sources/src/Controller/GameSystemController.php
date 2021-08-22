@@ -43,6 +43,8 @@ class GameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/api/game-system/", name="api_game_system_index", methods={"GET"})
+     * 
+     * @OA\Tag(name="game-system")
      */
     public function apiIndex(GameSystemRepository $gameSystemRepository): Response
     {
@@ -87,6 +89,8 @@ class GameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/api/game-system/{id}", name="api_game_system_show", methods={"GET"})
+     * 
+     * @OA\Tag(name="game-system")
      */
     public function apiShow(GameSystem $gameSystem): Response
     {

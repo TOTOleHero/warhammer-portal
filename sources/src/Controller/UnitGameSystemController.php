@@ -35,7 +35,7 @@ class UnitGameSystemController extends AbstractFOSRestController
      *     )
      * 
      * )
-     * @OA\Tag(name="unti")
+     * @OA\Tag(name="unitGameSystem")
      */
     public function apiIndex(UnitGameSystemRepository $unitGameSystemRepository): Response
     {
@@ -54,7 +54,7 @@ class UnitGameSystemController extends AbstractFOSRestController
      *         @OA\Items(ref=@Model(type=UnitGameSystem::class))
      *     )
      * )
-     * @OA\Tag(name="unti")
+     * @OA\Tag(name="unitGeneric")
      */
     public function apiGetAllByUnitGenericId(UnitGameSystemRepository $unitGameSystemRepository,$unitGenericId): Response
     {
@@ -107,6 +107,8 @@ class UnitGameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/api/unitGameSystem/{id}", name="api_unitGameSystem_show", methods={"GET"})
+     * 
+     * @OA\Tag(name="unitGameSystem")
      */
     public function apiShow(UnitGameSystem $unitGameSystem): Response
     {

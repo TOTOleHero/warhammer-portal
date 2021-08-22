@@ -44,6 +44,8 @@ class NationController extends AbstractFOSRestController
 
     /**
      * @Route("/api/nation/", name="api_nation_index", methods={"GET"})
+     *  
+     * @OA\Tag(name="nation")
      */
     public function apiIndex(NationRepository $nationRepository): Response
     {
@@ -54,6 +56,8 @@ class NationController extends AbstractFOSRestController
 
     /**
      * @Route("/api/unitGeneric/{unitGenericId}/nation/", name="api_nation_by_unitGeneric", methods={"GET"})
+     *  
+     * @OA\Tag(name="unitGeneric")
      */
     public function apiGetByUnitGenericId(NationManager $nationManager,$unitGenericId): Response
     {
@@ -99,6 +103,8 @@ class NationController extends AbstractFOSRestController
 
     /**
      * @Route("/api/nation/{id}", name="api_nation_show", methods={"GET"})
+     *  
+     * @OA\Tag(name="nation")
      */
     public function apiShow(Nation $nation): Response
     {
