@@ -1,6 +1,6 @@
 Adventure Code,Level,Type,Race,Monster Name,Wounds,WND,Move,WS,BS,Strength,T,Initiative,Attacks,Gold (Each),Armour,Damage,Special Abilities,1,2,3,4,5,6,7,8,9,10
-,,DARK_ELVES,ELVE,Dark Elf Warrior,6,OOOOOO,5,4,3+,3,3(4),6,1,100,1,1D6,Armed With Crossbows (Str 4); Doge (6+); Hate Elves,2,3,3,4,4,4,4,4,5,5
-,,DARK_ELVES,ELVE,Dark Elf Champion,14,OOOOOOOOOOOOOO,5,5,5+,4,3(5),7,2,480,2,2D6,Dodge 6+; Hate Elves; Magic Weapon,2,2,3,3,4,4,4,4,4,4
+,,DARK_ELVES,ELF,Dark Elf Warrior,6,OOOOOO,5,4,3+,3,3(4),6,1,100,1,1D6,Armed With Crossbows (Str 4); Doge (6+); Hate Elves,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELF,Dark Elf Champion,14,OOOOOOOOOOOOOO,5,5,5+,4,3(5),7,2,480,2,2D6,Dodge 6+; Hate Elves; Magic Weapon,2,2,3,3,4,4,4,4,4,4
 ,,CHAOS,BEAST_HUMANOID ,Beastman,6,OOOOOO,4,4,4+,3,4,3,1,100,-,1D6,Throw Spears (Str 3),2,3,3,4,4,4,4,4,5,5
 ,,CHAOS,BEAST_HUMANOID ,Beastman Champion,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,5,3+,4,4,4,2,610,-,1D6/2D6(5+),Magic Weapon; Throw Spears (Str 8),2,2,3,3,4,4,4,4,4,4
 ,,CHAOS,BEAST_HUMANOID ,Beastman Hero,34,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,4,6,2+,4,5(7),5,3,1300,2,2D6,Magic Item; Magic Weapon; Throw Spears (Str 9),2,2,3,3,3,4,4,4,4,4
@@ -16,9 +16,9 @@ Adventure Code,Level,Type,Race,Monster Name,Wounds,WND,Move,WS,BS,Strength,T,Ini
 ,,CHAOS,DAEMON ,Chaos Hound,8,OOOOOOOO,6,4,-,4,4(6),4,2,160,2,1D6,Ambush 5+; Gang Up,2,3,3,4,4,4,4,4,5,5
 ,,CHAOS,DAEMON ,Daemon of Khorne - Bloodletter,7,OOOOOOO,4,5,2+,4,3,6,2,200,-,1D6,Armed with Hellblade; Daemonic -1; Fear 5,2,2,3,3,4,4,4,4,4,4
 ,,CHAOS,DAEMON ,Daemon of Khorne - Juggernaut,35,OOOOOOOOOOOOOOOOOOOOOOOOO,7,3,-,5,5(7),2,2,700,2,2D6,Daemonic -1; Fear 7; Magic Resistance 5+; Never Pinned,2,3,4,4,4,4,5,5,5,6
-,,DARK_ELVES,ELVE,Dark Elf Lord,34,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,7,Auto,4,4(8),9,4,1600,4,3D6,Dodge 4+; Hate Elves; Magic Resistance 5+; Magic Weapon; 2 x Magic Item; Magic Armour,2,2,2,3,3,3,4,4,4,4
-,,DARK_ELVES,ELVE,Dark Elf Assassin,12,OOOOOOOOOOOO,5,9,Auto,4,4,10,2,410,-,1D6,Ambush; Magic 5+; Assassinate 6+; Dodge 5+; Hate Elves; Weeping Blades,2,2,2,2,3,3,3,3,4,4
-,,DARK_ELVES,ELVE,Dark Elf Beastmaster,15,OOOOOOOOOOOOOOO,5,5,2+,4,4(6),4,2,160,2,1D6,Armed With Crossbows (Str 5); Beast Handler (Chaos Hounds or Warhounds); Hate Elves,2,2,3,3,4,4,4,4,4,4
+,,DARK_ELVES,ELF,Dark Elf Lord,34,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,7,Auto,4,4(8),9,4,1600,4,3D6,Dodge 4+; Hate Elves; Magic Resistance 5+; Magic Weapon; 2 x Magic Item; Magic Armour,2,2,2,3,3,3,4,4,4,4
+,,DARK_ELVES,ELF,Dark Elf Assassin,12,OOOOOOOOOOOO,5,9,Auto,4,4,10,2,410,-,1D6,Ambush; Magic 5+; Assassinate 6+; Dodge 5+; Hate Elves; Weeping Blades,2,2,2,2,3,3,3,3,4,4
+,,DARK_ELVES,ELF,Dark Elf Beastmaster,15,OOOOOOOOOOOOOOO,5,5,2+,4,4(6),4,2,160,2,1D6,Armed With Crossbows (Str 5); Beast Handler (Chaos Hounds or Warhounds); Hate Elves,2,2,3,3,4,4,4,4,4,4
 ,,CHAOS,DAEMON ,Bloodthirster,125,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,10,Auto,8,7,8,10,8000,-,8D6,Armed with Axe of Khorne; Armed with Daemon Whip; Drain Power; Fly; Greater Daemon 14; Ignore Blow 3+; Ignore Pain 12; Large Monster; Magic Drain 5+,2,2,2,2,3,3,3,3,3,4
 ,,CHAOS,DAEMON ,Daemon of Slaanesh - Daemonette,15,OOOOOOOOOOOOOOO,4,6,2+,4,3,6,3,300,-,1D6,Ambush 5+; Daemonic -1; Fear 6; Magic Resistance 6+,2,2,3,3,3,4,4,4,4,4
 ,,CHAOS,DAEMON ,Daemon of Slaanesh - Fiend of Slaanesh,8,OOOOOOOO,6,3,-,3,3,3,3,250,-,1D6,Aura of Slaanesh; Daemonic -1; Fear 6,2,3,4,4,4,4,5,5,5,6
@@ -39,15 +39,15 @@ Adventure Code,Level,Type,Race,Monster Name,Wounds,WND,Move,WS,BS,Strength,T,Ini
 ,,CHAOS_DWARFS,DWARF,Chaos Dwarf Master Sorcerer,26,OOOOOOOOOOOOOOOOOOOOOOOOOO,3,4,4+,4,5(8),3,1,590,2,1D6/2D6(6+),Chaos Dwarf Magic 3; Magic Dispel 4+; Magic Item; Magic Armour; Magic Weapon; Magic Resistance 4+,2,3,3,4,4,4,4,4,5,5
 ,,CHAOS_DWARFS,DWARF,Chaos Dwarf Sorcerer Lord,40,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,3,4,4+,4,5(8),5,3,3280,3,3D6/4D6(5+),Chaos Dwarf Magic 4; Magic Dispel 4+; Magic Resistance 3+; Magic Armour; 3 x Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
 ,,GREENSKINS,GOBLIN ,Goblin,2,OO,4,2,5+,3,3,2,1,20,-,1D6,Armed with [1-2] Bows (Str 1) or [4-6] Spears (fight in Ranks),3,4,4,4,5,5,6,6,6,6
-,,DARK_ELVES,ELVE,Dark Elf Hero,25,OOOOOOOOOOOOOOOOOOOOOOOOO,5,6,1+,4,4(8),8,3,1040,4,2D6,Dodge 4+; Hate Elves; Magic Resistance 5+; Magic Armour; 2 x Magic,,,,,,,,,,
-,,DARK_ELVES,ELVE,Dark Elf Hero,25,OOOOOOOOOOOOOOOOOOOOOOOOO,5,6,1+,4,4(8),8,3,1040,4,2D6,Dodge 4+; Hate Elves; Magic Resistance 5+; Magic Weapon; Magic Armour,2,2,3,3,3,4,4,4,4,4
-,,DARK_ELVES,ELVE,Dark Elf Sorcerer,12,OOOOOOOOOOOO,5,4,3+,3,4,7,1,590,-,1D6,Dark Elf Magic 1; Hate Elves; Magic Resistance 6+; Magic Item,2,3,3,4,4,4,4,4,5,5
-,,DARK_ELVES,ELVE,Dark Elf Sorcerer Champion,20,OOOOOOOOOOOOOOOOOOOO,5,4,3+,4,4(5),7,1,1210,1,1D6,Hate Elves; Dark Elf Magic 2; Magic Resistance 5+; Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
-,,DARK_ELVES,ELVE,Dark Elf Master Sorcerer,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,4,3+,4,4(6),8,2,2190,2,2D6,Hate Elves; Dark Elf Magic 3; Magic Dispel 4+; Magic Resistance 4+; 2 x Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
-,,DARK_ELVES,ELVE,Dark Elf Sorcerer Lord,41,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,4,3+,4,4(7),9,3,3280,3,3D6,Ambush; Magic A; Hate Elves; Dark Elf Magic 4; Magic Dispel 4+; Magic Resistance 3+; 3 x Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
-,,DARK_ELVES,ELVE,Dark Elf Naggaroth Black Guards,6,OOOOOO,5,5,3+,4,3(5),7,1,150,2,1D6,Armed With Halberds; Fight In Ranks; Hate Elves,2,2,3,3,4,4,4,4,4,4
-,,DARK_ELVES,ELVE,Witch Elf,11,OOOOOOOOOOO,5,4,3+,3,3,6,1,140,-,1D6,Frenzy 4+; Hate Elves,2,3,3,4,4,4,4,4,5,5
-,,DARK_ELVES,ELVE,Witch Elf Champion,13,OOOOOOOOOOOOO,5,5,2+,4,3,7,2,600,-,1D6,Frenzy 3+; Hate Elves,2,2,3,3,4,4,4,4,4,4
+,,DARK_ELVES,ELF,Dark Elf Hero,25,OOOOOOOOOOOOOOOOOOOOOOOOO,5,6,1+,4,4(8),8,3,1040,4,2D6,Dodge 4+; Hate Elves; Magic Resistance 5+; Magic Armour; 2 x Magic,,,,,,,,,,
+,,DARK_ELVES,ELF,Dark Elf Hero,25,OOOOOOOOOOOOOOOOOOOOOOOOO,5,6,1+,4,4(8),8,3,1040,4,2D6,Dodge 4+; Hate Elves; Magic Resistance 5+; Magic Weapon; Magic Armour,2,2,3,3,3,4,4,4,4,4
+,,DARK_ELVES,ELF,Dark Elf Sorcerer,12,OOOOOOOOOOOO,5,4,3+,3,4,7,1,590,-,1D6,Dark Elf Magic 1; Hate Elves; Magic Resistance 6+; Magic Item,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELF,Dark Elf Sorcerer Champion,20,OOOOOOOOOOOOOOOOOOOO,5,4,3+,4,4(5),7,1,1210,1,1D6,Hate Elves; Dark Elf Magic 2; Magic Resistance 5+; Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELF,Dark Elf Master Sorcerer,30,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,4,3+,4,4(6),8,2,2190,2,2D6,Hate Elves; Dark Elf Magic 3; Magic Dispel 4+; Magic Resistance 4+; 2 x Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELF,Dark Elf Sorcerer Lord,41,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,5,4,3+,4,4(7),9,3,3280,3,3D6,Ambush; Magic A; Hate Elves; Dark Elf Magic 4; Magic Dispel 4+; Magic Resistance 3+; 3 x Magic Item; Magic Weapon,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELF,Dark Elf Naggaroth Black Guards,6,OOOOOO,5,5,3+,4,3(5),7,1,150,2,1D6,Armed With Halberds; Fight In Ranks; Hate Elves,2,2,3,3,4,4,4,4,4,4
+,,DARK_ELVES,ELF,Witch Elf,11,OOOOOOOOOOO,5,4,3+,3,3,6,1,140,-,1D6,Frenzy 4+; Hate Elves,2,3,3,4,4,4,4,4,5,5
+,,DARK_ELVES,ELF,Witch Elf Champion,13,OOOOOOOOOOOOO,5,5,2+,4,3,7,2,600,-,1D6,Frenzy 3+; Hate Elves,2,2,3,3,4,4,4,4,4,4
 ,,GIANT,GIANT,Giant,64,OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO,6,3,4+,7,6(11),3,Spec.,2000,5,5D6,Fear 11; Giant Attacks; Ignore Blows 5+; Ignore Pain 10; Large Monster; Never Pinned,2,3,4,4,4,4,5,5,5,6
 ,,CHAOS_DWARFS,DWARF,Bull Centaur,12,OOOOOOOOOOOO,8,4,4+,4,4(6),3,2,410,2,1D6/2D6(5+),Fear 5; Magic Resistance 6+,2,3,3,4,4,4,4,4,5,5
 ,,CHAOS_DWARFS,DWARF,Bull Centaur Champion,23,OOOOOOOOOOOOOOOOOOOOOOO,8,5,3+,5,4(6),4,3,1060,2,2D6,Fear 7; Magic Resistance 5+; Magic Armour; Magic Item; Magic Weapon,2,2,3,3,4,4,4,4,4,4

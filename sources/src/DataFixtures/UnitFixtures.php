@@ -45,7 +45,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
 
     protected $data = [
         'High elf warrior / citizen / militia' => [
-            'race' => 'ELVE',
+            'race' => 'ELF',
             'nation' => 'HIGH_ELVES',
             'tags' => [
                 'High elf warrior', 'High elf citizen', 'High elf militia',

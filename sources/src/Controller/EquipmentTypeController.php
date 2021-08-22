@@ -7,7 +7,7 @@ use App\Form\EquipmentTypeType;
 use App\Repository\EquipmentTypeRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,15 +26,15 @@ class EquipmentTypeController extends AbstractFOSRestController
 
     /**
      * @Route("/api/equipmentType/", name="api_equipment_type_index", methods={"GET"})
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
      *     description="All EquipmentType",
-     *     @SWG\Schema(
-     *         type="array",
-     *         @SWG\Items(ref=@Model(type=EquipmentType::class))
+     *     @OA\JsonContent(
+     *        type="array",
+     *        @OA\Items(ref=@Model(type=EquipmentType::class))
      *     )
      * )
-     * @SWG\Tag(name="equipment")
+     * @OA\Tag(name="equipment")
      */
     public function apiIndex(EquipmentTypeRepository $equipmentTypeRepository): Response
     {
@@ -78,14 +78,12 @@ class EquipmentTypeController extends AbstractFOSRestController
 
     /**
      * @Route("/api/equipmentType/{id}", name="api_equipment_type_show", methods={"GET"})
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
      *     description="One EquipmentType",
-     *     @SWG\Schema(
      *         @Model(type=EquipmentType::class)
-     *     )
      * )
-     * @SWG\Tag(name="equipment")
+     * @OA\Tag(name="equipment")
      */
     public function apiShow(EquipmentType $equipmentType): Response
     {

@@ -7,7 +7,7 @@ use App\Form\UnitGameSystemType;
 use App\Repository\UnitGameSystemRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,15 +26,16 @@ class UnitGameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/api/unitGameSystem/", name="api_unitGameSystem_index", methods={"GET"})
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
      *     description="All UnitGameSystem",
-     *     @SWG\Schema(
+     *     @OA\JsonContent(
      *         type="array",
-     *         @SWG\Items(ref=@Model(type=UnitGameSystem::class))
+     *         @OA\Items(ref=@Model(type=UnitGameSystem::class))
      *     )
+     * 
      * )
-     * @SWG\Tag(name="unti")
+     * @OA\Tag(name="unti")
      */
     public function apiIndex(UnitGameSystemRepository $unitGameSystemRepository): Response
     {
@@ -45,15 +46,15 @@ class UnitGameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/api/unitGeneric/{unitGenericId}/unitGameSystem/", name="api_unitGameSystem_by_unitGeneric", methods={"GET"})
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
      *     description="All UnitGameSystem",
-     *     @SWG\Schema(
+     *     @OA\JsonContent(
      *         type="array",
-     *         @SWG\Items(ref=@Model(type=UnitGameSystem::class))
+     *         @OA\Items(ref=@Model(type=UnitGameSystem::class))
      *     )
      * )
-     * @SWG\Tag(name="unti")
+     * @OA\Tag(name="unti")
      */
     public function apiGetAllByUnitGenericId(UnitGameSystemRepository $unitGameSystemRepository,$unitGenericId): Response
     {
@@ -87,15 +88,15 @@ class UnitGameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/unitGameSystem/{id}", name="unitGameSystem_show", methods={"GET"})
-     * @SWG\Response(
+     * @OA\Response(
      *     response=200,
      *     description="One UnitGameSystem",
-     *     @SWG\Schema(
+     *     @OA\JsonContent(
      *         type="array",
-     *         @SWG\Items(ref=@Model(type=UnitGameSystem::class))
+     *         @OA\Items(ref=@Model(type=UnitGameSystem::class))
      *     )
      * )
-     * @SWG\Tag(name="unit")
+     * @OA\Tag(name="unit")
      */
     public function show(UnitGameSystem $unitGameSystem): Response
     {

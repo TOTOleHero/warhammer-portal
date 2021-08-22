@@ -5,12 +5,12 @@ namespace App\Entity;
 use App\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 
 /**
- * @SWG\Definition(
+ * @OA\Schema(
  *      allOf={
- *          @SWG\Schema(ref=@Model(type=Profile::class))
+ *         @Model(type=Profile::class)
  *      }
  * )
  * @ORM\Entity(repositoryClass=ProfileRepository::class)

@@ -1,22 +1,23 @@
 <div class="list-group">
-{% for race in races %}
-  <a href="{{ path('race_show', {'id': race.id}) }}" class="list-group-item list-group-item-action flex-column align-items-start active">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{ race.name }}</h5>
-      <small>3 days ago</small>
-    </div>
-    <p class="mb-1">Description</p>
-    <small>Game system : </small>
-  </a>
-
-{% else %}
- <dic class="list-group-item list-group-item-action flex-column align-items-start active">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">No data</h5>
+  {% for race in races %}
+    <a href="{{ path('race_show', {'id': race.id}) }}" 
+    class="list-group-item list-group-item-action flex-column border-top border-bottom">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ race.name }}</h5>
+        <small>3 days ago</small>
+      </div>
+      {# <p class="mb-1">Description</p> #}
       
+    </a>
+
+  {% else %}
+    <div class="list-group-item flex-column  border-top border-bottom">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">No data</h5>
+        
+      </div>
+      <p class="mb-1">No data</p>
     </div>
-    <p class="mb-1">No data</p>
-  </div>
- {% endfor %}
+  {% endfor %}
 
 </div>

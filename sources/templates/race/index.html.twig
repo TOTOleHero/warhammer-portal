@@ -1,39 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-page.html.twig' %}
 
 {% block title %}Race index{% endblock %}
 
-{% block body %}
+{% block body2 %}
     <h1>Race index</h1>
-{#
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Id</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for race in races %}
-            <tr>
-                <td>{{ race.name }}</td>
-                <td>{{ race.id }}</td>
-                <td>
-                    <a href="{{ path('race_show', {'id': race.id}) }}">show</a>
-                    <a href="{{ path('race_edit', {'id': race.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-#}
+    {#
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Id</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for race in races %}
+                <tr>
+                    <td>{{ race.name }}</td>
+                    <td>{{ race.id }}</td>
+                    <td>
+                        <a href="{{ path('race_show', {'id': race.id}) }}">show</a>
+                        <a href="{{ path('race_edit', {'id': race.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    #}
 
-
-{% include 'race/list_group.html.twig' %}
+    {% include 'race/list_group.html.twig' %}
 
     <a href="{{ path('race_new') }}">Create new</a>
 {% endblock %}

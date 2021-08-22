@@ -1,6 +1,6 @@
 <?= $helper->getHeadPrintCode($entity_class_name) ?>
 
-{% block body %}
+{% block body2 %}
     <h1><?= $entity_class_name ?></h1>
 
     <table class="table">

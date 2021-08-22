@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as JMS;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
 
@@ -53,15 +53,15 @@ class UnitGameSystem
     /**
      * @var Collection|Profile[]
      * @ORM\OneToMany(targetEntity=Profile::class, mappedBy="unitGameSystem", orphanRemoval=true)
-     * @SWG\Property(
+     * @OA\Property(
      *      type="array",
-     *      @SWG\Items(
+     *      @OA\Items(
      *          allOf={
-     *          @SWG\Schema(ref=@Model(type=ProfileAOS4::class)),
-     *          @SWG\Schema(ref=@Model(type=ProfileWFB9::class)),
-     *          @SWG\Schema(ref=@Model(type=ProfileWFB12::class)),
-     *          @SWG\Schema(ref=@Model(type=ProfileWHQ::class)),
-     *          @SWG\Schema(ref=@Model(type=ProfileT9A12::class))
+     *          @Model(type=ProfileAOS4::class),
+     *          @Model(type=ProfileWFB9::class),
+     *          @Model(type=ProfileWFB12::class),
+     *          @Model(type=ProfileWHQ::class),
+     *          @Model(type=ProfileT9A12::class)
      *      })
      * )
      */
