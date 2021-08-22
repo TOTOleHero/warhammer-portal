@@ -102,6 +102,7 @@ class NationFixtures extends Fixture
         ['UNDEAD',                                  'en_US',                                  'Unified Undead'],
         ['CHAOS',                                  'en_US',                                  'Unified chaos'],
         ['GIANT',                                  'en_US',                                  'Giant'],
+        ['AMAZONS',                                  'en_US',                                  'Amazons'],
     ];
 
     public function load(ObjectManager $manager)

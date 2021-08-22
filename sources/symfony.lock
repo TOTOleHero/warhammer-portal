@@ -174,6 +174,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.0.0"
     },
+    "hobnob/xml-stream-reader": {
+        "version": "v1.0.8"
+    },
     "jms/metadata": {
         "version": "2.3.0"
     },
@@ -199,6 +202,25 @@
     },
     "league/csv": {
         "version": "9.6.2"
+    },
+    "league/flysystem": {
+        "version": "2.2.3"
+    },
+    "league/flysystem-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "446659fccbea4a0076de3d59268fc7d478c48296"
+        },
+        "files": [
+            "config/packages/flysystem.yaml",
+            "var/storage/.gitignore"
+        ]
+    },
+    "league/mime-type-detection": {
+        "version": "1.7.0"
     },
     "league/uri": {
         "version": "6.4.0"

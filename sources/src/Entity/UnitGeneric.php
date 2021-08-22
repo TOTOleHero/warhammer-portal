@@ -101,16 +101,16 @@ class UnitGeneric
 
     public function getAllTags()
     {
-        $allTags = array_merge(
-            $this->getTags()->toArray(),
-            $this->getRace()->getAllTags(),
-        );
+        $allTags = $this->getTags()->toArray();
 
+        if($this->getRace() != null)
+        {
+            $allTags = array_merge($allTags,$this->getRace()->getAllTags());
+        }
         foreach($this->getNations() as $nation)
         {
             $allTags = array_merge($allTags,$nation->getAllTags());
         }
-
         return $allTags;
     }
 

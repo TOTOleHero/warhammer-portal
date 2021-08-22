@@ -6,6 +6,7 @@ use App\Entity\Nation;
 use App\Form\NationType;
 use App\Manager\NationManager;
 use App\Repository\NationRepository;
+use App\Repository\UnitGenericRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,9 +71,10 @@ class NationController extends AbstractFOSRestController
     /**
      * @Route("/nation/{id}", name="nation_show", methods={"GET"})
      */
-    public function show(Nation $nation): Response
+    public function show(Nation $nation, UnitGenericRepository $unitGenericRepository): Response
     {
         return $this->render('nation/show.html.twig', [
+            'unitGenerics' => $unitGenericRepository->findByNation($nation),
             'nation' => $nation,
         ]);
     }
