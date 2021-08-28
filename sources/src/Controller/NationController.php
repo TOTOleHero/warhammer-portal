@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Nation;
 use App\Form\NationType;
 use App\Manager\NationManager;
+use App\Manager\UnitGenericManager;
 use App\Repository\NationRepository;
 use App\Repository\UnitGenericRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -93,11 +94,13 @@ class NationController extends AbstractFOSRestController
 
     /**
      * @Route("/nation/{id}", name="nation_show", methods={"GET"})
+     * @Route("/nation/{id}/gameSystem/{gameSystem}", name="nation_gameSystem_show", methods={"GET"})
      */
-    public function show(Nation $nation, UnitGenericRepository $unitGenericRepository): Response
+    public function show(Nation $nation, $gameSystem =null, UnitGenericManager $unitGenericManager): Response
     {
+
         return $this->render('nation/show.html.twig', [
-            'unitGenerics' => $unitGenericRepository->findByNation($nation),
+            'unitGenerics' => $unitGenericManager->findByNationAndGameSystem($nation,$gameSystem),
             'nation' => $nation,
         ]);
     }

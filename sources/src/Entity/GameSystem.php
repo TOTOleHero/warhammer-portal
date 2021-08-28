@@ -64,6 +64,7 @@ class GameSystem implements Translatable
     protected $locale;
 
     /**
+     * unit profile allow for this gamesystem
      * @ORM\ManyToOne(targetEntity=ProfileType::class, inversedBy="gameSystems")
      * @ORM\JoinColumn(nullable=false)
      */

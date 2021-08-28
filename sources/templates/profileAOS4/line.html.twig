@@ -1,7 +1,7 @@
 {% set profile = profileAOS4 %}
 {% block body2 %}
 	{% if startTable is not defined or startTable %}
-		<table class="table">
+		<table  class="table">
 			<tbody>
 				<tr
 					class="table-primary">
@@ -16,7 +16,7 @@
 			{% endif %}
 			<tr>
 				{# <td>{{ profileAOS4.id }}</td> #}
-				<td scope="row" class="table-secondary">{{ profile.name }}</td>
+				<td  scope="row" class="table-secondary">{{ profile.name }}</td>
 				<td>{{ profileAOS4.movement }}</td>
 				<td>{{ profileAOS4.wounds }}</td>
 				<td>{{ profileAOS4.bravery }}</td>

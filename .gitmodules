@@ -1,3 +1,6 @@
 [submodule "sources/src/DataFixtures/warhammer-armies-project"]
 	path = sources/src/DataFixtures/warhammer-armies-project
 	url = https://github.com/BSData/warhammer-armies-project.git
+[submodule "sources/src/DataFixtures/whfb"]
+	path = sources/src/DataFixtures/whfb
+	url = https://github.com/BSData/whfb.git

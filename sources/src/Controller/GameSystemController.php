@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\GameSystem;
 use App\Form\GameSystemType;
+use App\Manager\NationManager;
 use App\Repository\GameSystemRepository;
+use App\Repository\NationRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -81,10 +83,13 @@ class GameSystemController extends AbstractFOSRestController
     /**
      * @Route("/game-system/{id}", name="game_system_show", methods={"GET"})
      */
-    public function show(GameSystem $gameSystem): Response
+    public function show(GameSystem $gameSystem, NationManager $nationManager): Response
     {
+        $nations = $nationManager->findByGamesSystem($gameSystem);
+
         return $this->render('game_system/show.html.twig', [
             'game_system' => $gameSystem,
+            'nations' => $nations,
         ]);
     }
 

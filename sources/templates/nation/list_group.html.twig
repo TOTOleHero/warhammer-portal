@@ -1,6 +1,18 @@
+{#
+    parameter gamesystem to filter with gameSystem
+#}
+
 <div class="list-group">
 {% for nation in nations %}
-  <a href="{{ path('nation_show', {'id': nation.id}) }}" 
+  {% set linkParams = {'id': nation.id  } %}
+  {% set nationRoute = 'nation_show' %}
+  {% if gameSystemId %}
+      {% set linkParams = {'id': nation.id, 'gameSystem' : gameSystemId  } %}
+      {% set nationRoute = 'nation_gameSystem_show' %}
+  {% else %}
+  
+  {% endif %}
+  <a href="{{ path(nationRoute,linkParams) }}" 
   class="list-group-item list-group-item-action flex-column  border-top border-bottom">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{ nation.name }}</h5>

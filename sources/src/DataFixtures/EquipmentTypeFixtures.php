@@ -31,6 +31,7 @@ class EquipmentTypeFixtures extends Fixture
         ['en_US', 'Missile Weapons', '', 'MW'],
         ['en_US', 'Armour', '', 'A'],
         ['en_US', 'Unknown', '', 'U'],
+        ['en_US', 'General Weapons', '', 'W'],
     ];
 
     public function load(ObjectManager $manager)

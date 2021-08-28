@@ -23,7 +23,7 @@
         {% for gameSystem,profiles in unitGeneric.allprofilesByGameSystems %}
        
         <tr>
-            <td colspan="2">
+            <td id="{{ (unitGeneric.getGameSystem(gameSystem)).id }}" colspan="2">
                 {{ (unitGeneric.getGameSystem(gameSystem)).name }}
             </td>
         </tr>
