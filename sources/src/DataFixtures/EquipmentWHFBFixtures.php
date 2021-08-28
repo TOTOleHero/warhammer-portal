@@ -85,11 +85,11 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
                         
                         $nationFullName = $node->attributes()->name;
                         $matches = [];
-                        preg_match_all('/(^[^-0-9]*)/',$nationFullName,$matches);
+                        preg_match_all('/(^[^-0-9(]*)/',$nationFullName,$matches);
                         $nationName = trim($matches[0][0]);
-                        var_dump($nationName);
+                        //var_dump($nationName);
                         $matches = [];
-                        preg_match_all('/\(([0-9]{4})/',$nationFullName,$matches);
+                        preg_match_all('/([0-9]{4})/',$nationFullName,$matches);
                         $year = null;
                         if(isset($matches[1][0]))
                         {
@@ -124,7 +124,7 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
                         }
 
                         $nationCode = str_replace(' ','_',strtoupper($nationName));
-                        var_dump($nationCode);
+                        //var_dump($nationCode);
                         $nation = $this->nationRepository->find($nationCode);
                         if (null == $nation) {
                             throw new \Exception(sprintf('Nation %s not found', $nationCode));

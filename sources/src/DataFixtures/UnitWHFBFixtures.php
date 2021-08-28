@@ -51,98 +51,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
         $this->equipmentTypeRepository = $equipmentTypeRepository;
     }
 
-    protected $data = [
-        'High elf warrior / citizen / militia' => [
-            'race' => 'ELF',
-            'nation' => 'HIGH_ELVES',
-            'tags' => [
-                'High elf warrior', 'High elf citizen', 'High elf militia',
-            ],
-            'profiles' => [
-                'WFBV3' => [
-                    ['Elf', 5, 4, 4, 3, 3, 1, 6, 1, 8, 9, 9, 8],
-                ],
-                'WFBV4' => [
-                    [
-                        'High elf spearmen', 5, 4, 4, 3, 3, 1, 6, 1, 8, 'equipments' => ['Spear', 'Sword', 'Shield', 'Light armour'],
-                    ],
-                    ['High elf warrior', 5, 4, 4, 3, 3, 1, 6, 1, 8, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                    ['Archer', 5, 4, 4, 3, 3, 1, 6, 1, 8, 'equipments' => ['Spear', 'Hand weapon', 'Shield', 'Light armour']],
-                    ['Champion', 5, 5, 5, 4, 3, 1, 7, 2, 8],
-                ],
-                'MHV1' => [
-                   ['High elf warrior', 4, 3, 4, 3, 3, 1, 4, 1, 9, 'equipments' => [
-                    'Knife',
-                    'Mace',
-                    'Sword',
-                    'Double-handed weapon',
-                    'Flail',
-                    'Light armour',
-                    'Heavy armour',
-                    'Shield',
-                    'Helmet',
-                    'Buckler',
-                    'Ithilmar armour',
-                   ]],
-                   ['High elf archer', 4, 3, 4, 3, 3, 1, 4, 1, 9, 'equipments' => [
-                    'Knife',
-                    'Mace',
-                    'Sword',
-                    'Spear',
-                    'Bow',
-                    'Short bow',
-                    'Long bow',
-                    'Elf bow',
-                    'Light armour',
-                    'Shield',
-                    'Helmet',
-                   ]],
-                ],
-                'WFBV5' => [
-                    [
-                        'Elven spearmen', 5, 4, 4, 3, 3, 1, 6, 1, 8, 'equipments' => ['Spear', 'Shield', 'Light armour'], 'rules' => ['Citizen levy'],
-                    ],
-                    ['Champion', 5, 5, 5, 4, 3, 1, 7, 2, 8, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                    ['Archer', 5, 4, 4, 3, 3, 1, 6, 1, 8],
-                ],
-                'WFBV6' => [
-                    [
-                        'Spearmen', 5, 4, 4, 3, 3, 1, 5, 1, 8, 'equipments' => ['Spear', 'Hand weapon', 'Shield', 'Light armour'], 'rules' => ['Fight in three ranks with spears'],
-                    ],
-                    ['Champion', 5, 4, 4, 3, 3, 1, 5, 2, 8],
-                    ['Archer', 5, 4, 4, 3, 3, 1, 5, 1, 8],
-                ],
-                'WFBV7' => [
-                    [
-                        'Spearmen', 5, 4, 4, 3, 3, 1, 5, 1, 8, 'equipments' => ['Spear', 'Hand weapon', 'Shield', 'Light armour'], 'rules' => ['Valour of ages', 'Speed of suryan', 'Martial Prowess'],
-                    ],
-                    ['Sentinel', 5, 4, 4, 3, 3, 1, 5, 2, 8, 'equipments' => ['Spear', 'Hand weapon', 'Shield', 'Light armour']],
-                    ['Archer', 5, 4, 4, 3, 3, 1, 5, 1, 8],
-                    ['Hawkeyes', 5, 4, 4, 3, 3, 1, 5, 1, 8],
-                ],
-                'WFBV8' => [
-                    ['Spearmen', 5, 4, 4, 3, 3, 1, 5, 1, 8, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                    ['Sentinel', 5, 4, 4, 3, 3, 1, 5, 2, 8, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                    ['Archer', 5, 4, 4, 3, 3, 1, 5, 1, 8],
-                    ['Hawkeyes', 5, 4, 5, 3, 3, 1, 5, 1, 8],
-                ],
-                'T9AV2' => [
-                    ['Citizen Spears', 5, 10, 8, 1, 4, 3, 0, 1, 4, 3, 0, 5, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                    ['Citizen Archers', 5, 10, 8, 1, 4, 3, 0, 1, 4, 3, 0, 5, 'equipments' => ['Spear', 'Shield', 'Light armour']],
-                ],
-                'WHQV1' => [
-                    // name + title , battle level, gold,M,WS,BS,S,DiceDamage, T, W,I, A, Luck, WillPower, Skills, Pin
-                    ['Ranger elf novice', 1, 0, 4, 4, '5+', 3, 1, 3, '1D6+7', 5, 1, 0, 2, '-', '3+'],
-                    ['Ranger elf champion', 2, 2000, 4, 5, '5+', 3, 1, 3, '2D6+8', 6, 1, 0, 3, 1, '3+'],
-                ],
-                'AOSV1' => [
-                    ['Highborn spearmen', 6, 1, 6, '5+', 'equipments' => ['Silverwood Spear', 'Aelven Shield']],
-                    ['Highborn archer', 6, 1, 6, '5+'],
-                ],
-            ],
-        ],
-    ];
-
+    
     public function load(ObjectManager $manager)
     {
         $gameSystemRepository = $manager->getRepository(GameSystem::class);
@@ -170,7 +79,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                         $rootNode = $node;
                         $nationFullName = $node->attributes()->name;
                         $matches = [];
-                        preg_match_all('/(^[^-0-9]*)/',$nationFullName,$matches);
+                        preg_match_all('/(^[^-0-9(]*)/',$nationFullName,$matches);
                         $nationName = trim($matches[0][0]);
                         var_dump($nationName);
                         $matches = [];

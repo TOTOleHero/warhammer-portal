@@ -46,7 +46,7 @@ class NationWHFBFixture extends Fixture
 
                         $nationName = $node->attributes()->name;
                         $matches = [];
-                        preg_match_all('/(^[^-0-9]*)/',$nationName,$matches);
+                        preg_match_all('/(^[^-0-9(]*)/',$nationName,$matches);
 
                         $nationName = trim($matches[0][0]);
 

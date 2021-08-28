@@ -20,14 +20,18 @@ class UnitGenericRepository extends ServiceEntityRepository
         parent::__construct($registry, UnitGeneric::class);
     }
 
-    public function findByNation(Nation $nation)
+    public function findByNation($nationId)
     {
+        if($nationId instanceof Nation)
+        {
+            $nationId = $nationId->getId();
+        }
 
         return $this->createQueryBuilder('ug')
             ->join('ug.nations','n')
             ->addSelect('n')
             ->where('n.id = :nation')
-            ->setParameter(':nation',$nation->getId())
+            ->setParameter(':nation',$nationId)
             ->getQuery()
             ->getResult()
         ;

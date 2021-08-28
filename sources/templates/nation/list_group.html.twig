@@ -6,7 +6,7 @@
 {% for nation in nations %}
   {% set linkParams = {'id': nation.id  } %}
   {% set nationRoute = 'nation_show' %}
-  {% if gameSystemId %}
+  {% if gameSystemId|default(false) %}
       {% set linkParams = {'id': nation.id, 'gameSystem' : gameSystemId  } %}
       {% set nationRoute = 'nation_gameSystem_show' %}
   {% else %}
