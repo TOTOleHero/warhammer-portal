@@ -34,6 +34,35 @@ class UnitGenericManager
         ->execute();
     }
 
+    public function countAll()
+    {
+        return $this->entityManager->createQueryBuilder()
+        ->select('count(o.id)')
+        ->from(UnitGeneric::class,'o')
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
+
+    public function findByBaseNameAndNation($baseName, $nationId)
+    {
+        if($nationId instanceof Nation)
+        {
+            $nationId = $nationId->getId();
+        }
+
+        return $this->entityManager->createQueryBuilder()
+        ->select('u')
+        ->from(UnitGeneric::class,'u')
+        ->join('u.nations','n')
+        ->where('n.id = :nationId')
+        ->andWhere('u.baseName = :baseName')
+        ->setParameter(':nationId',$nationId)
+        ->setParameter(':baseName',$baseName)
+        ->getQuery()
+        ->execute();
+
+    }
+
 
     public function findByNationAndGameSystem($nationId,$gameSystemId)
     {

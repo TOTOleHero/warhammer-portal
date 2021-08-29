@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Nation;
 use App\Entity\WorldAlignment;
+use App\Manager\NationManager;
 use App\Manager\TagManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -11,6 +12,7 @@ use League\Flysystem\Filesystem;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\StorageAttributes;
+use App\Helper\NationHelper;
 
 class NationWHFBFixture extends Fixture
 {
@@ -19,9 +21,15 @@ class NationWHFBFixture extends Fixture
      */
     protected $tagManager;
 
-    public function __construct(TagManager $tagManager)
+    /**
+     * @var NationManager
+     */
+    protected $nationManager;
+
+    public function __construct(TagManager $tagManager, NationManager $nationManager)
     {
         $this->tagManager = $tagManager;
+        $this->nationManager = $nationManager;
     }
 
     public function load(ObjectManager $manager)
@@ -49,22 +57,10 @@ class NationWHFBFixture extends Fixture
                         preg_match_all('/(^[^-0-9(]*)/',$nationName,$matches);
 
                         $nationName = trim($matches[0][0]);
-
                         $nationCode = str_replace(' ','_',strtoupper($nationName));
-                        $nation = $nationRepository->find($nationCode);
-                        if($nation == null)
-                        {
-                            var_dump($nationCode.' create');
-                            $object = new Nation();
-                            $object->setName($nationName);
-                            $object->setId($nationCode);
-                            $object->addTag($this->tagManager->loadOrCreate($object->getName()));
-                            $manager->persist($object);
-                        }
-                        else
-                        {
-                            var_dump($nationCode.' exist');
-                        }
+                        $nationCode = NationHelper::fixNationCodeName($nationCode);
+                        $nationName = NationHelper::fixNationCodeName($nationName);
+                        $this->nationManager->loadOrCreate($nationCode,$nationName);
                     }
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));

@@ -25,6 +25,7 @@ use Doctrine\Persistence\ObjectManager;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\StorageAttributes;
+use App\Helper\NationHelper;
 
 class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -59,11 +60,91 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
         $raceRepository = $manager->getRepository(Race::class);
 
 
+
+
         $adapter = new LocalFilesystemAdapter(
             // Determine root directory
             __DIR__.'/whfb'
         );
         $filesystem = new Filesystem($adapter);
+
+        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
+        foreach ($allFiles as $item) {
+            if($item->isFile() 
+            && pathinfo($item->path(),PATHINFO_EXTENSION) == 'gst'
+            && (strpos(pathinfo($item->path(),PATHINFO_FILENAME), '4th') !== false)
+            )
+            {
+                $monsters = [];
+                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                        $xmlParser->registerCallback(
+                            '/gameSystem/sharedProfiles/profile',
+                            function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use (&$monsters) {
+                                $name = (string)$node->attributes()->name;
+                                var_dump( '==========================');
+                                var_dump( $name);
+                                $typeName = $node->attributes()->typename;
+                                if(! in_array($typeName,["Profile"]))
+                                {
+                                    var_dump('Not a profile');
+                                    return;
+                                }
+                                
+                                if(count($node->xpath('./characteristics/characteristic[@name="Movement"]')) == 0)
+                                {
+                                    var_dump('No characteristic for '. $name);
+                                    return;
+                                }
+
+                                $monsters[(string)$node->attributes()->id]=
+                                [
+                                    /* 'name' */  $name,
+                                    /* "Movement"   */      (string)$node->xpath('./characteristics/characteristic[@name="Movement"]')[0],
+                                    /* "Weapon Skill"  */          (string)$node->xpath('./characteristics/characteristic[@name="Weapon Skill"]')[0],
+                                    /* "Ballistic Skill" */          (string)$node->xpath('./characteristics/characteristic[@name="Ballistic Skill"]')[0],
+                                    /* "Strength"  */         (string)$node->xpath('./characteristics/characteristic[@name="Strength"]')[0],
+                                    /* "Toughness"  */          (string)$node->xpath('./characteristics/characteristic[@name="Toughness"]')[0],
+                                   /*  "Wounds"   */        (string)$node->xpath('./characteristics/characteristic[@name="Wounds"]')[0],
+                                    /* "Initiative"  */           (string)$node->xpath('./characteristics/characteristic[@name="Initiative"]')[0],
+                                    /* "Attacks"   */         (string)$node->xpath('./characteristics/characteristic[@name="Attacks"]')[0],
+                                    /* "Leadership" */           (string)$node->xpath('./characteristics/characteristic[@name="Leadership"]')[0],
+                                    'equipments' => []                     ,
+                                     'rules' => [],
+                                     'name'=> $name,
+                                ];
+        
+                            }
+                );
+                $xmlParser->parse($filesystem->readStream($item->path()));
+                $nation = $nationRepository->find('MONSTER');
+                foreach($monsters as $monster)
+                {
+                    $object = new UnitGeneric();
+                    $unitName = $monster["name"];
+                    $object->setBaseName($unitName);
+                
+                    $object->addNation($nation);
+                    $gameSystem = 'WFBV4';
+                    $gameSystem = $gameSystemRepository->find($gameSystem);
+                    if (null == $gameSystem) {
+                        throw new \Exception('Games system '.$gameSystem.' not found');
+                    }
+                    $unitGamesSystem = (new UnitGameSystem())
+                    ->setGameSystem($gameSystem)
+                    ->setName($unitName)
+                    ->addTag($this->tagManager->loadOrCreate($unitName));
+                    
+                    $profile = $this->createProfileByGameSystem($gameSystem, $monster,$manager);
+
+                    $manager->persist($profile);
+                    $unitGamesSystem->addProfile($profile);
+                    $object->addUnitGameSystem($unitGamesSystem);
+                    $manager->persist($unitGamesSystem);
+
+                    $manager->persist($object);
+                }
+            }
+        }
         $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
         foreach ($allFiles as $item) {
             if($item->isFile() && pathinfo($item->path(),PATHINFO_EXTENSION) == 'cat')
@@ -78,10 +159,11 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                         
                         $rootNode = $node;
                         $nationFullName = $node->attributes()->name;
+                        var_dump('full name : "'.$nationFullName.'"');
                         $matches = [];
                         preg_match_all('/(^[^-0-9(]*)/',$nationFullName,$matches);
                         $nationName = trim($matches[0][0]);
-                        var_dump($nationName);
+                        
                         $matches = [];
                         preg_match_all('/\(([0-9]{4})/',$nationFullName,$matches);
                         
@@ -106,10 +188,11 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                             }
                         }
 
-                        var_dump($version);
-
+                        var_dump('Version : "'.$version.'"');
                         $nationCode = str_replace(' ','_',strtoupper($nationName));
-                        var_dump($nationCode);
+                        var_dump('Nation code : "'.$nationCode.'"');
+                        $nationCode = NationHelper::fixNationCodeName($nationCode);
+                        var_dump('Fixed nation code : "'.$nationCode.'"');
                         $nation = $nationRepository->find($nationCode);
                         if (null == $nation) {
                             throw new \Exception(sprintf('Nation %s not found', $nationCode));
@@ -151,7 +234,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                 $xmlParser = new \Hobnob\XmlStreamReader\Parser();
                 $xmlParser->registerCallback(
                     '/catalogue/selectionEntries/selectionEntry',
-                    function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use ($profilesList,$ruleList,$rootNode,&$version,&$nation,$gameSystemRepository,$manager) {
+                    function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use ($profilesList,$ruleList,$rootNode,&$version,$nation,$gameSystemRepository,$manager) {
                         
                         if(empty($node->attributes()->name))
                         {
@@ -169,6 +252,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                                 var_dump('No profile for '.$node->attributes()->name);
                                 return;
                             }
+                            
                             $profileXml = $profiles[0];
                             if(count($profileXml->xpath('./characteristics/characteristic[@name="M"]')) == 0)
                             {

@@ -40,6 +40,9 @@ class GameSystemFixtures extends Fixture implements DependentFixtureInterface
         ['AOSV2', 'en_US', 'Age Of Sigmar V2', 'profileAOS4', 'Games Workshop', 'mortal-realms'],
         ['T9AV2', 'en_US', 'The 9th Age V2', 'profileT9A12', 'Games Workshop', 'earth'],
         ['T9AV1', 'en_US', 'The 9th Age V1', 'profileT9A12', 'Games Workshop', 'earth'],
+//        ['KOW1', 'en_US', 'King of war V1', '', 'Mantic', 'mantica'],
+//        ['KOW2', 'en_US', 'King of war V2', '', 'Mantic', 'mantica'],
+//        ['KOW3', 'en_US', 'King of war V3', '', 'Mantic', 'mantica'],
         ['MHV1', 'en_US', 'Mordheim V1', 'profileWFB9', 'Games Workshop', 'warhammer-old-world'],
         ['WFBAPV9', 'en_US', 'Warhammer Armies Project V9', 'profileWFB9', 'Mathias Eliasson', 'warhammer-old-world', 'externalLinks' => [
             [
@@ -47,6 +50,9 @@ class GameSystemFixtures extends Fixture implements DependentFixtureInterface
                 'href' => 'http://warhammerarmiesproject.blogspot.com/search/label/9th%20Edition',
                 'locale' => 'en_US',
             ],
+        ]],
+        ['WFBAPV8', 'en_US', 'Warhammer Armies Project V8', 'profileWFB9', 'Mathias Eliasson', 'warhammer-old-world', 'externalLinks' => [
+            [],
         ]],
      ];
 

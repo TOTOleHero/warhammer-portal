@@ -23,6 +23,7 @@ class WorldFixtures extends Fixture
         ['en_US', 'warhammer-old-world', 'Warhammer Old World'],
         ['en_US', 'mortal-realms', 'Mortal Realms'],
         ['en_US', 'earth', 'Earth'],
+        ['en_US', 'Mantica', 'Mantica'],
     ];
 
     public function load(ObjectManager $manager)

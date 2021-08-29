@@ -99,8 +99,8 @@ class NationFixtures extends Fixture
         ['IND',                                  'en_US',                                  'Ind'],
         ['VAMPIRE_COAST',                                  'en_US',                                  'Vampire Coast'],
         ['MONSTER',                                  'en_US',                                  'Monsters'],
-        ['UNDEAD',                                  'en_US',                                  'Unified Undead'],
-        ['CHAOS',                                  'en_US',                                  'Unified chaos'],
+        ['UNDEAD_LEGIONS',                                  'en_US',                                  'Undead legions'],
+        ['CHAOS_LEGIONS',                                  'en_US',                                  'Chaos legions'],
         ['GIANT',                                  'en_US',                                  'Giant'],
         ['AMAZONS',                                  'en_US',                                  'Amazons'],
     ];

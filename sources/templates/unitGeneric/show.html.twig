@@ -24,7 +24,7 @@
        
         <tr>
             <td id="{{ (unitGeneric.getGameSystem(gameSystem)).id }}" colspan="2">
-                {{ (unitGeneric.getGameSystem(gameSystem)).name }}
+                <a href="{{ path('game_system_show',{ 'id': (unitGeneric.getGameSystem(gameSystem)).id } ) }}">{{ (unitGeneric.getGameSystem(gameSystem)).name }}</a>
             </td>
         </tr>
         <tr>
@@ -45,6 +45,7 @@
                     {% if  profile.profileType == 'profileT9A12'%}
                         {% include 'profileT9A12/line.html.twig' with {'profileT9A12': profile,'startTable' :loop.first,'endTable' :loop.last }  %}
                     {% endif %}
+                    
 
                 {% endfor %}
             </td>

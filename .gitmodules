@@ -4,3 +4,6 @@
 [submodule "sources/src/DataFixtures/whfb"]
 	path = sources/src/DataFixtures/whfb
 	url = https://github.com/BSData/whfb.git
+[submodule "sources/src/DataFixtures/The-9th-Age"]
+	path = sources/src/DataFixtures/The-9th-Age
+	url = https://github.com/BSData/The-9th-Age.git

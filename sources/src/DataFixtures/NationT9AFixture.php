@@ -14,7 +14,7 @@ use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\StorageAttributes;
 use App\Helper\NationHelper;
 
-class NationWAPFixture extends Fixture
+class NationT9AFixture extends Fixture
 {
     /**
      * @var TagManager
@@ -39,7 +39,7 @@ class NationWAPFixture extends Fixture
 
         $adapter = new LocalFilesystemAdapter(
             // Determine root directory
-            __DIR__.'/warhammer-armies-project'
+            __DIR__.'/The-9th-Age'
         );
         $filesystem = new Filesystem($adapter);
         $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
@@ -51,8 +51,14 @@ class NationWAPFixture extends Fixture
                     '/catalogue',
                     function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use ($nationRepository,$manager) {
                         
-                        $nationCode = str_replace(' ','_',strtoupper((string)$node->attributes()->name));
-                        $nationName = (string)$node->attributes()->name;
+
+                        $nationName = $node->attributes()->name;
+                        //var_dump($nationName);
+                        $matches = [];
+                        preg_match_all('/(^[^-0-9(]*)/',$nationName,$matches);
+
+                        $nationName = trim($matches[0][0]);
+                        $nationCode = str_replace(' ','_',strtoupper($nationName));
                         $nationCode = NationHelper::fixNationCodeName($nationCode);
                         $nationName = NationHelper::fixNationCodeName($nationName);
                         $this->nationManager->loadOrCreate($nationCode,$nationName);

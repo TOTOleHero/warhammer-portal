@@ -13,6 +13,7 @@ use Doctrine\Persistence\ObjectManager;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\StorageAttributes;
+use App\Helper\NationHelper;
 
 class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -78,12 +79,14 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
             {
                 $nation = null;
                 $version = null;
+                $BSDATAGameSystemId = null;
                 $xmlParser = new \Hobnob\XmlStreamReader\Parser();
                 $xmlParser->registerCallback(
                     '/catalogue',
-                    function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use (&$version, &$nation,$manager) {
+                    function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use (&$BSDATAGameSystemId ,&$version, &$nation,$manager) {
                         
                         $nationFullName = $node->attributes()->name;
+                        $BSDATAGameSystemId = $node->attributes()->gamesystemid;
                         $matches = [];
                         preg_match_all('/(^[^-0-9(]*)/',$nationFullName,$matches);
                         $nationName = trim($matches[0][0]);
@@ -124,7 +127,9 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
                         }
 
                         $nationCode = str_replace(' ','_',strtoupper($nationName));
-                        //var_dump($nationCode);
+                        var_dump('Nation code : "'.$nationCode.'"');
+                        $nationCode = NationHelper::fixNationCodeName($nationCode);
+                        var_dump('Fixed nation code : "'.$nationCode.'"');
                         $nation = $this->nationRepository->find($nationCode);
                         if (null == $nation) {
                             throw new \Exception(sprintf('Nation %s not found', $nationCode));
@@ -132,13 +137,22 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
                     }
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));
-                
+                //var_dump($BSDATAGameSystemId);
+                /*
+                if($BSDATAGameSystemId == "417a-57eb-6f3e-81c9")
+                {
+                    var_dump('SKIP V4');
+                    continue;
+                }
+                */
+
                 $xmlParser = new \Hobnob\XmlStreamReader\Parser();
                 $xmlParser->registerCallback(
                     '/catalogue/sharedProfiles/profile',
                     function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use (&$version,&$nation,$manager) {
                         
-         
+                        
+
                         if(empty($node->attributes()->name))
                         {
                             var_dump('No name');

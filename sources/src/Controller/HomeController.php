@@ -2,6 +2,11 @@
 
 namespace App\Controller;
 
+use App\Manager\GameSystemManager;
+use App\Manager\NationManager;
+use App\Manager\ProfileManager;
+use App\Manager\UnitGameSystemManager;
+use App\Manager\UnitGenericManager;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,10 +18,24 @@ class HomeController extends AbstractFOSRestController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function index(
+        UnitGenericManager $unitGenericManager
+    ,NationManager $nationManager,
+    UnitGameSystemManager $unitGameSystemManager,
+    ProfileManager $profileManager,
+    GameSystemManager $gameSystemManager
+    
+    ): Response
     {
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+            'stats' => [
+                'Profile'=> $profileManager->countAll(),
+                'UnitGeneric'=> $unitGenericManager->countAll(),
+                'UnitGameSystem'=> $unitGameSystemManager->countAll(),
+                'Nation'=> $nationManager->countAll(),
+                'GameSystem'=> $gameSystemManager->countAll(),
+            ]
         ]);
     }
 

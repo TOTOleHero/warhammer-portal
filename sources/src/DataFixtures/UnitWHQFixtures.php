@@ -20,7 +20,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use League\Csv\Reader;
 
-class WHQUnitFixtures extends Fixture implements DependentFixtureInterface
+class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * @var TagManager

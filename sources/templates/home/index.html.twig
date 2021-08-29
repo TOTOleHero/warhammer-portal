@@ -7,7 +7,7 @@
 
         <div class="jumbotron">
         <h1 class="display-3">Fantasy Battle DB</h1>
-        <p class="lead">This site was created to give the community a tool to create applications around games related to miniature and fantasy.</p>
+        <p class="lead">This site was created to give to the community a tool to create applications around games related to 25-30mm miniatures and fantasy world.</p>
         {#
         <hr class="my-4">
         <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
@@ -33,7 +33,21 @@
                 )) }}
             
         </div>
-        <div class="col-md-6 border">You can find the API with Swagger at <a href="/api/doc" >{{ url('home') }}api/doc</a>
+        <div class="col-md-6">
+            <div class="border p-3">
+            <h3>Stats</h3>
+                <table class="table">
+                {% for object,total in stats %}
+                <tr>
+                    <th scope="row">{{ object }}</th><td>{{ total }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+            <div class="border p-3">
+            <p>You can find the API with Swagger at <a href="/api/doc" >{{ url('home') }}api/doc</a>.</p>
+            <p>Some initials data was Loaded from projet Battle Scribe Data <a href="https://github.com/BSData">https://github.com/BSData</a>.</p>
+            </div>
         </div>
         <div class="col-md-3">
         <h2>Worlds</h2>

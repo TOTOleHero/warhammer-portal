@@ -23,10 +23,7 @@
         </tr>
         {% endif %}
         <tr>
-            {#<td>{{ profileT9A12.id }}</td> #}
             <td  scope="row" class="table-secondary">{{ profile.name }}</td>
-
-
             <td>{{ profileT9A12.globalAdvanceRate }}</td>
             <td>{{ profileT9A12.globalMarch }}</td>
             <td>{{ profileT9A12.globalDiscipline }}</td>
@@ -39,12 +36,8 @@
             <td>{{ profileT9A12.offensiveSkill }}</td>
             <td>{{ profileT9A12.offensiveStrength }}</td>
             <td>{{ profileT9A12.offensiveArmourPenetration }}</td>
-
-
-
         </tr>
         <tr>
-            {# <td>{{ profileAOS4.id }}</td> #}
             <td ></td>
             <td scope="row">Equipments</td>
             <td colspan="11">{% for equipment in profile.equipments %}{% if not loop.first %}, {% endif %}{{ equipment }}{% else %}No equipment{% endfor %}.</td>
