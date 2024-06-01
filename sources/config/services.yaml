@@ -10,7 +10,7 @@ parameters:
     # array/collection parameters
     app.supported_locales: ['en', 'es', 'fr']
     jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
-
+    env(TRUSTED_PROXIES): '127.0.0.1'
 services:
     # default configuration for services in *this* file
     _defaults:
