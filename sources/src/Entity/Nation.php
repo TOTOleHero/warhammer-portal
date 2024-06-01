@@ -23,7 +23,7 @@ use JMS\Serializer\Annotation as JMS;
  *          parameters = { "id" = "expr(object.getId())" }
  *      )
  * )
-   * @Hateoas\Relation(
+ * @Hateoas\Relation(
  *      "unitGenerics",
  *      href = @Hateoas\Route(
  *          "api_unitGeneric_by_nation",

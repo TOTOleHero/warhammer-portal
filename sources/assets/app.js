@@ -11,8 +11,10 @@ import './theme/superhero/bootstrap.css';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
+// create global $ and jQuery variables
+global.$ = global.jQuery = $;
 
 require('bootstrap');
-
+require('jq-timeline');
 
 

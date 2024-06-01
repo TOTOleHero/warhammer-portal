@@ -14,9 +14,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UserRolesCommand extends Command
 {
-
     /**
-     * ContainerInterface
+     * ContainerInterface.
      */
     private $container;
 
@@ -53,24 +52,23 @@ class UserRolesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-
         $io = new SymfonyStyle($input, $output);
         $io->title('User roles managment');
-
 
         $userRepository = $this->container->get('doctrine')->getRepository(User::class);
         $userEmail = $input->getArgument('email');
 
         $user = $userRepository->findOneByEmail($userEmail);
 
-        if ($user == null) {
+        if (null == $user) {
             $io->error('User not found');
+
             return Command::FAILURE;
         }
         $saveUser = false;
         $userRoles = $user->getRoles();
 
-        $io->section('Current User roles for ' . $userEmail);
+        $io->section('Current User roles for '.$userEmail);
         $table = new Table($output);
         $table
             ->setHeaders(['role']);
@@ -96,7 +94,6 @@ class UserRolesCommand extends Command
             $table->render();
         }
 
-
         if (!empty($input->getOption('addRoles'))) {
             $table = new Table($output);
             $io->section('Add Roles');
@@ -114,7 +111,7 @@ class UserRolesCommand extends Command
             $table->render();
         }
 
-        $io->section('Result roles for ' . $userEmail);
+        $io->section('Result roles for '.$userEmail);
 
         $table = new Table($output);
         $table
@@ -124,7 +121,7 @@ class UserRolesCommand extends Command
         }
         $table->render();
 
-        $io->section('Save all roles for ' . $userEmail);
+        $io->section('Save all roles for '.$userEmail);
         if ($saveUser) {
             $user->setRoles($userRoles);
             $this->container->get('doctrine')->getManager()->persist($user);
@@ -133,7 +130,6 @@ class UserRolesCommand extends Command
         } else {
             $io->text('No change, not saved');
         }
-
 
         // this method must return an integer number with the "exit status code"
         // of the command. You can also use these constants to make code more readable

@@ -13,7 +13,6 @@ use Doctrine\Persistence\ObjectManager;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\StorageAttributes;
-use App\Helper\NationHelper;
 
 class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterface
 {
@@ -48,8 +47,6 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
         $this->nationRepository = $nationRepository;
     }
 
-
-
     protected function getGameSystem($gameSystem)
     {
         $gameSystems = [];
@@ -58,7 +55,7 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
             if (null === $gameSystemObject) {
-                throw new \Exception(sprintf('%s games system not found',$gameSystem));
+                throw new \Exception(sprintf('%s games system not found', $gameSystem));
             }
             $gameSystems[$gameSystem] = $gameSystemObject;
         }
@@ -75,34 +72,28 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
         $filesystem = new Filesystem($adapter);
         $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
         foreach ($allFiles as $item) {
-            if($item->isFile() && pathinfo($item->path(),PATHINFO_EXTENSION) == 'gst')
-            {
-  
+            if ($item->isFile() && 'gst' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $xmlParser = new \Hobnob\XmlStreamReader\Parser();
                 $xmlParser->registerCallback(
                     '/gameSystem/sharedProfiles/profile',
-                    function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use (&$version,&$nation,$manager) {
-                        
-                        
-
-                        if(empty($node->attributes()->name))
-                        {
+                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$version, &$nation, $manager) {
+                        if (empty($node->attributes()->name)) {
                             var_dump('No name');
+
                             return;
                         }
                         $typeName = $node->attributes()->typename;
-                        if(! in_array($typeName,["Ranged Weapon","Melee Weapon"]))
-                        {
-                            var_dump('Not equipment');
+                        if (!in_array($typeName, ['Ranged Weapon', 'Melee Weapon'])) {
+                            var_dump('"'.$typeName.'" is not an equipment');
+
                             return;
                         }
-                        
+
                         $gameSystem = 'WFBV4';
                         $type = 'U';
-                        switch(true)
-                        {
-                            case $typeName == "Melee Weapon": $type = 'W'; break;
-                            case $typeName == "Ranged Weapon": $type = 'MW'; break;
+                        switch (true) {
+                            case 'Melee Weapon' == $typeName: $type = 'W'; break;
+                            case 'Ranged Weapon' == $typeName: $type = 'MW'; break;
                         }
                         $object = new Equipment();
                         $object->setGameSystem($this->getGameSystem($gameSystem));
@@ -110,19 +101,14 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
                         $object->setName($node->attributes()->name);
                         $object->setDescription($node->attributes()->name);
                         $manager->persist($object);
-                        
                     }
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));
-              
             }
-            
         }
 
         $manager->flush();
     }
-
-    
 
     public function getDependencies()
     {

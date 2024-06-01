@@ -7,12 +7,11 @@ use App\Form\NationType;
 use App\Manager\NationManager;
 use App\Manager\UnitGenericManager;
 use App\Repository\NationRepository;
-use App\Repository\UnitGenericRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
 
 class NationController extends AbstractFOSRestController
 {
@@ -39,6 +38,7 @@ class NationController extends AbstractFOSRestController
                     'class' => __CLASS__,
                 ]);
         }
+
         return $this->render($templateBase.$template, [
             'nations' => $nationRepository->findAll(),
         ]);
@@ -46,7 +46,7 @@ class NationController extends AbstractFOSRestController
 
     /**
      * @Route("/api/nation/", name="api_nation_index", methods={"GET"})
-     *  
+     *
      * @OA\Tag(name="nation")
      */
     public function apiIndex(NationRepository $nationRepository): Response
@@ -58,16 +58,15 @@ class NationController extends AbstractFOSRestController
 
     /**
      * @Route("/api/unitGeneric/{unitGenericId}/nation/", name="api_nation_by_unitGeneric", methods={"GET"})
-     *  
+     *
      * @OA\Tag(name="unitGeneric")
      */
-    public function apiGetByUnitGenericId(NationManager $nationManager,$unitGenericId): Response
+    public function apiGetByUnitGenericId(NationManager $nationManager, $unitGenericId): Response
     {
         $view = $this->view($nationManager->findByUnitGeneric($unitGenericId), 200);
 
         return $this->handleView($view);
     }
-
 
     /**
      * @Route("/contribute/nation/new", name="nation_new", methods={"GET","POST"})
@@ -96,18 +95,17 @@ class NationController extends AbstractFOSRestController
      * @Route("/nation/{id}", name="nation_show", methods={"GET"})
      * @Route("/nation/{id}/gameSystem/{gameSystem}", name="nation_gameSystem_show", methods={"GET"})
      */
-    public function show(Nation $nation, $gameSystem =null, UnitGenericManager $unitGenericManager): Response
+    public function show(Nation $nation, $gameSystem = null, UnitGenericManager $unitGenericManager): Response
     {
-
         return $this->render('nation/show.html.twig', [
-            'unitGenerics' => $unitGenericManager->findByNationAndGameSystem($nation,$gameSystem),
+            'unitGenerics' => $unitGenericManager->findByNationAndGameSystem($nation, $gameSystem),
             'nation' => $nation,
         ]);
     }
 
     /**
      * @Route("/api/nation/{id}", name="api_nation_show", methods={"GET"})
-     *  
+     *
      * @OA\Tag(name="nation")
      */
     public function apiShow(Nation $nation): Response

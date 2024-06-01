@@ -4,15 +4,14 @@ namespace App\DataFixtures;
 
 use App\Entity\Nation;
 use App\Entity\WorldAlignment;
+use App\Helper\NationHelper;
 use App\Manager\NationManager;
 use App\Manager\TagManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use League\Flysystem\Filesystem;
-use League\Flysystem\Adapter\Local;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\StorageAttributes;
-use App\Helper\NationHelper;
 
 class NationWAPFixture extends Fixture
 {
@@ -44,27 +43,22 @@ class NationWAPFixture extends Fixture
         $filesystem = new Filesystem($adapter);
         $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
         foreach ($allFiles as $item) {
-            if($item->isFile() && pathinfo($item->path(),PATHINFO_EXTENSION) == 'cat')
-            {
+            if ($item->isFile() && 'cat' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $xmlParser = new \Hobnob\XmlStreamReader\Parser();
                 $xmlParser->registerCallback(
                     '/catalogue',
-                    function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use ($nationRepository,$manager) {
-                        
-                        $nationCode = str_replace(' ','_',strtoupper((string)$node->attributes()->name));
-                        $nationName = (string)$node->attributes()->name;
+                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) {
+                        $nationCode = str_replace(' ', '_', strtoupper((string) $node->attributes()->name));
+                        $nationName = (string) $node->attributes()->name;
                         $nationCode = NationHelper::fixNationCodeName($nationCode);
                         $nationName = NationHelper::fixNationCodeName($nationName);
-                        $this->nationManager->loadOrCreate($nationCode,$nationName);
+                        $this->nationManager->loadOrCreate($nationCode, $nationName);
                     }
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));
-              
             }
-
         }
 
-        
         $manager->flush();
     }
 }

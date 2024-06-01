@@ -8,10 +8,10 @@ use App\Manager\ProfileManager;
 use App\Manager\UnitGameSystemManager;
 use App\Manager\UnitGenericManager;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
-use OpenApi\Annotations as OA;
 
 class HomeController extends AbstractFOSRestController
 {
@@ -19,29 +19,26 @@ class HomeController extends AbstractFOSRestController
      * @Route("/", name="home")
      */
     public function index(
-        UnitGenericManager $unitGenericManager
-    ,NationManager $nationManager,
+        UnitGenericManager $unitGenericManager, NationManager $nationManager,
     UnitGameSystemManager $unitGameSystemManager,
     ProfileManager $profileManager,
     GameSystemManager $gameSystemManager
-    
-    ): Response
-    {
+    ): Response {
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'stats' => [
-                'Profile'=> $profileManager->countAll(),
-                'UnitGeneric'=> $unitGenericManager->countAll(),
-                'UnitGameSystem'=> $unitGameSystemManager->countAll(),
-                'Nation'=> $nationManager->countAll(),
-                'GameSystem'=> $gameSystemManager->countAll(),
-            ]
+                'Profile' => $profileManager->countAll(),
+                'UnitGeneric' => $unitGenericManager->countAll(),
+                'UnitGameSystem' => $unitGameSystemManager->countAll(),
+                'Nation' => $nationManager->countAll(),
+                'GameSystem' => $gameSystemManager->countAll(),
+            ],
         ]);
     }
 
     /**
      * @Route("/api/", name="api_index", methods={"GET"})
-     * 
+     *
      * @OA\Tag(name="root")
      */
     public function apiIndex(RouterInterface $router): Response

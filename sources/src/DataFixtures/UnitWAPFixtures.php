@@ -14,10 +14,10 @@ use App\Entity\Race;
 use App\Entity\Rule;
 use App\Entity\UnitGameSystem;
 use App\Entity\UnitGeneric;
+use App\Helper\NationHelper;
 use App\Manager\TagManager;
 use App\Repository\EquipmentRepository;
 use App\Repository\EquipmentTypeRepository;
-use App\Repository\GameSystemRepository;
 use App\Repository\RuleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -25,7 +25,6 @@ use Doctrine\Persistence\ObjectManager;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\StorageAttributes;
-use App\Helper\NationHelper;
 
 class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -44,7 +43,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
     protected $ruleRepository;
 
     public function __construct(TagManager $tagManager,
-     EquipmentRepository $equipmentRepository, RuleRepository $ruleRepository,EquipmentTypeRepository $equipmentTypeRepository)
+     EquipmentRepository $equipmentRepository, RuleRepository $ruleRepository, EquipmentTypeRepository $equipmentTypeRepository)
     {
         $this->tagManager = $tagManager;
         $this->equipmentRepository = $equipmentRepository;
@@ -52,14 +51,11 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
         $this->equipmentTypeRepository = $equipmentTypeRepository;
     }
 
-    
-
     public function load(ObjectManager $manager)
     {
         $gameSystemRepository = $manager->getRepository(GameSystem::class);
         $nationRepository = $manager->getRepository(Nation::class);
         $raceRepository = $manager->getRepository(Race::class);
-
 
         $adapter = new LocalFilesystemAdapter(
             // Determine root directory
@@ -68,15 +64,13 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
         $filesystem = new Filesystem($adapter);
         $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
         foreach ($allFiles as $item) {
-            if($item->isFile() && pathinfo($item->path(),PATHINFO_EXTENSION) == 'cat')
-            {
+            if ($item->isFile() && 'cat' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $nation = null;
                 $xmlParser = new \Hobnob\XmlStreamReader\Parser();
                 $xmlParser->registerCallback(
                     '/catalogue',
-                    function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use (&$nation,$nationRepository,$manager) {
-                        
-                        $nationCode = str_replace(' ','_',strtoupper($node->attributes()->name));
+                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$nation, $nationRepository) {
+                        $nationCode = str_replace(' ', '_', strtoupper($node->attributes()->name));
                         var_dump('Nation code : "'.$nationCode.'"');
                         $nationCode = NationHelper::fixNationCodeName($nationCode);
                         var_dump('Fixed nation code : "'.$nationCode.'"');
@@ -87,31 +81,28 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                     }
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));
-                
+
                 $xmlParser = new \Hobnob\XmlStreamReader\Parser();
                 $xmlParser->registerCallback(
                     '/catalogue/selectionEntries/selectionEntry',
-                    function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use (&$nation,$gameSystemRepository,$manager) {
-                        
-                        if($node->attributes()->type == 'unit')
-                        {
-                                                      
+                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$nation, $gameSystemRepository, $manager) {
+                        if ('unit' == $node->attributes()->type) {
                             $profiles = $node->xpath('./selectionentries/selectionentry/profiles/profile');
-                            if(count($profiles) == 0)
-                            {
+                            if (0 == count($profiles)) {
                                 var_dump('No profile for '.$node->attributes()->name);
+
                                 return;
                             }
                             $profileXml = $profiles[0];
-                            if(count($profileXml->xpath('./characteristics/characteristic[@name="M"]')) == 0)
-                            {
+                            if (0 == count($profileXml->xpath('./characteristics/characteristic[@name="M"]'))) {
                                 var_dump('No characteristic for '.$node->attributes()->name);
+
                                 return;
                             }
                             $object = new UnitGeneric();
                             $unitName = $node->attributes()->name;
                             $object->setBaseName($unitName);
-                      
+
                             $object->addNation($nation);
                             $gameSystem = 'WFBAPV9';
                             $gameSystem = $gameSystemRepository->find($gameSystem);
@@ -122,8 +113,8 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                             ->setGameSystem($gameSystem)
                             ->setName($unitName)
                             ->addTag($this->tagManager->loadOrCreate($unitName));
-                            
-                            $profile = $this->createProfileByGameSystem($gameSystem, $this->convertToProfileData($profileXml),$manager);
+
+                            $profile = $this->createProfileByGameSystem($gameSystem, $this->convertToProfileData($profileXml), $manager);
 
                             $manager->persist($profile);
                             $unitGamesSystem->addProfile($profile);
@@ -132,22 +123,17 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                             $manager->persist($object);
                             //var_dump($node->xpath('//profile'));
                         }
-                        
                     }
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));
-              
             }
-            
         }
 
         $manager->flush();
     }
 
-
     protected function convertToProfileData($xmlNode)
     {
-
         /*
         ->setMovement($profileData[1])
                     ->setWeaponSkill($profileData[2])
@@ -159,48 +145,40 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                     ->setAttacks($profileData[8])
                     ->setLeadership($profileData[9]);
         */
-        
+
         // var_dump('convertToProfileData :'.$xmlNode->attributes()->name );
 
-        $profile =  [
+        $profile = [
             $xmlNode->attributes()->name,
-            (string)$xmlNode->xpath('./characteristics/characteristic[@name="M"]')[0],
-            (string)$xmlNode->xpath('./characteristics/characteristic[@name="WS"]')[0],
-            (string)$xmlNode->xpath('./characteristics/characteristic[@name="BS"]')[0],
-            (string)$xmlNode->xpath('./characteristics/characteristic[@name="S"]')[0],
-            (string)$xmlNode->xpath('./characteristics/characteristic[@name="T"]')[0],
-            (string)$xmlNode->xpath('./characteristics/characteristic[@name="W"]')[0],
-            (string)$xmlNode->xpath('./characteristics/characteristic[@name="I"]')[0],
-            (string)$xmlNode->xpath('./characteristics/characteristic[@name="A"]')[0],
-            (string)$xmlNode->xpath('./characteristics/characteristic[@name="LD"]')[0],
-            'equipments' => []                     ,
+            (string) $xmlNode->xpath('./characteristics/characteristic[@name="M"]')[0],
+            (string) $xmlNode->xpath('./characteristics/characteristic[@name="WS"]')[0],
+            (string) $xmlNode->xpath('./characteristics/characteristic[@name="BS"]')[0],
+            (string) $xmlNode->xpath('./characteristics/characteristic[@name="S"]')[0],
+            (string) $xmlNode->xpath('./characteristics/characteristic[@name="T"]')[0],
+            (string) $xmlNode->xpath('./characteristics/characteristic[@name="W"]')[0],
+            (string) $xmlNode->xpath('./characteristics/characteristic[@name="I"]')[0],
+            (string) $xmlNode->xpath('./characteristics/characteristic[@name="A"]')[0],
+            (string) $xmlNode->xpath('./characteristics/characteristic[@name="LD"]')[0],
+            'equipments' => [],
             'rules' => [],
         ];
 
         $zeroEquipment = $xmlNode->xpath('./../../selectionentries/selectionentry/costs/cost[@value="0.0"]/../..');
 
-        foreach($zeroEquipment as $equipment)
-        {
-            
+        foreach ($zeroEquipment as $equipment) {
             $infolinks = $equipment->xpath('./infolinks/infolink');
-            foreach($infolinks as $infolink)
-            {   
-                if($infolink->attributes()->type=="rule")
-                {
-                    $profile['rules'][]=$infolink->attributes()->name;
+            foreach ($infolinks as $infolink) {
+                if ('rule' == $infolink->attributes()->type) {
+                    $profile['rules'][] = $infolink->attributes()->name;
                 }
-                if($infolink->attributes()->type=="profile")
-                {
-                    $profile['equipments'][]=$infolink->attributes()->name;
+                if ('profile' == $infolink->attributes()->type) {
+                    $profile['equipments'][] = $infolink->attributes()->name;
                 }
-                
             }
         }
 
         return $profile;
-
     }
-
 
     protected function getGameSystem($gameSystem)
     {
@@ -218,7 +196,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
         return $gameSystems[$gameSystem];
     }
 
-    protected function createProfileByGameSystem(GameSystem $gameSystem, $profileData,$manager)
+    protected function createProfileByGameSystem(GameSystem $gameSystem, $profileData, $manager)
     {
         $profile = $gameSystem->newProfile()
             ->addTag($this->tagManager->loadOrCreate($profileData[0]))
@@ -228,7 +206,6 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
             foreach ($profileData['equipments'] as $equipmentName) {
                 $equipment = $this->equipmentRepository->findOneBy(['name' => $equipmentName, 'gameSystem' => $gameSystem]);
                 if (null === $equipment) {
-                    
                     $equipment = new Equipment();
                     $equipment->setGameSystem($gameSystem);
                     $equipment->setType($this->equipmentTypeRepository->find('U'));
@@ -239,8 +216,6 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                     $manager->flush();
 
                     // throw new \Exception(sprintf('%s equipment not found', $equipmentName));
-
-
                 }
 
                 $profile->addEquipment($equipment);
@@ -251,20 +226,17 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
             foreach ($profileData['rules'] as $ruleName) {
                 $rule = $this->ruleRepository->findOneBy(['name' => $ruleName, 'gameSystem' => $gameSystem]);
                 if (null === $rule) {
-                    
                     $rule = new Rule();
                     $rule->setGameSystem($gameSystem);
-    
+
                     $rule->setName($ruleName);
                     $rule->setDescription($ruleName);
-    
+
                     $manager->persist($rule);
                     $manager->flush();
 
-                    
                     //throw new \Exception(sprintf('%s rule not found', $ruleName));
                 }
-
 
                 $profile->addRule($rule);
             }

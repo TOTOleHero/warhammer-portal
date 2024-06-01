@@ -6,9 +6,6 @@ use App\Entity\GameSystem;
 use App\Entity\Nation;
 use App\Entity\UnitGeneric;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Uid\Uuid;
-
-use function Symfony\Component\String\u;
 
 class UnitGenericManager
 {
@@ -26,10 +23,10 @@ class UnitGenericManager
     {
         return $this->entityManager->createQueryBuilder()
         ->select('u')
-        ->from(UnitGeneric::class,'u')
-        ->join('u.nations','n')
+        ->from(UnitGeneric::class, 'u')
+        ->join('u.nations', 'n')
         ->where('n.id = :nationId')
-        ->setParameter(':nationId',$nationsId)
+        ->setParameter(':nationId', $nationsId)
         ->getQuery()
         ->execute();
     }
@@ -38,57 +35,51 @@ class UnitGenericManager
     {
         return $this->entityManager->createQueryBuilder()
         ->select('count(o.id)')
-        ->from(UnitGeneric::class,'o')
+        ->from(UnitGeneric::class, 'o')
         ->getQuery()
         ->getSingleScalarResult();
     }
 
     public function findByBaseNameAndNation($baseName, $nationId)
     {
-        if($nationId instanceof Nation)
-        {
+        if ($nationId instanceof Nation) {
             $nationId = $nationId->getId();
         }
 
         return $this->entityManager->createQueryBuilder()
         ->select('u')
-        ->from(UnitGeneric::class,'u')
-        ->join('u.nations','n')
+        ->from(UnitGeneric::class, 'u')
+        ->join('u.nations', 'n')
         ->where('n.id = :nationId')
         ->andWhere('u.baseName = :baseName')
-        ->setParameter(':nationId',$nationId)
-        ->setParameter(':baseName',$baseName)
+        ->setParameter(':nationId', $nationId)
+        ->setParameter(':baseName', $baseName)
         ->getQuery()
         ->execute();
-
     }
 
-
-    public function findByNationAndGameSystem($nationId,$gameSystemId)
+    public function findByNationAndGameSystem($nationId, $gameSystemId)
     {
-        if($nationId instanceof Nation)
-        {
+        if ($nationId instanceof Nation) {
             $nationId = $nationId->getId();
         }
-        if($gameSystemId == null)
-        {
+        if (null == $gameSystemId) {
             return $this->entityManager->getRepository(UnitGeneric::class)->findByNation($nationId);
         }
-        if($gameSystemId instanceof GameSystem)
-        {
+        if ($gameSystemId instanceof GameSystem) {
             $gameSystemId = $gameSystemId->getId();
         }
-        
+
         return $this->entityManager->createQueryBuilder()
         ->select('u')
-        ->from(UnitGeneric::class,'u')
-        ->join('u.nations','n')
-        ->join('u.unitGameSystems','ugs')
-        ->join('ugs.gameSystem','gs')
+        ->from(UnitGeneric::class, 'u')
+        ->join('u.nations', 'n')
+        ->join('u.unitGameSystems', 'ugs')
+        ->join('ugs.gameSystem', 'gs')
         ->where('n.id = :nationId')
         ->andWhere('gs.id = :gameSystemId')
-        ->setParameter(':nationId',$nationId)
-        ->setParameter(':gameSystemId',$gameSystemId)
+        ->setParameter(':nationId', $nationId)
+        ->setParameter(':gameSystemId', $gameSystemId)
         ->getQuery()
         ->execute();
     }

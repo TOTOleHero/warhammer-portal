@@ -64,11 +64,17 @@ class GameSystem implements Translatable
     protected $locale;
 
     /**
-     * unit profile allow for this gamesystem
+     * unit profile allow for this gamesystem.
+     *
      * @ORM\ManyToOne(targetEntity=ProfileType::class, inversedBy="gameSystems")
      * @ORM\JoinColumn(nullable=false)
      */
     private $profileType;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=GameLine::class)
+     */
+    private $gameLine;
 
     /**
      * @ORM\ManyToOne(targetEntity=World::class, inversedBy="gameSystems")
@@ -170,6 +176,26 @@ class GameSystem implements Translatable
     public function setPublisher(string $publisher): self
     {
         $this->publisher = $publisher;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of gameLine.
+     */
+    public function getGameLine()
+    {
+        return $this->gameLine;
+    }
+
+    /**
+     * Set the value of gameLine.
+     *
+     * @return self
+     */
+    public function setGameLine($gameLine)
+    {
+        $this->gameLine = $gameLine;
 
         return $this;
     }

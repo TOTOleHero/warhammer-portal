@@ -1,0 +1,31 @@
+version: "3.8"
+
+
+services:
+   fantasy-db:
+      container_name: fantasy-db
+      build: .
+      environment:
+         DATABASE_URL: mysql://fantasydb:fantasydb@fdb-database:3306/fantasydb?serverVersion=10.11.7-MariaDB
+         MAILER_DSN: smtp://@mailcatcher:1025
+      volumes:
+         - ./sources:/var/www/html
+      ports:
+         - 8087:80
+      links:
+         - fdb-database
+         - fdb-mailcatcher
+
+   fdb-mailcatcher:
+      image: dockage/mailcatcher:0.9.0
+      ports:
+         - 1081:1080
+
+   fdb-database:
+      container_name: fdb-database
+      image: mariadb:10.11
+      environment:
+         MARIADB_ROOT_PASSWORD: password
+      volumes:
+        - ./db-data/mysql:/var/lib/mysql
+        - ./db-init:/docker-entrypoint-initdb.d

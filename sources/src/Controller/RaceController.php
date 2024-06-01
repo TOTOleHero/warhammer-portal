@@ -7,10 +7,10 @@ use App\Form\RaceType;
 use App\Repository\RaceRepository;
 use App\Repository\UnitGenericRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
 
 class RaceController extends AbstractFOSRestController
 {
@@ -45,7 +45,7 @@ class RaceController extends AbstractFOSRestController
 
     /**
      * @Route("/api/race/", name="api_race_index", methods={"GET"})
-     *  
+     *
      * @OA\Tag(name="race")
      */
     public function apiIndex(RaceRepository $raceRepository): Response
@@ -91,7 +91,7 @@ class RaceController extends AbstractFOSRestController
 
     /**
      * @Route("/api/race/{id}", name="api_race_show", methods={"GET"})
-     *  
+     *
      * @OA\Tag(name="race")
      */
     public function apiShow(Race $race): Response

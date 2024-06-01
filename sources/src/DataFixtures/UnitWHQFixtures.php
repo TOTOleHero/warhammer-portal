@@ -68,13 +68,12 @@ class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
                 }
             }
             $nation = $nationRepository->find($unitData['Type']);
-            if($nation == null)
-            {
-                var_dump($unitData['Type']);die;
+            if (null == $nation) {
+                var_dump($unitData['Type']);
+                exit;
             }
             $object->addNation($nation);
-            
-                        
+
             $object->setRace($raceRepository->find($unitData['Race']));
             $gameSystemCode = 'WHQV1';
             $profileData = [[
@@ -98,7 +97,7 @@ class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
                 */
                 ,
                 $unitData['Level'],
-                $unitData['Gold (Each)'], 
+                $unitData['Gold (Each)'],
                 $unitData['Move'],
                 $unitData['WS'],
                 $unitData['BS'],
@@ -111,11 +110,11 @@ class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
                 $unitData['Monster Name'],
                 $unitData['Monster Name'],
                 $unitData['Monster Name'],
-                '' /*$unitData[''] */,
-                '' /*$unitData[''] */,
-                '' /*$unitData[''] */,
+                '' /*$unitData[''] */ ,
+                '' /*$unitData[''] */ ,
+                '' /*$unitData[''] */ ,
                 ]];
-            
+
             $gameSystem = $gameSystemRepository->find($gameSystemCode);
 
             if (null == $gameSystem) {
@@ -137,7 +136,6 @@ class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
 
                 $manager->persist($object);
             }
-            
         }
         $manager->flush();
     }

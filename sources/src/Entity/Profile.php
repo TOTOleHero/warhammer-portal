@@ -20,7 +20,9 @@ use Symfony\Component\Uid\Uuid;
  *                          "profileWFB9" = "ProfileWFB9",
  *                          "profileAOS4" = "ProfileAOS4",
  *                          "profileWHQ" = "ProfileWHQ",
- *                          "profileT9A12" = "ProfileT9A12"
+ *                          "profileT9A12" = "ProfileT9A12",
+ *                          "profileKOW" = "ProfileKOW",
+ *                          "profileUnknown" = "ProfileUnknown"
  * })
  * @Hateoas\Relation(
  *      "self",
@@ -49,11 +51,18 @@ abstract class Profile
     use TaggableTrait {
         TaggableTrait::__construct as private __taggableTraitConstruct;
     }
+    
+    
+    /*
+        don't forget to change @ORM\DiscriminatorMap below
+    */
     protected const PROFILE_TYPE_WFB12 = 'profileWFB12';
     protected const PROFILE_TYPE_WFB9 = 'profileWFB9';
     protected const PROFILE_TYPE_AOS4 = 'profileAOS4';
     protected const PROFILE_TYPE_WHQ = 'profileWHQ';
     protected const PROFILE_TYPE_T9A12 = 'profileT9A12';
+    protected const PROFILE_TYPE_KOW = 'profileKOW';
+    protected const PROFILE_TYPE_UNKNOWN = 'profileUnknown';
 
     /**
      * @ORM\Id

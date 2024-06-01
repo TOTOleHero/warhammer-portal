@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Command;
 
@@ -12,9 +12,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UserListCommand extends Command
 {
-
     /**
-     * ContainerInterface
+     * ContainerInterface.
      */
     private $container;
 
@@ -34,10 +33,8 @@ class UserListCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-
         $io = new SymfonyStyle($input, $output);
         $io->title('User list');
-
 
         $userRepository = $this->container->get('doctrine')->getRepository(User::class);
 
@@ -45,11 +42,10 @@ class UserListCommand extends Command
 
         $table = new Table($output);
         $table
-            ->setHeaders(['id','email', 'roles']);
+            ->setHeaders(['id', 'email', 'roles']);
 
-        foreach($users as $user)
-        {
-            $table->addRow([$user->getId(),$user->getEmail(),implode(',',$user->getRoles())]);
+        foreach ($users as $user) {
+            $table->addRow([$user->getId(), $user->getEmail(), implode(',', $user->getRoles())]);
         }
 
         $table->render();

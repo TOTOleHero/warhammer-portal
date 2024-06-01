@@ -1,0 +1,313 @@
+{% extends 'base-page.html.twig' %}
+
+{% block title %}Timeline{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+    <link href="https://cdn.jsdelivr.net/gh/ka215/jquery.timeline@main/dist/jquery.timeline.min.css" rel="stylesheet">
+    <style>
+        body #theTimeline {
+            color: black;
+        }
+        h3.jqtl-timeline-title {
+            color: white;
+        }
+
+        #timelineModal .modal-body {
+            background-color: white;
+        }
+    </style>
+{% endblock %}
+
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+/*
+let defaults = {
+  "type": "point",
+  "startDatetime": "2022-09-16",
+  "endDatetime": "2022-12-17",
+  "scale": "day",
+  "rows": "auto",
+  "minGridSize": 48,
+  "headline": {
+    "display": true,
+    "title": "Demo of jQuery.Timeline",
+    "range": true,
+    "locale": "en-US",
+    "format": {
+      "timeZone": "Asia/Tokyo"
+    }
+  },
+  "footer": {
+    "display": true,
+    "content": "<small>&copy; MAGIC METHODS 2022</small>",
+    "range": true,
+    "locale": "en-US",
+    "format": {
+      "timeZone": "Asia/Tokyo"
+    }
+  },
+  "sidebar": {
+    "sticky": true,
+    "list": [
+      "<a name=\"row-01\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"Tony Stark\"></span> \"Tony\" Stark</a>",
+      "<a name=\"row-02\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"Steve Rogers\"></span> Steve Rogers</a>",
+      "<a name=\"row-03\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"Thor\"></span> Thor</a>",
+      "<a name=\"row-04\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"Bruce Banner/Hulk\"></span> Bruce Banner/Hulk</a>",
+      "<a name=\"row-05\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"Natasha Romanoff\"></span> Natasha Romanoff</a>",
+      "<a name=\"row-06\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"Clint Barton\"></span> Clint Barton</a>",
+      "<a name=\"row-07\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"Peter Quill\"></span> Peter Quill/Star-Lord</a>",
+      "<a name=\"row-08\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"Scott Lang\"></span> Scott Lang</a>",
+      "<a name=\"row-09\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"Peter Parker\"></span> Peter Parker</a>",
+      "<a name=\"row-10\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"Stephen Strange\"></span> Stephen Strange</a>",
+      "<a name=\"row-11\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"T'Challa\"></span> T'Challa</a>",
+      "<a name=\"row-12\"><span class=\"avatar-icon\"><img src=\"https://cdn.iconscout.com/icon/free/png-256/smiley-44-444983.png\" class=\"rounded\" alt=\"Carol Danvers\"></span> Carol Danvers</a>"
+    ]
+  },
+  "ruler": {
+    "top": {
+      "lines": [
+        "year",
+        "month",
+        "day",
+        "weekday"
+      ],
+      "height": 26,
+      "fontSize": 13,
+      "color": "#777777",
+      "background": "#FFFFFF",
+      "locale": "en-US",
+      "format": {
+        "timeZone": "Asia/Tokyo",
+        "hour12": false,
+        "year": "numeric",
+        "month": "long",
+        "day": "numeric",
+        "weekday": "short"
+      }
+    },
+    "bottom": {
+      "lines": [
+        "week",
+        "year"
+      ],
+      "color": "#777777",
+      "background": "#FFFFFF",
+      "locale": "en-US",
+      "format": {
+        "timeZone": "Asia/Tokyo",
+        "hour12": false,
+        "year": "numeric",
+        "week": "ordinal"
+      }
+    }
+  },
+  "rangeAlign": "end",
+  "eventMeta": {
+    "display": false,
+    "scale": "day",
+    "locale": "en-US",
+    "format": {
+      "timeZone": "Asia/Tokyo"
+    },
+    "content": ""
+  },
+  "reloadCacheKeep": false,
+  "zoom": false,
+  "debug": false
+},
+    */
+    overrides = {
+        type: 'point',
+        startDatetime: '1988-1-1',
+        endDatetime: '2024-12-31',
+        scale: 'year',
+        with: '0px',
+        "rows": "auto",
+        minGridSize: 80,
+        headline: {
+            title: 'Fantasy wargame or skirmish game with miniatures',
+            range: false,
+        },
+        footer: {
+            display: false,
+        },
+        ruler: {
+            top: {
+                lines: [ 'year' ],
+                format: { month: 'numeric' }
+            },
+            bottom: {
+                lines: [ 'year' ],
+                format: { month: 'short' }
+            }
+        },
+        effects: {
+            hoverEvent: true,
+        },
+        reloadCacheKeep: true,
+        zoom: true,
+        debug: true,
+        "sidebar": {
+            "sticky": true,
+            "list": [
+            "Warhammer Fantasy  Battle",
+            "Warhammer Age of Sigmar",
+            "Warhammer Quest",
+            "Heroquest",
+             "King Of War",
+            "Confrontation",
+            "Hybrid",
+            "Chronopia",
+            "Age Of Fantasy",
+             "Saga",
+            "The ninth age",
+            "Warhammer Armies Project",
+            "Warhammer Renaissance",
+            "BlackHammer",
+            "Warhammer Warcry",
+            "Warhammer Underworld",
+            "Warmachine",
+            "Runewars",
+            "Alkemy",
+            "Frostgrave",
+            "Hordes"
+            ]
+        },
+    }
+
+    //mcu_options = Object.assign( defaults, overrides )
+    var bulletSize = 50;
+    $(document).ready(function() {
+        $("#theTimeline").Timeline(overrides).
+        Timeline('openEvent', function( event, eventNodes ) {
+      // Define an event handler for getting event nodes on the timeline
+      //console.log( 'The event node with eventID: '+ event.eventId +' was clicked.', event, eventNodes );
+      console.log(eventNodes);
+      $('#timelineModalLongTitle').empty().append(eventNodes.label);
+      $('#timelineModal').find('.modal-body').empty().append(eventNodes.image);
+      $('#timelineModal').modal('show')
+      //openDialog( eventNodes );
+    });
+    });
+
+</script>
+{% endblock %}
+
+{% block body2 %}
+    <h1>Timeline</h1>
+    <div id="theTimeline">
+        <ul class="timeline-events">
+
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-fantasy-battle-4ed.png') }}',id:'1004',start:'1992-06-01', row:1,size: bulletSize,relation: { } }">Warhammer fantasy battle 4th edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-quest-95.png') }}',id:'3001',start:'1995-06-01', row:3,size: bulletSize ,relation: { before:1004, curve:true }}">Warhammer quest (95)</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-quest-silver-tower.png') }}',id:'3002',start:'2016-06-01', row:3,size: bulletSize ,relation: { before:3001, curve:true }}">Warhammer quest (95)</li>
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-quest-shadows-over-hammerhal.png') }}',id:'3003',start:'2017-06-01', row:3,size: bulletSize ,relation: { before:3002, curve:true }}">Warhammer quest (95)</li>
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-quest-cursed-city.png') }}',id:'3004',start:'2021-06-01', row:3,size: bulletSize ,relation: { before:3003, after: -1,curve:true }}">Warhammer quest (95)</li>
+
+
+
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-fantasy-battle-5ed.png') }}',id:1005,start:'1996-06-01', row:1,size: bulletSize,relation: { before:1004, curve:true }}">Warhammer fantasy battle 5th edition</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-fantasy-battle-6ed.png') }}',id:1006,start:'2000-06-01', row:1,size: bulletSize,relation: { before:1005, curve:true }}">Warhammer fantasy battle 6th edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-fantasy-battle-6ed.png') }}',id:1007,start:'2006-06-01', row:1,size: bulletSize,relation: { before:1006, curve:true }}">Warhammer fantasy battle 7th edition</li>
+
+
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-fantasy-battle-6ed.png') }}',id:1008,start:'2010-06-01', row:1,size: bulletSize,relation: { before:1007 ,after:2001, curve:true}}">Warhammer fantasy battle 8th edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-the-old-world-1ed.png') }}',id:1009,start:'2024-01-01', row:1,size: bulletSize,relation: { before:1008 , curve:true}}">Warhammer the old work 1st edition</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-aos-1ed.png') }}',id:2001,start:'2015-06-01', row:2,size: bulletSize,relation: { after:3002, curve:true }}">Warhammer age of sigmar 1st edition</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-aos-2ed.png') }}',id:2002,start:'2018-06-01', row:2,size:bulletSize,relation: { before:2001, curve:true  } }">Warhammer age of sigmar 2nd edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-aos-2ed.png') }}',id:2003,start:'2021-06-01', row:2,size: bulletSize,relation: { before:2002,after:-1, curve:true }}">Warhammer age of sigmar 3th edition</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/the-ninth-age-1ed.png') }}',id:11001,start:'2015-06-01', row:11,size: bulletSize,relation: { before:1008, curve:true }}">The ninth age 1st edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/the-ninth-age-1ed.png') }}',id:11002,start:'2018-06-01', row:11,size: bulletSize,relation: { before:11001,after:-1, curve:true }}">The ninth age 2nd edition</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/chronopia-1ed.png') }}',id:7001,start:'1997-06-01', row:8,size: bulletSize,relation: { curve:true }}">Chronopia 1st edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/chronopia-2ed.png') }}',id:7002,start:'2002-06-01', row:8,size: bulletSize,relation: { before:7001, curve:true }}">Chronopia 2nd edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/chronopia-3ed.png') }}',id:7003,start:'2022-06-01', row:8,size: bulletSize,relation: { before:7002,  curve:true }}">Chronopia 3th edition</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/saga-1ed.png') }}',id:1001,start:'2018-06-01', row:10,size: bulletSize,relation: {  curve:true }}">Saga</li>
+<li data-timeline-node="{image:'{{ asset('build/images/saga-1ed.png') }}',id:1002,start:'2019-06-01', row:10,size: bulletSize,relation: { before:1001,after:-1,  curve:true }}">Saga : l'age de la magie</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/heroquest-1ed.png') }}',id:4001,start:'1989-06-01', row:4,size: bulletSize,relation: { after:3001,  curve:true }}">Heroquest</li>
+<li data-timeline-node="{image:'{{ asset('build/images/heroquest-2ed.png') }}',id:4002,start:'2021-06-01', row:4,size: bulletSize,relation: { before:4001,after:-1,  curve:true }}">Heroquest</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/confrontation-1ed.png') }}',id:6001,start:'1998-06-01', row:6,size: bulletSize,relation: {  curve:true }}">Confrontation 1st edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/confrontation-1ed.png') }}',id:6002,start:'2001-06-01', row:6,size: bulletSize,relation: { before:6001, curve:true }}">Confrontation 2nd edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/confrontation-1ed.png') }}',id:6003,start:'2005-06-01', row:6,size: bulletSize,relation: { before:6002, curve:true }}">Confrontation 3th edition</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/confrontation-1ed.png') }}',id:6004,start:'2008-01-01', row:6,size: bulletSize,relation: { before:6003, curve:true }}">Confrontation 3.5th edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/confrontation-ragnarok-1ed.png') }}',id:6005,start:'2008-12-01', row:6,size: bulletSize,relation: { before:6003, curve:true }}">Confrontation rag'narok edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/confrontation-la-confederation-du-dragon.png') }}',id:6006,start:'2010-01', row:6,size: bulletSize,relation: { before:6004, curve:true }}">Confrontation confédération du dragon rouge</li>
+<li data-timeline-node="{image:'{{ asset('build/images/confrontation-resurrection-1ed.png') }}',id:6007,start:'2017-01', row:6,size: bulletSize,relation: { before:6005, curve:true }}">Confrontation résurrection</li>
+<li data-timeline-node="{image:'{{ asset('build/images/confrontation-classic-5ed.png') }}',id:6008,start:'2018-01', row:6,size: bulletSize,relation: { before:6007, curve:true }}">Confrontation classic</li>
+<li data-timeline-node="{image:'{{ asset('build/images/hybrid-1ed.png') }}',id:6008,start:'2003-06-01', row:7,size: bulletSize,relation: { before:6002, curve:true }}">Hybrid</li>
+<li data-timeline-node="{image:'{{ asset('build/images/age-of-fantasy-1ed.png') }}',id:9008,start:'2017-06-01', row:9,size: bulletSize,relation: { after:-1, curve:true }}">Confrontation classic</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-armies-project-8ed.png') }}',id:1201,start:'2010-06-01', row:12,size: bulletSize,relation: { before:1008,  curve:true }}">Warhammer armies project 8th edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-armies-project-8ed.png') }}',id:1202,start:'2012-06-01', row:12,size: bulletSize,relation: { before:1201,after:-1,  curve:true }}">Warhammer armies project 8th edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/blackhammer.png') }}',id:1401,start:'2011-06-01', row:14,size: bulletSize,relation: { before:1008,  curve:true }}">Blackhammer</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-warcry-1ed.png') }}',id:150001,start:'2019-06-01', row:15,size: bulletSize,relation: { before:2001,after:-1,  curve:true }}">Warhammer warcry</li>
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-underworld-1ed.png') }}',id:16001,start:'2017-06-01', row:16,size: bulletSize,relation: { before:2001, after:-1, curve:true }}">Warhammer underworld</li>
+
+
+
+
+<li data-timeline-node="{id:1402,start:'2016-06-01', row:14,size: 'small',relation: { before:1401,curve:true }}">Blackhammer end of publication</li>
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-renaissance-1ed.png') }}',id:1301,start:'2018-06-01', row:13,size: bulletSize,relation: { before:1004,  curve:true }}">Warhammer renaissance</li>
+<li data-timeline-node="{image:'{{ asset('build/images/warhammer-renaissance-1ed.png') }}',id:1301,start:'2018-06-01', row:13,size: bulletSize,relation: { before:1006,  curve:true }}">Warhammer renaissance</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/king-of-war-1ed.png') }}',id:5001,start:'2010-06-01', row:5,size: bulletSize,relation: {before:1007,   curve:true }}">King of war</li>
+<li data-timeline-node="{image:'{{ asset('build/images/king-of-war-vanguard-1ed.png') }}',id:5002,start:'2018-06-01', row:5,size: bulletSize,relation: {before:5001,  after:-1, curve:true }}">King of war Vanguard</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/frostgrave-1ed.png') }}',id:20001,start:'2015-06-01', row:20,size: bulletSize,relation: {  curve:true }}">Frostgrave 1st edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/frostgrave-2ed.png') }}',id:20003,start:'2020-06-01', row:20,size: bulletSize,relation: { before:20002,after:-1, curve:true }}">Frostgrave 2nd edition</li>
+<li data-timeline-node="{image:'{{ asset('build/images/frostgrave-ghost-archipelago-1ed.png') }}',id:20002,start:'2017-06-01', row:20,size: bulletSize,relation: { before:20001,after:-1, curve:true }}">Frostgrave ghost archipelago edition</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/alkemy-miniature-game-1ed.png') }}',id:19001,start:'2008-06-01', row:19,size: bulletSize,relation: {  curve:true }}">Alkemy jeu de figurine</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/warmachine-1ed.png') }}',id:17001,start:'2003-06-01', row:17,size: bulletSize,relation: {  curve:true }}">Warmachine</li>
+<li data-timeline-node="{image:'{{ asset('build/images/warmachine-2ed.png') }}',id:17002,start:'2010-06-01', row:17,size: bulletSize,relation: { before:17001, curve:true }}">Warmachine prime MK II</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/hordes-1ed.png') }}',id:21001,start:'2006-06-01', row:21,size: bulletSize,relation: {  before:17001, curve:true }}">Hordes</li>
+<li data-timeline-node="{image:'{{ asset('build/images/hordes-1ed.png') }}',id:21002,start:'2010-06-01', row:21,size: bulletSize,relation: { before:21001, curve:true }}">Hordes primal MK II</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/dungeon-saga-1ed.png') }}',id:5005,start:'2010-06-01', row:5,size: bulletSize,relation: { before:5001, curve:true }}">Dungeon saga</li>
+
+<li data-timeline-node="{image:'{{ asset('build/images/runewars-miniature-game-1ed.png') }}',id:18001,start:'2017-06-01', row:18,size: bulletSize,relation: {  curve:true }}">Runewars miniatures game</li>
+<li data-timeline-node="{id:18002,start:'2019-06-01', row:18,size: 'small',relation: { before:18001,curve:true }}">Runewars miniatures game end of publication</li>
+
+
+
+        </ul>
+
+
+    </div>
+
+    <div class="modal fade" id="timelineModal" tabindex="-1" role="dialog" aria-labelledby="timelineModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="timelineModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Equipment;
+use App\Helper\NationHelper;
 use App\Manager\TagManager;
 use App\Repository\EquipmentTypeRepository;
 use App\Repository\GameSystemRepository;
@@ -13,7 +14,6 @@ use Doctrine\Persistence\ObjectManager;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\StorageAttributes;
-use App\Helper\NationHelper;
 
 class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -48,8 +48,6 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
         $this->nationRepository = $nationRepository;
     }
 
-
-
     protected function getGameSystem($gameSystem)
     {
         $gameSystems = [];
@@ -58,7 +56,7 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
             if (null === $gameSystemObject) {
-                throw new \Exception(sprintf('%s games system not found',$gameSystem));
+                throw new \Exception(sprintf('%s games system not found', $gameSystem));
             }
             $gameSystems[$gameSystem] = $gameSystemObject;
         }
@@ -75,58 +73,49 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
         $filesystem = new Filesystem($adapter);
         $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
         foreach ($allFiles as $item) {
-            if($item->isFile() && pathinfo($item->path(),PATHINFO_EXTENSION) == 'cat')
-            {
+            if ($item->isFile() && 'cat' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $nation = null;
                 $version = null;
                 $BSDATAGameSystemId = null;
                 $xmlParser = new \Hobnob\XmlStreamReader\Parser();
                 $xmlParser->registerCallback(
                     '/catalogue',
-                    function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use (&$BSDATAGameSystemId ,&$version, &$nation,$manager) {
-                        
+                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$BSDATAGameSystemId, &$version, &$nation) {
                         $nationFullName = $node->attributes()->name;
                         $BSDATAGameSystemId = $node->attributes()->gamesystemid;
                         $matches = [];
-                        preg_match_all('/(^[^-0-9(]*)/',$nationFullName,$matches);
+                        preg_match_all('/(^[^-0-9(]*)/', $nationFullName, $matches);
                         $nationName = trim($matches[0][0]);
                         //var_dump($nationName);
                         $matches = [];
-                        preg_match_all('/([0-9]{4})/',$nationFullName,$matches);
+                        preg_match_all('/([0-9]{4})/', $nationFullName, $matches);
                         $year = null;
-                        if(isset($matches[1][0]))
-                        {
+                        if (isset($matches[1][0])) {
                             $year = trim($matches[1][0]);
                         }
                         //var_dump( $year);
                         $matches = [];
-                        if(empty($year))
-                        {
-                            preg_match_all('/([0-9])ed|([0-9])th/',$nationFullName,$matches);
+                        if (empty($year)) {
+                            preg_match_all('/([0-9])ed|([0-9])th/', $nationFullName, $matches);
                             //var_dump( $matches);
                             $version = trim($matches[1][0]);
-                            if(empty($version))
-                            {
+                            if (empty($version)) {
                                 $version = trim($matches[2][0]);
                             }
-                        }
-                        else
-                        {
-                            switch(true)
-                            {
-                                case 2000 > $year: $version=5; break;
-                                case 2000 <= $year && $year < 2006: $version=6; break;
-                                case 2006 <= $year && $year < 2010: $version=7; break;
-                                case 2010 <= $year : $version=8; break;
+                        } else {
+                            switch (true) {
+                                case 2000 > $year: $version = 5; break;
+                                case 2000 <= $year && $year < 2006: $version = 6; break;
+                                case 2006 <= $year && $year < 2010: $version = 7; break;
+                                case 2010 <= $year: $version = 8; break;
                             }
                         }
 
-                        if(empty($version))
-                        {
+                        if (empty($version)) {
                             throw new \Exception('No version in : '.$nationFullName);
                         }
 
-                        $nationCode = str_replace(' ','_',strtoupper($nationName));
+                        $nationCode = str_replace(' ', '_', strtoupper($nationName));
                         var_dump('Nation code : "'.$nationCode.'"');
                         $nationCode = NationHelper::fixNationCodeName($nationCode);
                         var_dump('Fixed nation code : "'.$nationCode.'"');
@@ -149,16 +138,13 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
                 $xmlParser = new \Hobnob\XmlStreamReader\Parser();
                 $xmlParser->registerCallback(
                     '/catalogue/sharedProfiles/profile',
-                    function( \Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node ) use (&$version,&$nation,$manager) {
-                        
-                        
-
-                        if(empty($node->attributes()->name))
-                        {
+                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$version, &$nation, $manager) {
+                        if (empty($node->attributes()->name)) {
                             var_dump('No name');
+
                             return;
                         }
-                        
+
                         $gameSystem = 'WFBV'.$version;
 
                         $object = new Equipment();
@@ -166,30 +152,24 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
                         $type = 'U';
                         $typeName = $node->attributes()->typename;
 
-                        switch(true)
-                        {
-                            case $typeName == 'Armour': $type = 'A'; break;
-                            case $typeName == 'Weapon': $type = 'W'; break;
+                        switch (true) {
+                            case 'Armour' == $typeName: $type = 'A'; break;
+                            case 'Weapon' == $typeName: $type = 'W'; break;
                         }
-              
+
                         $object->setType($this->equipmentTypeRepository->find($type));
                         $object->setName($node->attributes()->name);
                         $object->setDescription($node->attributes()->name);
 
                         $manager->persist($object);
-                        
                     }
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));
-              
             }
-            
         }
 
         $manager->flush();
     }
-
-    
 
     public function getDependencies()
     {

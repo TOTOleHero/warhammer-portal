@@ -6,12 +6,11 @@ use App\Entity\GameSystem;
 use App\Form\GameSystemType;
 use App\Manager\NationManager;
 use App\Repository\GameSystemRepository;
-use App\Repository\NationRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
 
 class GameSystemController extends AbstractFOSRestController
 {
@@ -46,7 +45,7 @@ class GameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/api/game-system/", name="api_game_system_index", methods={"GET"})
-     * 
+     *
      * @OA\Tag(name="game-system")
      */
     public function apiIndex(GameSystemRepository $gameSystemRepository): Response
@@ -95,7 +94,7 @@ class GameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/api/game-system/{id}", name="api_game_system_show", methods={"GET"})
-     * 
+     *
      * @OA\Tag(name="game-system")
      */
     public function apiShow(GameSystem $gameSystem): Response

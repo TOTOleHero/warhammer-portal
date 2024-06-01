@@ -6,10 +6,10 @@ use App\Entity\Profile;
 use App\Form\ProfileType;
 use App\Repository\ProfileRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
 
 class ProfileController extends AbstractFOSRestController
 {
@@ -25,7 +25,7 @@ class ProfileController extends AbstractFOSRestController
 
     /**
      * @Route("/api/profile/", name="api_profile_index", methods={"GET"})
-     *  
+     *
      * @OA\Tag(name="profile")
      */
     public function apiIndex(ProfileRepository $profileRepository): Response
@@ -70,7 +70,7 @@ class ProfileController extends AbstractFOSRestController
 
     /**
      * @Route("/api/profile/{id}", name="api_profile_show", methods={"GET"})
-     *  
+     *
      * @OA\Tag(name="profile")
      */
     public function apiShow(Profile $profile): Response

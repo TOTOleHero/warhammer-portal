@@ -7,10 +7,10 @@ use App\Form\UnitGenericType;
 use App\Manager\UnitGenericManager;
 use App\Repository\UnitGenericRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
 
 class UnitGenericController extends AbstractFOSRestController
 {
@@ -26,7 +26,7 @@ class UnitGenericController extends AbstractFOSRestController
 
     /**
      * @Route("/api/unitGeneric/", name="api_unitGeneric_index", methods={"GET"})
-     * 
+     *
      * @OA\Tag(name="unitGeneric")
      */
     public function apiIndex(UnitGenericRepository $unitGenericRepository): Response
@@ -38,15 +38,15 @@ class UnitGenericController extends AbstractFOSRestController
 
     /**
      * @Route("/api/nation/{nationId}/unitGeneric/", name="api_unitGeneric_by_nation", methods={"GET"})
-     * 
+     *
      * @OA\Tag(name="nation")
      */
-    public function apigetAllByNationId(UnitGenericManager $unitGenericManager,$nationId): Response
+    public function apigetAllByNationId(UnitGenericManager $unitGenericManager, $nationId): Response
     {
         $view = $this->view($unitGenericManager->findByNationId($nationId), 200);
 
         return $this->handleView($view);
-    }    
+    }
 
     /**
      * @Route("/contribute/unitGeneric/new", name="unitGeneric_new", methods={"GET","POST"})
@@ -83,7 +83,7 @@ class UnitGenericController extends AbstractFOSRestController
 
     /**
      * @Route("/api/unitGeneric/{id}", name="api_unitGeneric_show", methods={"GET"})
-     * 
+     *
      * @OA\Tag(name="unitGeneric")
      */
     public function apiShow(UnitGeneric $unitGeneric): Response

@@ -10,9 +10,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Hateoas\Configuration\Annotation as Hateoas;
-use Hateoas\Configuration\Metadata\ClassMetadataInterface;
-use Hateoas\Configuration\Relation;
-use Hateoas\Configuration\Route;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Uid\Uuid;
@@ -44,7 +41,7 @@ use Symfony\Component\Uid\Uuid;
  *      exclusion = @Hateoas\Exclusion(excludeIf = "expr([] === object.getUnitGameSystems())")
  * )
 
-  * @Hateoas\Relation(
+ * @Hateoas\Relation(
  *      "nations",
  *      href = @Hateoas\Route(
  *          "api_nation_by_unitGeneric",
@@ -80,14 +77,13 @@ class UnitGeneric
     private $nations;
 
     /**
-     * @JMS\Exclude() 
+     * @JMS\Exclude()
      * @ORM\ManyToOne(targetEntity=Race::class)
-
      */
     private $race;
 
     /**
-     * @JMS\Exclude() 
+     * @JMS\Exclude()
      * @ORM\OneToMany(targetEntity=UnitGameSystem::class, mappedBy="unitGeneric")
      */
     private $unitGameSystems;
@@ -103,19 +99,15 @@ class UnitGeneric
     {
         $allTags = $this->getTags()->toArray();
 
-        if($this->getRace() != null)
-        {
-            $allTags = array_merge($allTags,$this->getRace()->getAllTags());
+        if (null != $this->getRace()) {
+            $allTags = array_merge($allTags, $this->getRace()->getAllTags());
         }
-        foreach($this->getNations() as $nation)
-        {
-            $allTags = array_merge($allTags,$nation->getAllTags());
+        foreach ($this->getNations() as $nation) {
+            $allTags = array_merge($allTags, $nation->getAllTags());
         }
+
         return $allTags;
     }
-
-
-
 
     public function getGameSystem($gameSystemId): GameSystem
     {
@@ -204,30 +196,27 @@ class UnitGeneric
 
     public function addNation(Nation $nation)
     {
-        if(!$this->nations->contains($nation))
-                          {
-                              $this->nations->add($nation);
-                          }
+        if (!$this->nations->contains($nation)) {
+            $this->nations->add($nation);
+        }
 
-                          return $this;
+        return $this;
     }
-
 
     public function removeNation(Nation $nation)
     {
-        if(!$this->nations->contains($nation))
-                          {
-                              $this->nations->remove($nation);
-                          }
+        if (!$this->nations->contains($nation)) {
+            $this->nations->remove($nation);
+        }
 
-                          return $this;
+        return $this;
     }
 
     public function getNations()
     {
         return $this->nations;
     }
-    
+
     public function setNations($nations): self
     {
         $this->nations = $nations;

@@ -22,16 +22,15 @@ class UnitGenericRepository extends ServiceEntityRepository
 
     public function findByNation($nationId)
     {
-        if($nationId instanceof Nation)
-        {
+        if ($nationId instanceof Nation) {
             $nationId = $nationId->getId();
         }
 
         return $this->createQueryBuilder('ug')
-            ->join('ug.nations','n')
+            ->join('ug.nations', 'n')
             ->addSelect('n')
             ->where('n.id = :nation')
-            ->setParameter(':nation',$nationId)
+            ->setParameter(':nation', $nationId)
             ->getQuery()
             ->getResult()
         ;
