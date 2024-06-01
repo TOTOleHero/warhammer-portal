@@ -21,6 +21,7 @@ RUN sed -ri -e 's!</VirtualHost>!<Directory ${APACHE_DOCUMENT_ROOT}>\nAllowOverr
 RUN echo 'memory_limit = 2048M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
 
 COPY sources /var/www/html
+RUN mkdir -p /var/www/html/var
 RUN chmod -R 755 /var/www/html /var/www/html/var
 RUN chmod +X /var/www/html /var/www/html/var
 RUN chmod -R 777 /var/www/html/var
