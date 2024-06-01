@@ -1,6 +1,6 @@
 {% extends 'base-page.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Fantasy Battle DB{% endblock %}
 
 {% block body2 %}
 <div class="container mt-3">
@@ -47,6 +47,7 @@
             <div class="border p-3">
             <p>You can find the API with Swagger at <a href="/api/doc" >{{ url('home') }}api/doc</a>.</p>
             <p>Some initials data was Loaded from projet Battle Scribe Data <a href="https://github.com/BSData">https://github.com/BSData</a>.</p>
+            <p>You can see the timeline of multitude of games system at <a href="{{ url('timeline_index') }}">Timeline</a>.</p>
             </div>
         </div>
         <div class="col-md-3">
