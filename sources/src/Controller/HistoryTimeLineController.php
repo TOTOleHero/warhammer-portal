@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HistoryTimeLineController extends AbstractFOSRestController
 {
     /**
-     * @Route("/timeline/", name="timeline_index", methods={"GET"})
+     * @Route("/timeline", name="timeline_index", methods={"GET"})
      */
     public function index(): Response
     {
