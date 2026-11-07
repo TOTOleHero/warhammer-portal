@@ -40,20 +40,24 @@ class RuleFixtures extends Fixture implements DependentFixtureInterface
         ['en_US', 'Spear Phalanx', 'Re-roll hit rolls of 1 for this unit if it did not move in its preceding movement phase.', 'gameSystems' => ['AOSV1', 'AOSV2']],
     ];
 
+    /**
+     * @var array<string, mixed>
+     */
+    protected $gameSystemCache = [];
+
     protected function getGameSystem($gameSystem)
     {
-        $gameSystems = [];
 
-        if (!array_key_exists($gameSystem, $gameSystems)) {
+        if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
             if (null === $gameSystemObject) {
-                throw new \Exception(sprintf('%s games system not found'));
+                throw new \Exception(sprintf('%s games system not found', $gameSystem));
             }
-            $gameSystems[$gameSystem] = $gameSystemObject;
+            $this->gameSystemCache[$gameSystem] = $gameSystemObject;
         }
 
-        return $gameSystems[$gameSystem];
+        return $this->gameSystemCache[$gameSystem];
     }
 
     public function load(ObjectManager $manager): void

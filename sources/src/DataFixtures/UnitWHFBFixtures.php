@@ -38,9 +38,19 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
      */
     protected $equipmentRepository;
     /**
-     * @var EquipmentRepository
+     * @var RuleRepository
      */
     protected $ruleRepository;
+
+    /**
+     * @var EquipmentTypeRepository
+     */
+    protected $equipmentTypeRepository;
+
+    /**
+     * @var \Doctrine\Persistence\ObjectRepository<GameSystem>
+     */
+    protected $gameSystemRepository;
 
     public function __construct(TagManager $tagManager,
      EquipmentRepository $equipmentRepository, RuleRepository $ruleRepository, EquipmentTypeRepository $equipmentTypeRepository)
@@ -54,6 +64,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $gameSystemRepository = $manager->getRepository(GameSystem::class);
+        $this->gameSystemRepository = $gameSystemRepository;
         $nationRepository = $manager->getRepository(Nation::class);
         $raceRepository = $manager->getRepository(Race::class);
 
@@ -70,10 +81,10 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
             && (false !== strpos(pathinfo($item->path(), PATHINFO_FILENAME), '4th'))
             ) {
                 $monsters = [];
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                             '/gameSystem/sharedProfiles/profile',
-                            function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$monsters) {
+                            function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$monsters) {
                                 $name = (string) $node->attributes()->name;
                                 var_dump('==========================');
                                 var_dump($name);
@@ -143,10 +154,10 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                 $rootNode = null;
                 $nation = null;
                 $version = null;
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                     '/catalogue',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$rootNode, &$version, &$nation, $nationRepository) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$rootNode, &$version, &$nation, $nationRepository) {
                         $rootNode = $node;
                         $nationFullName = $node->attributes()->name;
                         var_dump('full name : "'.$nationFullName.'"');
@@ -188,10 +199,10 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
 
                 $profilesList = [];
                 $ruleList = [];
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                     '/catalogue/sharedProfiles/profile',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$profilesList) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$profilesList) {
                         $profilesList[(string) $node->attributes()->id] =
                         [
                             'name' => $node->attributes()->name,
@@ -201,7 +212,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                 );
                 $xmlParser->registerCallback(
                     '/catalogue/sharedRules/rule',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$ruleList) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$ruleList) {
                         $ruleList[(string) $node->attributes()->id] =
                         [
                             'name' => $node->attributes()->name,
@@ -210,10 +221,10 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));
 
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                     '/catalogue/selectionEntries/selectionEntry',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use ($profilesList, $ruleList, $rootNode, &$version, $nation, $gameSystemRepository, $manager) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use ($profilesList, $ruleList, $rootNode, &$version, $nation, $gameSystemRepository, $manager) {
                         if (empty($node->attributes()->name)) {
                             var_dump('No name');
 
@@ -319,20 +330,24 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
         return $profile;
     }
 
+    /**
+     * @var array<string, mixed>
+     */
+    protected $gameSystemCache = [];
+
     protected function getGameSystem($gameSystem)
     {
-        $gameSystems = [];
 
-        if (!array_key_exists($gameSystem, $gameSystems)) {
+        if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
             if (null === $gameSystemObject) {
-                throw new \Exception(sprintf('%s games system not found'));
+                throw new \Exception(sprintf('%s games system not found', $gameSystem));
             }
-            $gameSystems[$gameSystem] = $gameSystemObject;
+            $this->gameSystemCache[$gameSystem] = $gameSystemObject;
         }
 
-        return $gameSystems[$gameSystem];
+        return $this->gameSystemCache[$gameSystem];
     }
 
     protected function createProfileByGameSystem(GameSystem $gameSystem, $profileData, $manager)

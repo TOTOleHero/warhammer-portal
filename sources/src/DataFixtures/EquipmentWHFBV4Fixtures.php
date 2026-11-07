@@ -47,20 +47,24 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
         $this->nationRepository = $nationRepository;
     }
 
+    /**
+     * @var array<string, mixed>
+     */
+    protected $gameSystemCache = [];
+
     protected function getGameSystem($gameSystem)
     {
-        $gameSystems = [];
 
-        if (!array_key_exists($gameSystem, $gameSystems)) {
+        if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
             if (null === $gameSystemObject) {
                 throw new \Exception(sprintf('%s games system not found', $gameSystem));
             }
-            $gameSystems[$gameSystem] = $gameSystemObject;
+            $this->gameSystemCache[$gameSystem] = $gameSystemObject;
         }
 
-        return $gameSystems[$gameSystem];
+        return $this->gameSystemCache[$gameSystem];
     }
 
     public function load(ObjectManager $manager): void
@@ -73,10 +77,10 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
         $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
         foreach ($allFiles as $item) {
             if ($item->isFile() && 'gst' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                     '/gameSystem/sharedProfiles/profile',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$version, &$nation, $manager) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use ($manager) {
                         if (empty($node->attributes()->name)) {
                             var_dump('No name');
 

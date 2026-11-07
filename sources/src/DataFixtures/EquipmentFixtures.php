@@ -60,20 +60,24 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
         ['en_US', 'Elf bow', '', 'type' => 'MW', 'gameSystems' => ['MHV1']],
     ];
 
+    /**
+     * @var array<string, mixed>
+     */
+    protected $gameSystemCache = [];
+
     protected function getGameSystem($gameSystem)
     {
-        $gameSystems = [];
 
-        if (!array_key_exists($gameSystem, $gameSystems)) {
+        if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
             if (null === $gameSystemObject) {
-                throw new \Exception(sprintf('%s games system not found'));
+                throw new \Exception(sprintf('%s games system not found', $gameSystem));
             }
-            $gameSystems[$gameSystem] = $gameSystemObject;
+            $this->gameSystemCache[$gameSystem] = $gameSystemObject;
         }
 
-        return $gameSystems[$gameSystem];
+        return $this->gameSystemCache[$gameSystem];
     }
 
     public function load(ObjectManager $manager): void

@@ -31,7 +31,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
      */
     protected $equipmentRepository;
     /**
-     * @var EquipmentRepository
+     * @var RuleRepository
      */
     protected $ruleRepository;
 

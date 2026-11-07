@@ -48,20 +48,24 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
         $this->nationRepository = $nationRepository;
     }
 
+    /**
+     * @var array<string, mixed>
+     */
+    protected $gameSystemCache = [];
+
     protected function getGameSystem($gameSystem)
     {
-        $gameSystems = [];
 
-        if (!array_key_exists($gameSystem, $gameSystems)) {
+        if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
             if (null === $gameSystemObject) {
                 throw new \Exception(sprintf('%s games system not found', $gameSystem));
             }
-            $gameSystems[$gameSystem] = $gameSystemObject;
+            $this->gameSystemCache[$gameSystem] = $gameSystemObject;
         }
 
-        return $gameSystems[$gameSystem];
+        return $this->gameSystemCache[$gameSystem];
     }
 
     public function load(ObjectManager $manager): void
@@ -77,10 +81,10 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
                 $nation = null;
                 $version = null;
                 $BSDATAGameSystemId = null;
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                     '/catalogue',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$BSDATAGameSystemId, &$version, &$nation) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$BSDATAGameSystemId, &$version, &$nation) {
                         $nationFullName = $node->attributes()->name;
                         $BSDATAGameSystemId = $node->attributes()->gamesystemid;
                         $matches = [];
@@ -135,10 +139,10 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
                 }
                 */
 
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                     '/catalogue/sharedProfiles/profile',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$version, &$nation, $manager) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$version, $manager) {
                         if (empty($node->attributes()->name)) {
                             var_dump('No name');
 

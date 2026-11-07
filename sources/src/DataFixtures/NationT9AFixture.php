@@ -44,10 +44,10 @@ class NationT9AFixture extends Fixture
         $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
         foreach ($allFiles as $item) {
             if ($item->isFile() && 'cat' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                     '/catalogue',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) {
                         $nationName = $node->attributes()->name;
                         //var_dump($nationName);
                         $matches = [];

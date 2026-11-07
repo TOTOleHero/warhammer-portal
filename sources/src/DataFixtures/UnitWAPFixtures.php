@@ -38,9 +38,19 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
      */
     protected $equipmentRepository;
     /**
-     * @var EquipmentRepository
+     * @var RuleRepository
      */
     protected $ruleRepository;
+
+    /**
+     * @var EquipmentTypeRepository
+     */
+    protected $equipmentTypeRepository;
+
+    /**
+     * @var \Doctrine\Persistence\ObjectRepository<GameSystem>
+     */
+    protected $gameSystemRepository;
 
     public function __construct(TagManager $tagManager,
      EquipmentRepository $equipmentRepository, RuleRepository $ruleRepository, EquipmentTypeRepository $equipmentTypeRepository)
@@ -54,6 +64,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $gameSystemRepository = $manager->getRepository(GameSystem::class);
+        $this->gameSystemRepository = $gameSystemRepository;
         $nationRepository = $manager->getRepository(Nation::class);
         $raceRepository = $manager->getRepository(Race::class);
 
@@ -66,10 +77,10 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
         foreach ($allFiles as $item) {
             if ($item->isFile() && 'cat' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $nation = null;
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                     '/catalogue',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$nation, $nationRepository) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$nation, $nationRepository) {
                         $nationCode = str_replace(' ', '_', strtoupper($node->attributes()->name));
                         var_dump('Nation code : "'.$nationCode.'"');
                         $nationCode = NationHelper::fixNationCodeName($nationCode);
@@ -82,10 +93,10 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));
 
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                     '/catalogue/selectionEntries/selectionEntry',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$nation, $gameSystemRepository, $manager) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$nation, $gameSystemRepository, $manager) {
                         if ('unit' == $node->attributes()->type) {
                             $profiles = $node->xpath('./selectionentries/selectionentry/profiles/profile');
                             if (0 == count($profiles)) {
@@ -180,20 +191,24 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
         return $profile;
     }
 
+    /**
+     * @var array<string, mixed>
+     */
+    protected $gameSystemCache = [];
+
     protected function getGameSystem($gameSystem)
     {
-        $gameSystems = [];
 
-        if (!array_key_exists($gameSystem, $gameSystems)) {
+        if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
             if (null === $gameSystemObject) {
-                throw new \Exception(sprintf('%s games system not found'));
+                throw new \Exception(sprintf('%s games system not found', $gameSystem));
             }
-            $gameSystems[$gameSystem] = $gameSystemObject;
+            $this->gameSystemCache[$gameSystem] = $gameSystemObject;
         }
 
-        return $gameSystems[$gameSystem];
+        return $this->gameSystemCache[$gameSystem];
     }
 
     protected function createProfileByGameSystem(GameSystem $gameSystem, $profileData, $manager)

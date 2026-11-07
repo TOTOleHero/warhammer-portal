@@ -39,9 +39,19 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
      */
     protected $equipmentRepository;
     /**
-     * @var EquipmentRepository
+     * @var RuleRepository
      */
     protected $ruleRepository;
+
+    /**
+     * @var EquipmentTypeRepository
+     */
+    protected $equipmentTypeRepository;
+
+    /**
+     * @var \Doctrine\Persistence\ObjectRepository<GameSystem>
+     */
+    protected $gameSystemRepository;
 
     /**
      * @var UnitGenericManager
@@ -64,6 +74,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $gameSystemRepository = $manager->getRepository(GameSystem::class);
+        $this->gameSystemRepository = $gameSystemRepository;
         $nationRepository = $manager->getRepository(Nation::class);
         $raceRepository = $manager->getRepository(Race::class);
 
@@ -76,10 +87,10 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
         foreach ($allFiles as $item) {
             if ($item->isFile() && 'cat' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $nation = null;
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                     '/catalogue',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$nation, $nationRepository) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$nation, $nationRepository) {
                         $nationName = $node->attributes()->name;
                         //var_dump($nationName);
                         $matches = [];
@@ -96,10 +107,10 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));
 
-                $xmlParser = new \Hobnob\XmlStreamReader\Parser();
+                $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
                     '/catalogue/selectionEntries/selectionEntry',
-                    function (\Hobnob\XmlStreamReader\Parser $parser, \SimpleXMLElement $node) use (&$nation, $gameSystemRepository, $manager) {
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$nation, $gameSystemRepository, $manager) {
                         if ('unit' == $node->attributes()->type) {
                             if (
                                 0 == count($node->xpath('./selectionentries/selectionentry/profiles/profile/characteristics/characteristic[ @name="Adv" or @name="Mar" or @name="Dis"  or @name="HP" or @name="Def" or @name="Res" or @name="Arm"  or  @name="Att" or @name="Off" or @name="Str" or @name="AP" or @name="Agi" ]'))
@@ -238,8 +249,6 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
             $name = (string) $initialNode->xpath('./profiles/profile[@name]')[0]->attributes()->name;
         } elseif (count($initialNode->xpath('./selectionentries/selectionentry/profiles/profile[@name]')) > 0) {
             $name = (string) $initialNode->xpath('./selectionentries/selectionentry/profiles/profile[@name]')[0]->attributes()->name;
-        } elseif (count($initialNode->xpath('./selectionentries/selectionentry/profiles/profile[@name]')) > 0) {
-            $name = (string) $initialNode->xpath('./selectionentries/selectionentry/profiles/profile[@name]')[0]->attributes()->name;
         } elseif (count($xmlNode->xpath('./profiles/profile[@name]')) > 0) {
             $name = (string) $xmlNode->xpath('./profiles/profile[@name]')[0];
         } else {
@@ -264,20 +273,24 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
         return '';
     }
 
+    /**
+     * @var array<string, mixed>
+     */
+    protected $gameSystemCache = [];
+
     protected function getGameSystem($gameSystem)
     {
-        $gameSystems = [];
 
-        if (!array_key_exists($gameSystem, $gameSystems)) {
+        if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
             if (null === $gameSystemObject) {
-                throw new \Exception(sprintf('%s games system not found'));
+                throw new \Exception(sprintf('%s games system not found', $gameSystem));
             }
-            $gameSystems[$gameSystem] = $gameSystemObject;
+            $this->gameSystemCache[$gameSystem] = $gameSystemObject;
         }
 
-        return $gameSystems[$gameSystem];
+        return $this->gameSystemCache[$gameSystem];
     }
 
     protected function createProfileByGameSystem(GameSystem $gameSystem, $profileData, $manager)

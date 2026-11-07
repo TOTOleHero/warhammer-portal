@@ -19,7 +19,7 @@ class GameSystemFixtures extends Fixture implements DependentFixtureInterface
     protected $tagManager;
 
     /**
-     * @var
+     * @var WorldRepository
      */
     protected $worldRepository;
 
