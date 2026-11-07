@@ -31,7 +31,7 @@ class NationWAPFixture extends Fixture
         $this->nationManager = $nationManager;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $worldAlignmentRepository = $manager->getRepository(WorldAlignment::class);
         $nationRepository = $manager->getRepository(Nation::class);

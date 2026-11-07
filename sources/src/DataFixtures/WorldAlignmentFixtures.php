@@ -26,7 +26,7 @@ class WorldAlignmentFixtures extends Fixture
         ['CHAOS', 'en_US', 'Chaos'],
      ];
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         foreach ($this->data as $data) {
             $object = new WorldAlignment();

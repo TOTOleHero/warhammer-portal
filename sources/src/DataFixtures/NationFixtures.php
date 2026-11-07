@@ -105,7 +105,7 @@ class NationFixtures extends Fixture
         ['AMAZONS',                                  'en_US',                                  'Amazons'],
     ];
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $worldAlignmentRepository = $manager->getRepository(WorldAlignment::class);
 

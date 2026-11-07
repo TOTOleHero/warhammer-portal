@@ -63,7 +63,7 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
         return $gameSystems[$gameSystem];
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $adapter = new LocalFilesystemAdapter(
             // Determine root directory
@@ -110,7 +110,7 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             GameSystemFixtures::class,

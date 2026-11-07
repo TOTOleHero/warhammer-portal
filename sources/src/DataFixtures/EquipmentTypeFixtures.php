@@ -34,7 +34,7 @@ class EquipmentTypeFixtures extends Fixture
         ['en_US', 'General Weapons', '', 'W'],
     ];
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         foreach ($this->data as $data) {
             $object = new EquipmentType();

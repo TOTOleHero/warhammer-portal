@@ -76,7 +76,7 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
         return $gameSystems[$gameSystem];
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         foreach ($this->data as $data) {
             foreach ($data['gameSystems'] as $gameSystem) {
@@ -92,7 +92,7 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             GameSystemFixtures::class,

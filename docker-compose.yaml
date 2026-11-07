@@ -1,6 +1,3 @@
-version: "3.8"
-
-
 services:
    fantasy-db:
       container_name: fantasy-db

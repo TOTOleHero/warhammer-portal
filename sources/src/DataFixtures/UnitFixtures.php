@@ -135,7 +135,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
         ],
     ];
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $gameSystemRepository = $manager->getRepository(GameSystem::class);
         $nationRepository = $manager->getRepository(Nation::class);
@@ -288,7 +288,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
         }
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             GameSystemFixtures::class,

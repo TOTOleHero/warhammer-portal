@@ -57,7 +57,7 @@ class GameSystemFixtures extends Fixture implements DependentFixtureInterface
         ]],
      ];
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $profileTypeRepository = $manager->getRepository(ProfileType::class);
         $gameLineRepository = $manager->getRepository(GameLine::class);
@@ -81,7 +81,7 @@ class GameSystemFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             GameLineFixtures::class,

@@ -31,7 +31,7 @@ class AlignementFixtures extends Fixture
         ['CHAOTIC_EVIL', 'en_US', 'Chaotic Evil'],
     ];
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         foreach ($this->data as $data) {
             $object = new Alignment();

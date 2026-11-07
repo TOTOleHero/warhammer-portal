@@ -62,7 +62,7 @@ class RaceFixtures extends Fixture
         ['NATURAL_SPIRIT', 'en_US', 'Natural spirit'],
     ];
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         foreach ($this->data as $data) {
             $object = new Race();

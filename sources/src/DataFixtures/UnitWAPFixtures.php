@@ -51,7 +51,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
         $this->equipmentTypeRepository = $equipmentTypeRepository;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $gameSystemRepository = $manager->getRepository(GameSystem::class);
         $nationRepository = $manager->getRepository(Nation::class);
@@ -325,7 +325,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
         }
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             GameSystemFixtures::class,

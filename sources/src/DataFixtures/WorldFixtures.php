@@ -26,7 +26,7 @@ class WorldFixtures extends Fixture
         ['en_US', 'Mantica', 'Mantica'],
     ];
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         foreach ($this->data as $data) {
             $object = new World();

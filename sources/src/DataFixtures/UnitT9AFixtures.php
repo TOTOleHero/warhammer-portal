@@ -61,7 +61,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
         $this->unitGenericManager = $unitGenericManager;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $gameSystemRepository = $manager->getRepository(GameSystem::class);
         $nationRepository = $manager->getRepository(Nation::class);
@@ -409,7 +409,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
         }
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             GameSystemFixtures::class,

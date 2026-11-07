@@ -25,7 +25,7 @@ class ProfileTypeFixtures extends Fixture
         //['profileUnknown', 'en_US', '(type unknown)', ProfileUnknown::class],
     ];
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         foreach ($this->data as $data) {
             $object = new ProfileType();
