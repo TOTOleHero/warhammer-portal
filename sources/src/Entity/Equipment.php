@@ -15,6 +15,7 @@ use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Entity(repositoryClass=EquipmentRepository::class)
+ *
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -33,21 +34,27 @@ class Equipment implements Translatable
 {
     /**
      * @ORM\Id
+     *
      * @JMS\Type("string")
+     *
      * @ORM\Column(type="uuid", unique=true)
+     *
      * @ORM\GeneratedValue(strategy="CUSTOM")
+     *
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
     /**
      * @Gedmo\Translatable
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=GameSystem::class)
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $gameSystem;
@@ -59,12 +66,14 @@ class Equipment implements Translatable
 
     /**
      * @Gedmo\Translatable
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=EquipmentType::class)
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;

@@ -35,9 +35,11 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
      */
     protected $ruleRepository;
 
-    public function __construct(TagManager $tagManager,
-     EquipmentRepository $equipmentRepository, RuleRepository $ruleRepository)
-    {
+    public function __construct(
+        TagManager $tagManager,
+        EquipmentRepository $equipmentRepository,
+        RuleRepository $ruleRepository,
+    ) {
         $this->tagManager = $tagManager;
         $this->equipmentRepository = $equipmentRepository;
         $this->ruleRepository = $ruleRepository;
@@ -63,32 +65,32 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
                     ['Champion', 5, 5, 5, 4, 3, 1, 7, 2, 8],
                 ],
                 'MHV1' => [
-                   ['High elf warrior', 4, 3, 4, 3, 3, 1, 4, 1, 9, 'equipments' => [
-                    'Knife',
-                    'Mace',
-                    'Sword',
-                    'Double-handed weapon',
-                    'Flail',
-                    'Light armour',
-                    'Heavy armour',
-                    'Shield',
-                    'Helmet',
-                    'Buckler',
-                    'Ithilmar armour',
-                   ]],
-                   ['High elf archer', 4, 3, 4, 3, 3, 1, 4, 1, 9, 'equipments' => [
-                    'Knife',
-                    'Mace',
-                    'Sword',
-                    'Spear',
-                    'Bow',
-                    'Short bow',
-                    'Long bow',
-                    'Elf bow',
-                    'Light armour',
-                    'Shield',
-                    'Helmet',
-                   ]],
+                    ['High elf warrior', 4, 3, 4, 3, 3, 1, 4, 1, 9, 'equipments' => [
+                        'Knife',
+                        'Mace',
+                        'Sword',
+                        'Double-handed weapon',
+                        'Flail',
+                        'Light armour',
+                        'Heavy armour',
+                        'Shield',
+                        'Helmet',
+                        'Buckler',
+                        'Ithilmar armour',
+                    ]],
+                    ['High elf archer', 4, 3, 4, 3, 3, 1, 4, 1, 9, 'equipments' => [
+                        'Knife',
+                        'Mace',
+                        'Sword',
+                        'Spear',
+                        'Bow',
+                        'Short bow',
+                        'Long bow',
+                        'Elf bow',
+                        'Light armour',
+                        'Shield',
+                        'Helmet',
+                    ]],
                 ],
                 'WFBV5' => [
                     [
@@ -207,7 +209,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
 
         switch (get_class($profile)) {
             case ProfileWFB9::class:
-                /* @var ProfileWFB9 $profile  */
+                /* @var ProfileWFB9 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])
@@ -221,7 +223,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
                     ->setLeadership($profileData[9]);
 
             case ProfileWFB12::class:
-                /* @var ProfileWFB12 $profile  */
+                /* @var ProfileWFB12 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])
@@ -238,7 +240,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
                     ->setWillPower($profileData[12]);
 
             case ProfileT9A12::class:
-                /* @var ProfileT9A12 $profile  */
+                /* @var ProfileT9A12 $profile */
                 return $profile
 
                     ->setGlobalAdvanceRate($profileData[1])
@@ -255,7 +257,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
                     ->setOffensiveArmourPenetration($profileData[12]);
 
             case ProfileWHQ::class:
-                /* @var ProfileWHQ $profile  */
+                /* @var ProfileWHQ $profile */
                 return $profile
 
                     ->setBattleLevel($profileData[1])
@@ -275,7 +277,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
                     ->setEscapePinning($profileData[15]);
 
             case ProfileAOS4::class:
-                /* @var ProfileAOS4 $profile  */
+                /* @var ProfileAOS4 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])

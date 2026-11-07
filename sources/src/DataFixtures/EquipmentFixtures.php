@@ -43,7 +43,7 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
         ['en_US', 'Long bow', '', 'type' => 'MW', 'gameSystems' => ['MHV1', 'WFBV4', 'WFBV5', 'WFBV6', 'WFBV7', 'WFBV8', 'T9AV1', 'T9AV2']],
         ['en_US', 'Bow', '', 'type' => 'MW', 'gameSystems' => ['MHV1', 'WFBV4', 'WFBV5', 'WFBV6', 'WFBV7', 'WFBV8', 'T9AV1', 'T9AV2']],
         ['en_US', 'Silverwood Spear', 'Add 1 to the Attacks characteristic of this unit’s Silverwood Spears while it has 20 or more models.',
-        'type' => 'HHW', 'gameSystems' => ['AOSV1', 'AOSV2'], ],
+            'type' => 'HHW', 'gameSystems' => ['AOSV1', 'AOSV2'], ],
         ['en_US', 'Aelven Shield', 'Re-roll save rolls of 1 for a unit with Aelven Shields. In the shooting phase, re-roll failed save rolls of 1
         or 2 instead.', 'type' => 'A', 'gameSystems' => ['AOSV1', 'AOSV2']],
 
@@ -67,7 +67,6 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
 
     protected function getGameSystem($gameSystem)
     {
-
         if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 

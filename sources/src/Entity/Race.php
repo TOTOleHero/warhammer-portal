@@ -13,7 +13,9 @@ use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * @ORM\Entity(repositoryClass=RaceRepository::class)
+ *
  * @Gedmo\TranslationEntity(class="App\Entity\RaceTranslation")
+ *
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -39,13 +41,16 @@ class Race
     }
     /**
      * @Gedmo\Translatable
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="NONE")
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $id;

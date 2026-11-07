@@ -24,7 +24,7 @@ class WorldAlignmentFixtures extends Fixture
         ['DESTRUCTION', 'en_US', 'Destruction'],
         ['DEATH', 'en_US', 'Death'],
         ['CHAOS', 'en_US', 'Chaos'],
-     ];
+    ];
 
     public function load(ObjectManager $manager): void
     {

@@ -32,7 +32,7 @@ class WorldFixtures extends Fixture
             $object = new World();
             $object->setId($data[1]);
             $object->setName($data[2]);
-            //$object->setDescription($data[2]);
+            // $object->setDescription($data[2]);
             $manager->persist($object);
         }
         $manager->flush();

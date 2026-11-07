@@ -95,7 +95,7 @@ class NationController extends AbstractFOSRestController
      * @Route("/nation/{id}", name="nation_show", methods={"GET"})
      * @Route("/nation/{id}/gameSystem/{gameSystem}", name="nation_gameSystem_show", methods={"GET"})
      */
-    public function show(Nation $nation, $gameSystem = null, UnitGenericManager $unitGenericManager): Response
+    public function show(Nation $nation, UnitGenericManager $unitGenericManager, $gameSystem = null): Response
     {
         return $this->render('nation/show.html.twig', [
             'unitGenerics' => $unitGenericManager->findByNationAndGameSystem($nation, $gameSystem),

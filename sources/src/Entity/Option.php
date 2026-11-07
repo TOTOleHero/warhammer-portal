@@ -9,9 +9,13 @@ use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Entity(repositoryClass=OptionRepository::class)
+ *
  * @ORM\Table(name="`option`")
+ *
  * @ORM\InheritanceType("JOINED")
+ *
  * @ORM\DiscriminatorColumn(name="type", type="string")
+ *
  * @ORM\DiscriminatorMap({"commandOption" = "CommandOption",
  *                          "upgradeOption" = "UpgradeOption",
  *                          "equipmentOption" = "EquipmentOption"
@@ -20,14 +24,17 @@ use Symfony\Component\Uid\Uuid;
  */
 abstract class Option
 {
-    const OPTION_TYPE_COMMAND = 'commandOption';
-    const OPTION_TYPE_UPGRADE = 'upgradeOption';
-    const OPTION_TYPE_EQUIPMENT = 'equipmentOption';
+    public const OPTION_TYPE_COMMAND = 'commandOption';
+    public const OPTION_TYPE_UPGRADE = 'upgradeOption';
+    public const OPTION_TYPE_EQUIPMENT = 'equipmentOption';
 
     /**
      * @ORM\Id
+     *
      * @ORM\Column(type="uuid", unique=true)
+     *
      * @ORM\GeneratedValue(strategy="CUSTOM")
+     *
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
@@ -44,6 +51,7 @@ abstract class Option
 
     /**
      * @ORM\ManyToOne(targetEntity=GameSystem::class)
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $gameSystem;

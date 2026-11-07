@@ -47,7 +47,6 @@ class RuleFixtures extends Fixture implements DependentFixtureInterface
 
     protected function getGameSystem($gameSystem)
     {
-
         if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 

@@ -36,9 +36,11 @@ class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
      */
     protected $ruleRepository;
 
-    public function __construct(TagManager $tagManager,
-     EquipmentRepository $equipmentRepository, RuleRepository $ruleRepository)
-    {
+    public function __construct(
+        TagManager $tagManager,
+        EquipmentRepository $equipmentRepository,
+        RuleRepository $ruleRepository,
+    ) {
         $this->tagManager = $tagManager;
         $this->equipmentRepository = $equipmentRepository;
         $this->ruleRepository = $ruleRepository;
@@ -110,10 +112,10 @@ class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
                 $unitData['Monster Name'],
                 $unitData['Monster Name'],
                 $unitData['Monster Name'],
-                '' /*$unitData[''] */ ,
-                '' /*$unitData[''] */ ,
-                '' /*$unitData[''] */ ,
-                ]];
+                '' /* $unitData[''] */ ,
+                '' /* $unitData[''] */ ,
+                '' /* $unitData[''] */ ,
+            ]];
 
             $gameSystem = $gameSystemRepository->find($gameSystemCode);
 
@@ -170,7 +172,7 @@ class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
 
         switch (get_class($profile)) {
             case ProfileWFB9::class:
-                /* @var ProfileWFB9 $profile  */
+                /* @var ProfileWFB9 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])
@@ -184,7 +186,7 @@ class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
                     ->setLeadership($profileData[9]);
 
             case ProfileWFB12::class:
-                /* @var ProfileWFB12 $profile  */
+                /* @var ProfileWFB12 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])
@@ -201,7 +203,7 @@ class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
                     ->setWillPower($profileData[12]);
 
             case ProfileT9A12::class:
-                /* @var ProfileT9A12 $profile  */
+                /* @var ProfileT9A12 $profile */
                 return $profile
 
                     ->setGlobalAdvanceRate($profileData[1])
@@ -218,7 +220,7 @@ class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
                     ->setOffensiveArmourPenetration($profileData[12]);
 
             case ProfileWHQ::class:
-                /* @var ProfileWHQ $profile  */
+                /* @var ProfileWHQ $profile */
                 return $profile
 
                     ->setBattleLevel($profileData[1])
@@ -238,7 +240,7 @@ class UnitWHQFixtures extends Fixture implements DependentFixtureInterface
                     ->setEscapePinning($profileData[15]);
 
             case ProfileAOS4::class:
-                /* @var ProfileAOS4 $profile  */
+                /* @var ProfileAOS4 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])

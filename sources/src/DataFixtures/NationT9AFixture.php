@@ -41,7 +41,9 @@ class NationT9AFixture extends Fixture
             __DIR__.'/The-9th-Age'
         );
         $filesystem = new Filesystem($adapter);
-        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
+        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {
+            return $attributes->isFile();
+        });
         foreach ($allFiles as $item) {
             if ($item->isFile() && 'cat' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $xmlParser = new \App\Xml\StreamParser();
@@ -49,7 +51,7 @@ class NationT9AFixture extends Fixture
                     '/catalogue',
                     function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) {
                         $nationName = $node->attributes()->name;
-                        //var_dump($nationName);
+                        // var_dump($nationName);
                         $matches = [];
                         preg_match_all('/(^[^-0-9(]*)/', $nationName, $matches);
 

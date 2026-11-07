@@ -15,7 +15,9 @@ use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass=NationRepository::class)
+ *
  * @Gedmo\TranslationEntity(class="App\Entity\NationTranslation")
+ *
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -43,7 +45,9 @@ class Nation
     }
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="NONE")
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $id;
@@ -55,6 +59,7 @@ class Nation
 
     /**
      * @JMS\Exclude()
+     *
      * @ORM\ManyToMany(targetEntity=UnitGeneric::class, mappedBy="nations", fetch="EXTRA_LAZY")
      */
     private $unitGenerics;

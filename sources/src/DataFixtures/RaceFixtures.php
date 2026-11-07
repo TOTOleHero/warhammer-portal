@@ -29,24 +29,24 @@ class RaceFixtures extends Fixture
 
     protected $data = [
         ['ELF', 'en_US', 'Elf',
-        'externalLinks' => [
-            [
-                'category' => 'communityDescription', 'href' => 'https://warhammerfantasy.fandom.com/wiki/Elves',
-                'locale' => 'en_US',
+            'externalLinks' => [
+                [
+                    'category' => 'communityDescription', 'href' => 'https://warhammerfantasy.fandom.com/wiki/Elves',
+                    'locale' => 'en_US',
+                ],
             ],
         ],
-    ],
         ['DWARF', 'en_US', 'Dwarf'],
         ['HUMAN', 'en_US', 'Human'],
         ['ELEMENTAL', 'en_US', 'Elemental'],
         ['HALFING', 'en_US', 'Halfing'],
         ['BEAST_HUMANOID', 'en_US', 'Beast-humanoid'],
         ['LIZARD', 'en_US', 'Lizard', 'externalLinks' => [
-                    [
-                        'category' => 'forum', 'href' => 'https://www.lustria-online.com/',
-                        'locale' => 'en_US',
-                    ],
-                ],
+            [
+                'category' => 'forum', 'href' => 'https://www.lustria-online.com/',
+                'locale' => 'en_US',
+            ],
+        ],
         ],
         ['ORC', 'en_US', 'Orc'],
         ['GOBLIN', 'en_US', 'Goblin'],

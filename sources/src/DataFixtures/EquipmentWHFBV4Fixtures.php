@@ -36,11 +36,12 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
      */
     protected $nationRepository;
 
-    public function __construct(TagManager $tagManager,
-     GameSystemRepository $gameSystemRepository,
-      EquipmentTypeRepository $equipmentTypeRepository,
-      NationRepository $nationRepository)
-    {
+    public function __construct(
+        TagManager $tagManager,
+        GameSystemRepository $gameSystemRepository,
+        EquipmentTypeRepository $equipmentTypeRepository,
+        NationRepository $nationRepository,
+    ) {
         $this->tagManager = $tagManager;
         $this->gameSystemRepository = $gameSystemRepository;
         $this->equipmentTypeRepository = $equipmentTypeRepository;
@@ -54,7 +55,6 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
 
     protected function getGameSystem($gameSystem)
     {
-
         if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
@@ -74,7 +74,9 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
             __DIR__.'/whfb'
         );
         $filesystem = new Filesystem($adapter);
-        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
+        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {
+            return $attributes->isFile();
+        });
         foreach ($allFiles as $item) {
             if ($item->isFile() && 'gst' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $xmlParser = new \App\Xml\StreamParser();
@@ -96,8 +98,12 @@ class EquipmentWHFBV4Fixtures extends Fixture implements DependentFixtureInterfa
                         $gameSystem = 'WFBV4';
                         $type = 'U';
                         switch (true) {
-                            case 'Melee Weapon' == $typeName: $type = 'W'; break;
-                            case 'Ranged Weapon' == $typeName: $type = 'MW'; break;
+                            case 'Melee Weapon' == $typeName:
+                                $type = 'W';
+                                break;
+                            case 'Ranged Weapon' == $typeName:
+                                $type = 'MW';
+                                break;
                         }
                         $object = new Equipment();
                         $object->setGameSystem($this->getGameSystem($gameSystem));

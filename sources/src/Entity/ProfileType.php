@@ -14,7 +14,9 @@ class ProfileType
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="NONE")
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $id;

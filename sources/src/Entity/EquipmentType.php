@@ -10,6 +10,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * @ORM\Entity(repositoryClass=EquipmentTypeRepository::class)
+ *
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -28,13 +29,16 @@ class EquipmentType implements Translatable
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="NONE")
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $id;
 
     /**
      * @Gedmo\Translatable
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name;

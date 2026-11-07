@@ -37,11 +37,12 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
      */
     protected $nationRepository;
 
-    public function __construct(TagManager $tagManager,
-     GameSystemRepository $gameSystemRepository,
-      EquipmentTypeRepository $equipmentTypeRepository,
-      NationRepository $nationRepository)
-    {
+    public function __construct(
+        TagManager $tagManager,
+        GameSystemRepository $gameSystemRepository,
+        EquipmentTypeRepository $equipmentTypeRepository,
+        NationRepository $nationRepository,
+    ) {
         $this->tagManager = $tagManager;
         $this->gameSystemRepository = $gameSystemRepository;
         $this->equipmentTypeRepository = $equipmentTypeRepository;
@@ -55,7 +56,6 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
 
     protected function getGameSystem($gameSystem)
     {
-
         if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
@@ -75,7 +75,9 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
             __DIR__.'/whfb'
         );
         $filesystem = new Filesystem($adapter);
-        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
+        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {
+            return $attributes->isFile();
+        });
         foreach ($allFiles as $item) {
             if ($item->isFile() && 'cat' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $nation = null;
@@ -90,28 +92,36 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
                         $matches = [];
                         preg_match_all('/(^[^-0-9(]*)/', $nationFullName, $matches);
                         $nationName = trim($matches[0][0]);
-                        //var_dump($nationName);
+                        // var_dump($nationName);
                         $matches = [];
                         preg_match_all('/([0-9]{4})/', $nationFullName, $matches);
                         $year = null;
                         if (isset($matches[1][0])) {
                             $year = trim($matches[1][0]);
                         }
-                        //var_dump( $year);
+                        // var_dump( $year);
                         $matches = [];
                         if (empty($year)) {
                             preg_match_all('/([0-9])ed|([0-9])th/', $nationFullName, $matches);
-                            //var_dump( $matches);
+                            // var_dump( $matches);
                             $version = trim($matches[1][0]);
                             if (empty($version)) {
                                 $version = trim($matches[2][0]);
                             }
                         } else {
                             switch (true) {
-                                case 2000 > $year: $version = 5; break;
-                                case 2000 <= $year && $year < 2006: $version = 6; break;
-                                case 2006 <= $year && $year < 2010: $version = 7; break;
-                                case 2010 <= $year: $version = 8; break;
+                                case 2000 > $year:
+                                    $version = 5;
+                                    break;
+                                case 2000 <= $year && $year < 2006:
+                                    $version = 6;
+                                    break;
+                                case 2006 <= $year && $year < 2010:
+                                    $version = 7;
+                                    break;
+                                case 2010 <= $year:
+                                    $version = 8;
+                                    break;
                             }
                         }
 
@@ -130,7 +140,7 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
                     }
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));
-                //var_dump($BSDATAGameSystemId);
+                // var_dump($BSDATAGameSystemId);
                 /*
                 if($BSDATAGameSystemId == "417a-57eb-6f3e-81c9")
                 {
@@ -157,8 +167,12 @@ class EquipmentWHFBFixtures extends Fixture implements DependentFixtureInterface
                         $typeName = $node->attributes()->typename;
 
                         switch (true) {
-                            case 'Armour' == $typeName: $type = 'A'; break;
-                            case 'Weapon' == $typeName: $type = 'W'; break;
+                            case 'Armour' == $typeName:
+                                $type = 'A';
+                                break;
+                            case 'Weapon' == $typeName:
+                                $type = 'W';
+                                break;
                         }
 
                         $object->setType($this->equipmentTypeRepository->find($type));

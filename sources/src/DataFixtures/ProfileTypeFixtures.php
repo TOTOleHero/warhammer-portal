@@ -22,7 +22,7 @@ class ProfileTypeFixtures extends Fixture
         ['profileWHQ', 'en_US', 'Profile 15 attributes (type WHQ)', ProfileWHQ::class],
         ['profileT9A12', 'en_US', 'Profile 12 attributes (type T9A)', ProfileT9A12::class],
         ['profileKOW', 'en_US', 'Profile 12 attributes (type KOW)', ProfileKOW::class],
-        //['profileUnknown', 'en_US', '(type unknown)', ProfileUnknown::class],
+        // ['profileUnknown', 'en_US', '(type unknown)', ProfileUnknown::class],
     ];
 
     public function load(ObjectManager $manager): void

@@ -50,7 +50,7 @@ class NationFixtures extends Fixture
                 'category' => 'communityForum', 'href' => 'https://www.the-ninth-age.com/community/index.php?board/7-highborn-elves-he/', 'locale' => 'en_US',
             ],
         ],
-    ],
+        ],
         ['WOOD_ELVES', 'en_US', 'Wood elves'],
         ['DARK_ELVES', 'en_US', 'Dark elves'],
         ['BRETONNIA',        'en_US', 'Bretonnia'],
@@ -85,7 +85,7 @@ class NationFixtures extends Fixture
                 'category' => 'communityRule', 'href' => 'http://warhammerarmiesproject.blogspot.com/search/label/Cathay', 'locale' => 'en_US',
             ],
         ],
-    ],
+        ],
         ['NIPPON',                                  'en_US',                                  'Nippon', 'externalLinks' => [
             [
                 'category' => 'communityDescription', 'href' => 'http://bibliotheque-imperiale.com/index.php/Cat%C3%A9gorie:Nippon', 'locale' => 'fr_FR',
@@ -94,7 +94,7 @@ class NationFixtures extends Fixture
                 'category' => 'communityHistory', 'href' => 'http://bibliotheque-imperiale.com/index.php/Histoire_de_Nippon', 'locale' => 'fr_FR',
             ],
         ],
-    ],
+        ],
         ['ALBION',                                  'en_US',                                  'Albion'],
         ['IND',                                  'en_US',                                  'Ind'],
         ['VAMPIRE_COAST',                                  'en_US',                                  'Vampire Coast'],

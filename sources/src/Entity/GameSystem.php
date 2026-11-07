@@ -13,7 +13,9 @@ use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * @Gedmo\TranslationEntity(class="App\Entity\GameSystemTranslation")
+ *
  * @ORM\Entity(repositoryClass=GameSystemRepository::class)
+ *
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -39,6 +41,7 @@ class GameSystem implements Translatable
     }
     /**
      * @Gedmo\Translatable
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -50,7 +53,9 @@ class GameSystem implements Translatable
 
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="NONE")
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $id;
@@ -67,6 +72,7 @@ class GameSystem implements Translatable
      * unit profile allow for this gamesystem.
      *
      * @ORM\ManyToOne(targetEntity=ProfileType::class, inversedBy="gameSystems")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $profileType;

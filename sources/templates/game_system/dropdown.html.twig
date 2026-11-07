@@ -1,11 +1,10 @@
-
-<div class="dropdown-menu">
+{# game_system/dropdown.html.twig #}
+<div class="dropdown-menu bg-dark border-secondary shadow">
 {% for game_system in game_systems %}
-          <a class="dropdown-item" href="{{ path('game_system_show', {'id': game_system.id}) }}">{{ game_system.name }}</a>
-{#          <div class="dropdown-divider"></div> 
-          <a class="dropdown-item" href="#">Separated link</a>
-#}
+    <a class="dropdown-item text-light" href="{{ path('game_system_show', {'id': game_system.id}) }}">
+        <i class="fas fa-dice text-info mr-2"></i>{{ game_system.name }}
+    </a>
 {% else %}
-    <a class="dropdown-item" href="#">No data</a>
+    <a class="dropdown-item text-muted" href="#">No data</a>
 {% endfor %}          
 </div>

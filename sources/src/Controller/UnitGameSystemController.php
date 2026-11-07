@@ -26,15 +26,19 @@ class UnitGameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/api/unitGameSystem/", name="api_unitGameSystem_index", methods={"GET"})
+     *
      * @OA\Response(
      *     response=200,
      *     description="All UnitGameSystem",
+     *
      *     @OA\JsonContent(
      *         type="array",
+     *
      *         @OA\Items(ref=@Model(type=UnitGameSystem::class))
      *     )
      *
      * )
+     *
      * @OA\Tag(name="unitGameSystem")
      */
     public function apiIndex(UnitGameSystemRepository $unitGameSystemRepository): Response
@@ -46,14 +50,18 @@ class UnitGameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/api/unitGeneric/{unitGenericId}/unitGameSystem/", name="api_unitGameSystem_by_unitGeneric", methods={"GET"})
+     *
      * @OA\Response(
      *     response=200,
      *     description="All UnitGameSystem",
+     *
      *     @OA\JsonContent(
      *         type="array",
+     *
      *         @OA\Items(ref=@Model(type=UnitGameSystem::class))
      *     )
      * )
+     *
      * @OA\Tag(name="unitGeneric")
      */
     public function apiGetAllByUnitGenericId(UnitGameSystemRepository $unitGameSystemRepository, $unitGenericId): Response
@@ -88,14 +96,18 @@ class UnitGameSystemController extends AbstractFOSRestController
 
     /**
      * @Route("/unitGameSystem/{id}", name="unitGameSystem_show", methods={"GET"})
+     *
      * @OA\Response(
      *     response=200,
      *     description="One UnitGameSystem",
+     *
      *     @OA\JsonContent(
      *         type="array",
+     *
      *         @OA\Items(ref=@Model(type=UnitGameSystem::class))
      *     )
      * )
+     *
      * @OA\Tag(name="unit")
      */
     public function show(UnitGameSystem $unitGameSystem): Response

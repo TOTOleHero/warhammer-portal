@@ -26,14 +26,18 @@ class EquipmentController extends AbstractFOSRestController
 
     /**
      * @Route("/api/equipment/", name="api_equipment_index", methods={"GET"})
+     *
      * @OA\Response(
      *     response=200,
      *     description="All Equipment",
+     *
      *     @OA\JsonContent(
      *        type="array",
+     *
      *        @OA\Items(ref=@Model(type=Equipment::class))
      *     )
      * )
+     *
      * @OA\Tag(name="equipment")
      */
     public function apiIndex(EquipmentRepository $equipmentRepository): Response
@@ -78,11 +82,14 @@ class EquipmentController extends AbstractFOSRestController
 
     /**
      * @Route("/api/equipment/{id}", name="api_equipment_show", methods={"GET"})
+     *
      * @OA\Response(
      *     response=200,
      *     description="One Equipment",
+     *
      *     @Model(type=Equipment::class)
      * )
+     *
      * @OA\Tag(name="equipment")
      */
     public function apiShow(Equipment $equipment): Response

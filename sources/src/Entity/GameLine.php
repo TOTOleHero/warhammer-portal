@@ -13,7 +13,9 @@ use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * @Gedmo\TranslationEntity(class="App\Entity\GameLineTranslation")
+ *
  * @ORM\Entity(repositoryClass=GameLineRepository::class)
+ *
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -39,6 +41,7 @@ class GameLine implements Translatable
     }
     /**
      * @Gedmo\Translatable
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -50,7 +53,9 @@ class GameLine implements Translatable
 
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="NONE")
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $id;

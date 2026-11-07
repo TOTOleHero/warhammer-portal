@@ -10,9 +10,11 @@ use OpenApi\Annotations as OA;
 /**
  * @OA\Schema(
  *      allOf={
+ *
  *          @Model(type=Profile::class)
  *      }
  * )
+ *
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
  */
 class ProfileUnknown extends Profile

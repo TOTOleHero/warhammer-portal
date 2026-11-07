@@ -58,12 +58,13 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
      */
     protected $unitGenericManager;
 
-    public function __construct(TagManager $tagManager,
-     EquipmentRepository $equipmentRepository,
-      RuleRepository $ruleRepository,
-      EquipmentTypeRepository $equipmentTypeRepository,
-      UnitGenericManager $unitGenericManager
-      ) {
+    public function __construct(
+        TagManager $tagManager,
+        EquipmentRepository $equipmentRepository,
+        RuleRepository $ruleRepository,
+        EquipmentTypeRepository $equipmentTypeRepository,
+        UnitGenericManager $unitGenericManager,
+    ) {
         $this->tagManager = $tagManager;
         $this->equipmentRepository = $equipmentRepository;
         $this->ruleRepository = $ruleRepository;
@@ -83,7 +84,9 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
             __DIR__.'/The-9th-Age'
         );
         $filesystem = new Filesystem($adapter);
-        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
+        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {
+            return $attributes->isFile();
+        });
         foreach ($allFiles as $item) {
             if ($item->isFile() && 'cat' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $nation = null;
@@ -92,7 +95,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
                     '/catalogue',
                     function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$nation, $nationRepository) {
                         $nationName = $node->attributes()->name;
-                        //var_dump($nationName);
+                        // var_dump($nationName);
                         $matches = [];
                         preg_match_all('/(^[^-0-9(]*)/', $nationName, $matches);
                         $nationName = trim($matches[0][0]);
@@ -112,8 +115,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
                     '/catalogue/selectionEntries/selectionEntry',
                     function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$nation, $gameSystemRepository, $manager) {
                         if ('unit' == $node->attributes()->type) {
-                            if (
-                                0 == count($node->xpath('./selectionentries/selectionentry/profiles/profile/characteristics/characteristic[ @name="Adv" or @name="Mar" or @name="Dis"  or @name="HP" or @name="Def" or @name="Res" or @name="Arm"  or  @name="Att" or @name="Off" or @name="Str" or @name="AP" or @name="Agi" ]'))
+                            if (0 == count($node->xpath('./selectionentries/selectionentry/profiles/profile/characteristics/characteristic[ @name="Adv" or @name="Mar" or @name="Dis"  or @name="HP" or @name="Def" or @name="Res" or @name="Arm"  or  @name="Att" or @name="Off" or @name="Str" or @name="AP" or @name="Agi" ]'))
                                 && 0 == count($node->xpath('./profiles/profile/characteristics/characteristic[ @name="Adv" or @name="Mar" or @name="Dis"  or @name="HP" or @name="Def" or @name="Res" or @name="Arm"  or  @name="Att" or @name="Off" or @name="Str" or @name="AP" or @name="Agi" ]'))) {
                                 var_dump('No characteristic for '.$node->attributes()->name);
 
@@ -130,7 +132,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
                                 $profileArray = $this->convertToProfileData($nodeToProcess, $node);
 
                                 $unitName = $nodeToProcess->attributes()->name;
-                                //var_dump('OK for '.$unitName);
+                                // var_dump('OK for '.$unitName);
                                 if (!$profileArray['isCompleted']) {
                                     var_dump('Profile invalide for '.$unitName.'. Skip');
                                     continue;
@@ -168,7 +170,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
                                 $manager->persist($object);
                                 $manager->flush();
 
-                                //var_dump($node->xpath('//profile'));
+                                // var_dump($node->xpath('//profile'));
                             }
                         }
                     }
@@ -269,7 +271,8 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
         if (count($xmlNode->xpath('./profiles/profile/characteristics/characteristic[@name="'.$name.'"]')) > 0) {
             return (string) $xmlNode->xpath('./profiles/profile/characteristics/characteristic[@name="'.$name.'"]')[0];
         }
-        //throw new \Exception('Data not found for '.$name);
+
+        // throw new \Exception('Data not found for '.$name);
         return '';
     }
 
@@ -280,7 +283,6 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
 
     protected function getGameSystem($gameSystem)
     {
-
         if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
@@ -332,7 +334,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
                     $manager->persist($rule);
                     $manager->flush();
 
-                    //throw new \Exception(sprintf('%s rule not found', $ruleName));
+                    // throw new \Exception(sprintf('%s rule not found', $ruleName));
                 }
 
                 $profile->addRule($rule);
@@ -341,7 +343,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
 
         switch (get_class($profile)) {
             case ProfileWFB9::class:
-                /* @var ProfileWFB9 $profile  */
+                /* @var ProfileWFB9 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])
@@ -355,7 +357,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
                     ->setLeadership($profileData[9]);
 
             case ProfileWFB12::class:
-                /* @var ProfileWFB12 $profile  */
+                /* @var ProfileWFB12 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])
@@ -372,7 +374,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
                     ->setWillPower($profileData[12]);
 
             case ProfileT9A12::class:
-                /* @var ProfileT9A12 $profile  */
+                /* @var ProfileT9A12 $profile */
                 return $profile
 
                     ->setGlobalAdvanceRate($profileData[1])
@@ -389,7 +391,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
                     ->setOffensiveArmourPenetration($profileData[12]);
 
             case ProfileWHQ::class:
-                /* @var ProfileWHQ $profile  */
+                /* @var ProfileWHQ $profile */
                 return $profile
 
                     ->setBattleLevel($profileData[1])
@@ -409,7 +411,7 @@ class UnitT9AFixtures extends Fixture implements DependentFixtureInterface
                     ->setEscapePinning($profileData[15]);
 
             case ProfileAOS4::class:
-                /* @var ProfileAOS4 $profile  */
+                /* @var ProfileAOS4 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])

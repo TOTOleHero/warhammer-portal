@@ -12,7 +12,9 @@ class Rule
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -29,6 +31,7 @@ class Rule
 
     /**
      * @ORM\ManyToOne(targetEntity=GameSystem::class)
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $gameSystem;

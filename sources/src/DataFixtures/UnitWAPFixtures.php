@@ -52,9 +52,12 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
      */
     protected $gameSystemRepository;
 
-    public function __construct(TagManager $tagManager,
-     EquipmentRepository $equipmentRepository, RuleRepository $ruleRepository, EquipmentTypeRepository $equipmentTypeRepository)
-    {
+    public function __construct(
+        TagManager $tagManager,
+        EquipmentRepository $equipmentRepository,
+        RuleRepository $ruleRepository,
+        EquipmentTypeRepository $equipmentTypeRepository,
+    ) {
         $this->tagManager = $tagManager;
         $this->equipmentRepository = $equipmentRepository;
         $this->ruleRepository = $ruleRepository;
@@ -73,7 +76,9 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
             __DIR__.'/warhammer-armies-project'
         );
         $filesystem = new Filesystem($adapter);
-        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
+        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {
+            return $attributes->isFile();
+        });
         foreach ($allFiles as $item) {
             if ($item->isFile() && 'cat' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $nation = null;
@@ -132,7 +137,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                             $object->addUnitGameSystem($unitGamesSystem);
                             $manager->persist($unitGamesSystem);
                             $manager->persist($object);
-                            //var_dump($node->xpath('//profile'));
+                            // var_dump($node->xpath('//profile'));
                         }
                     }
                 );
@@ -198,7 +203,6 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
 
     protected function getGameSystem($gameSystem)
     {
-
         if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
@@ -250,7 +254,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                     $manager->persist($rule);
                     $manager->flush();
 
-                    //throw new \Exception(sprintf('%s rule not found', $ruleName));
+                    // throw new \Exception(sprintf('%s rule not found', $ruleName));
                 }
 
                 $profile->addRule($rule);
@@ -259,7 +263,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
 
         switch (get_class($profile)) {
             case ProfileWFB9::class:
-                /* @var ProfileWFB9 $profile  */
+                /* @var ProfileWFB9 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])
@@ -273,7 +277,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                     ->setLeadership($profileData[9]);
 
             case ProfileWFB12::class:
-                /* @var ProfileWFB12 $profile  */
+                /* @var ProfileWFB12 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])
@@ -290,7 +294,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                     ->setWillPower($profileData[12]);
 
             case ProfileT9A12::class:
-                /* @var ProfileT9A12 $profile  */
+                /* @var ProfileT9A12 $profile */
                 return $profile
 
                     ->setGlobalAdvanceRate($profileData[1])
@@ -307,7 +311,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                     ->setOffensiveArmourPenetration($profileData[12]);
 
             case ProfileWHQ::class:
-                /* @var ProfileWHQ $profile  */
+                /* @var ProfileWHQ $profile */
                 return $profile
 
                     ->setBattleLevel($profileData[1])
@@ -327,7 +331,7 @@ class UnitWAPFixtures extends Fixture implements DependentFixtureInterface
                     ->setEscapePinning($profileData[15]);
 
             case ProfileAOS4::class:
-                /* @var ProfileAOS4 $profile  */
+                /* @var ProfileAOS4 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])

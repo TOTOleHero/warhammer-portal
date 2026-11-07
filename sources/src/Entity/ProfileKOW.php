@@ -10,9 +10,11 @@ use OpenApi\Annotations as OA;
 /**
  * @OA\Schema(
  *      allOf={
+ *
  *         @Model(type=Profile::class)
  *      }
  * )
+ *
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
  */
 class ProfileKOW extends Profile
@@ -109,7 +111,6 @@ class ProfileKOW extends Profile
         return self::PROFILE_TYPE_KOW;
     }
 
-    
     /**
      * Get how many models the unit comprises.
      */
@@ -332,7 +333,7 @@ class ProfileKOW extends Profile
 
     /**
      * Get whether the unit is Infantry, Cavalry, etc.
-     */ 
+     */
     public function getUnitType()
     {
         return $this->unitType;
@@ -341,8 +342,8 @@ class ProfileKOW extends Profile
     /**
      * Set whether the unit is Infantry, Cavalry, etc.
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setUnitType($unitType)
     {
         $this->unitType = $unitType;

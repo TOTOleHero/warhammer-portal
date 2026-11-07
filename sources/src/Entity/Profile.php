@@ -14,8 +14,11 @@ use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
+ *
  * @ORM\InheritanceType("JOINED")
+ *
  * @ORM\DiscriminatorColumn(name="type", type="string")
+ *
  * @ORM\DiscriminatorMap({"profileWFB12" = "ProfileWFB12",
  *                          "profileWFB9" = "ProfileWFB9",
  *                          "profileAOS4" = "ProfileAOS4",
@@ -24,6 +27,7 @@ use Symfony\Component\Uid\Uuid;
  *                          "profileKOW" = "ProfileKOW",
  *                          "profileUnknown" = "ProfileUnknown"
  * })
+ *
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -51,8 +55,7 @@ abstract class Profile
     use TaggableTrait {
         TaggableTrait::__construct as private __taggableTraitConstruct;
     }
-    
-    
+
     /*
         don't forget to change @ORM\DiscriminatorMap below
     */
@@ -66,23 +69,31 @@ abstract class Profile
 
     /**
      * @ORM\Id
+     *
      * @JMS\Type("string")
+     *
      * @ORM\Column(type="uuid", unique=true)
+     *
      * @ORM\GeneratedValue(strategy="CUSTOM")
+     *
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
     /**
      * @JMS\Type("string")
+     *
      * @ORM\ManyToOne(targetEntity=UnitGameSystem::class, inversedBy="profiles")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $unitGameSystem;
 
     /**
      * @ORM\ManyToOne(targetEntity=GameSystem::class)
+     *
      * @ORM\JoinColumn(nullable=false)
+     *
      * @JMS\Type("string")
      */
     private $gameSystem;

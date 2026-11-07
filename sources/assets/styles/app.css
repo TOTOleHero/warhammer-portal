@@ -1,4 +1,77 @@
+/* 
+ * Surcharge du thème Superhero pour le look "Dark Fantasy" 
+ */
+
 body {
-    background-color: lightgray;
+    background-color: #0b1016 !important;
+    color: #c9d1d9 !important;
+    background-image: radial-gradient(circle at 50% 0%, #1a2332 0%, transparent 70%);
+    background-attachment: fixed;
 }
 
+/* En-tête immersif */
+.header-fantasy {
+    background: linear-gradient(135deg, rgba(23, 33, 43, 0.8) 0%, rgba(13, 17, 23, 0.9) 100%);
+    border-bottom: 2px solid #30363d;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Cartes (Effet de transparence et de profondeur) */
+.card.bg-dark {
+    background-color: rgba(22, 27, 34, 0.85) !important;
+    border: 1px solid #30363d !important;
+    border-radius: 8px;
+}
+
+.card-header {
+    background-color: rgba(1, 4, 9, 0.6) !important;
+    border-bottom: 1px solid #30363d !important;
+}
+
+/* Surcharge du tableau des statistiques */
+.custom-table {
+    background-color: transparent !important;
+}
+.custom-table tr {
+    border-color: #30363d;
+}
+.custom-table th {
+    color: #8b949e;
+    font-weight: normal;
+}
+
+/* Anticipation : style pour les listes rendues par les sous-contrôleurs */
+.custom-list-container .list-group {
+    background: transparent;
+    border-radius: 0;
+}
+.custom-list-container .list-group-item {
+    background-color: transparent;
+    border-color: #30363d;
+    border-left: none;
+    border-right: none;
+    color: #c9d1d9;
+    transition: all 0.2s ease-in-out;
+}
+.custom-list-container .list-group-item:hover {
+    background-color: rgba(48, 54, 61, 0.5);
+    color: #ffffff;
+    transform: translateX(4px);
+}
+
+/* Couleurs d'accentuation stylisées */
+.text-warning { color: #d29922 !important; }
+.text-info { color: #58a6ff !important; }
+.text-danger { color: #f85149 !important; }
+.text-success { color: #2ea043 !important; }
+
+
+/* Style au survol des menus déroulants sombres */
+.dropdown-menu.bg-dark .dropdown-item {
+    transition: background-color 0.2s, color 0.2s;
+}
+.dropdown-menu.bg-dark .dropdown-item:hover,
+.dropdown-menu.bg-dark .dropdown-item:focus {
+    background-color: rgba(48, 54, 61, 0.8) !important;
+    color: #ffffff !important;
+}

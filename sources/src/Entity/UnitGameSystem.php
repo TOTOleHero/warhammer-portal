@@ -17,7 +17,9 @@ use Symfony\Component\Uid\Uuid;
 
 /**
  * @Gedmo\TranslationEntity(class="App\Entity\UnitGameSystemTranslation")
+ *
  * @ORM\Entity(repositoryClass=UnitGameSystemRepository::class)
+ *
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -37,26 +39,35 @@ class UnitGameSystem
     }
     /**
      * @ORM\Id
+     *
      * @JMS\Type("string")
+     *
      * @ORM\Column(type="uuid", unique=true)
+     *
      * @ORM\GeneratedValue(strategy="CUSTOM")
+     *
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
     /**
      * @Gedmo\Translatable
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
      * @var Collection|Profile[]
+     *
      * @ORM\OneToMany(targetEntity=Profile::class, mappedBy="unitGameSystem", orphanRemoval=true)
+     *
      * @OA\Property(
      *      type="array",
+     *
      *      @OA\Items(
      *          allOf={
+     *
      *          @Model(type=ProfileAOS4::class),
      *          @Model(type=ProfileWFB9::class),
      *          @Model(type=ProfileWFB12::class),
@@ -74,12 +85,14 @@ class UnitGameSystem
 
     /**
      * @ORM\ManyToOne(targetEntity=UnitGeneric::class, inversedBy="unitGameSystems")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $unitGeneric;
 
     /**
      * @ORM\ManyToOne(targetEntity=GameSystem::class)
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $gameSystem;

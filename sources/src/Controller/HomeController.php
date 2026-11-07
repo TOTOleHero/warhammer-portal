@@ -19,10 +19,11 @@ class HomeController extends AbstractFOSRestController
      * @Route("/", name="home")
      */
     public function index(
-        UnitGenericManager $unitGenericManager, NationManager $nationManager,
-    UnitGameSystemManager $unitGameSystemManager,
-    ProfileManager $profileManager,
-    GameSystemManager $gameSystemManager
+        UnitGenericManager $unitGenericManager,
+        NationManager $nationManager,
+        UnitGameSystemManager $unitGameSystemManager,
+        ProfileManager $profileManager,
+        GameSystemManager $gameSystemManager,
     ): Response {
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
@@ -76,15 +77,15 @@ class HomeController extends AbstractFOSRestController
      */
     public function test(): Response
     {
-        /** @var $router \Symfony\Component\Routing\Router */
+        /** @var \Symfony\Component\Routing\Router $router */
         $router = $this->container->get('router');
-        /** @var $collection \Symfony\Component\Routing\RouteCollection */
+        /** @var \Symfony\Component\Routing\RouteCollection $collection */
         $collection = $router->getRouteCollection();
         $allRoutes = $collection->all();
 
         $routes = [];
 
-        /** @var $params \Symfony\Component\Routing\Route */
+        /** @var \Symfony\Component\Routing\Route $params */
         foreach ($allRoutes as $route => $params) {
             $defaults = $params->getDefaults();
 

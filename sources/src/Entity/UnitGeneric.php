@@ -16,7 +16,9 @@ use Symfony\Component\Uid\Uuid;
 
 /**
  * @Gedmo\TranslationEntity(class="App\Entity\UnitGenericTranslation")
+ *
  * @ORM\Entity(repositoryClass=UnitGenericRepository::class)
+ *
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -40,7 +42,6 @@ use Symfony\Component\Uid\Uuid;
  *      ),
  *      exclusion = @Hateoas\Exclusion(excludeIf = "expr([] === object.getUnitGameSystems())")
  * )
-
  * @Hateoas\Relation(
  *      "nations",
  *      href = @Hateoas\Route(
@@ -57,33 +58,41 @@ class UnitGeneric
     }
     /**
      * @ORM\Id
+     *
      * @JMS\Type("string")
+     *
      * @ORM\Column(type="uuid", unique=true)
+     *
      * @ORM\GeneratedValue(strategy="CUSTOM")
+     *
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
     /**
      * @Gedmo\Translatable
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $baseName;
 
     /**
      * @JMS\Exclude()
+     *
      * @ORM\ManyToMany(targetEntity=Nation::class, inversedBy="unitGenerics")
      */
     private $nations;
 
     /**
      * @JMS\Exclude()
+     *
      * @ORM\ManyToOne(targetEntity=Race::class)
      */
     private $race;
 
     /**
      * @JMS\Exclude()
+     *
      * @ORM\OneToMany(targetEntity=UnitGameSystem::class, mappedBy="unitGeneric")
      */
     private $unitGameSystems;
@@ -155,7 +164,7 @@ class UnitGeneric
      */
     public function getAllProfilesByGameSystems(): array
     {
-        //flat gamesystem array
+        // flat gamesystem array
         $profilesByGameSystems = array_map(
             function ($value) {
                 return [];

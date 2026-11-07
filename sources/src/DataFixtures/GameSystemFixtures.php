@@ -55,7 +55,7 @@ class GameSystemFixtures extends Fixture implements DependentFixtureInterface
         ['WFBAPV8', 'en_US', 'Warhammer Armies Project V8', 'profileWFB9', 'Mathias Eliasson', 'warhammer-old-world', 'WARHAMMER_ARMIES_PROJECT', 'externalLinks' => [
             [],
         ]],
-     ];
+    ];
 
     public function load(ObjectManager $manager): void
     {
@@ -63,7 +63,6 @@ class GameSystemFixtures extends Fixture implements DependentFixtureInterface
         $gameLineRepository = $manager->getRepository(GameLine::class);
 
         foreach ($this->data as $data) {
-            
             $object = new GameSystem();
             $object->setId($data[0]);
             $object->setName($data[2]);

@@ -4,6 +4,7 @@ namespace App\Manager;
 
 use App\Entity\ExternalLinkCategory;
 use Doctrine\ORM\EntityManagerInterface;
+
 use function Symfony\Component\String\u;
 
 class ExternalLinkCategoryManager

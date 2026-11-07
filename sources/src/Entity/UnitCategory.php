@@ -12,7 +12,9 @@ class UnitCategory
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="NONE")
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $id;
@@ -29,6 +31,7 @@ class UnitCategory
 
     /**
      * @ORM\ManyToOne(targetEntity=GameSystem::class)
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $gameSystem;

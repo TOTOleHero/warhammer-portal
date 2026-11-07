@@ -12,7 +12,9 @@ class ExternalLink
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -24,6 +26,7 @@ class ExternalLink
 
     /**
      * @ORM\ManyToOne(targetEntity=ExternalLinkCategory::class)
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;

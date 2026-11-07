@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TagRepository;
 use Doctrine\ORM\Mapping as ORM;
+
 use function Symfony\Component\String\u;
 
 /**
@@ -13,7 +14,9 @@ class Tag
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="NONE")
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $id;

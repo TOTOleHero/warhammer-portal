@@ -6,9 +6,9 @@ use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__ . '/src',
+        __DIR__.'/src',
     ])
     ->withSkip([
-        __DIR__ . '/src/Kernel.php',
+        __DIR__.'/src/Kernel.php',
     ])
     ->withAttributesSets(doctrine: true);

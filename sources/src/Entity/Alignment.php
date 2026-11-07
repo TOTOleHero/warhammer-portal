@@ -10,6 +10,7 @@ use Gedmo\Translatable\Translatable;
 
 /**
  * @Gedmo\TranslationEntity(class="App\Entity\AlignmentTranslation")
+ *
  * @ORM\Entity(repositoryClass=AligmentRepository::class)
  */
 class Alignment
@@ -19,7 +20,9 @@ class Alignment
     }
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="NONE")
+     *
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $id;

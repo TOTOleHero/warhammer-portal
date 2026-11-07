@@ -1,11 +1,10 @@
-
-<div class="dropdown-menu">
+{# nation/dropdown.html.twig #}
+<div class="dropdown-menu bg-dark border-secondary shadow">
 {% for nation in nations %}
-          <a class="dropdown-item" href="{{ path('nation_show', {'id': nation.id}) }}">{{ nation.name }}</a>
-{#          <div class="dropdown-divider"></div> 
-          <a class="dropdown-item" href="#">Separated link</a>
-#}
+    <a class="dropdown-item text-light" href="{{ path('nation_show', {'id': nation.id}) }}">
+        <i class="fas fa-flag text-white mr-2"></i>{{ nation.name }}
+    </a>
 {% else %}
-    <a class="dropdown-item" href="#">No data</a>
+    <a class="dropdown-item text-muted" href="#">No data</a>
 {% endfor %}          
 </div>

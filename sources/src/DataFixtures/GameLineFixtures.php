@@ -32,7 +32,7 @@ class GameLineFixtures extends Fixture
         ['CHRONOPIA', 'en_US', 'Chronopia',  'Target Games'],
         ['WARMACHINE', 'en_US', 'Warchine',  'Privateer Press'],
         ['CONFRONTATION', 'en_US', 'Confrontation',  'Rackham'],
-     ];
+    ];
 
     public function load(ObjectManager $manager): void
     {

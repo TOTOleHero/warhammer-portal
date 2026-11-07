@@ -52,9 +52,12 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
      */
     protected $gameSystemRepository;
 
-    public function __construct(TagManager $tagManager,
-     EquipmentRepository $equipmentRepository, RuleRepository $ruleRepository, EquipmentTypeRepository $equipmentTypeRepository)
-    {
+    public function __construct(
+        TagManager $tagManager,
+        EquipmentRepository $equipmentRepository,
+        RuleRepository $ruleRepository,
+        EquipmentTypeRepository $equipmentTypeRepository,
+    ) {
         $this->tagManager = $tagManager;
         $this->equipmentRepository = $equipmentRepository;
         $this->ruleRepository = $ruleRepository;
@@ -74,7 +77,9 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
         );
         $filesystem = new Filesystem($adapter);
 
-        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
+        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {
+            return $attributes->isFile();
+        });
         foreach ($allFiles as $item) {
             if ($item->isFile()
             && 'gst' == pathinfo($item->path(), PATHINFO_EXTENSION)
@@ -83,41 +88,41 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                 $monsters = [];
                 $xmlParser = new \App\Xml\StreamParser();
                 $xmlParser->registerCallback(
-                            '/gameSystem/sharedProfiles/profile',
-                            function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$monsters) {
-                                $name = (string) $node->attributes()->name;
-                                var_dump('==========================');
-                                var_dump($name);
-                                $typeName = $node->attributes()->typename;
-                                if (!in_array($typeName, ['Profile'])) {
-                                    var_dump('Not a profile');
+                    '/gameSystem/sharedProfiles/profile',
+                    function (\App\Xml\StreamParser $parser, \SimpleXMLElement $node) use (&$monsters) {
+                        $name = (string) $node->attributes()->name;
+                        var_dump('==========================');
+                        var_dump($name);
+                        $typeName = $node->attributes()->typename;
+                        if (!in_array($typeName, ['Profile'])) {
+                            var_dump('Not a profile');
 
-                                    return;
-                                }
+                            return;
+                        }
 
-                                if (0 == count($node->xpath('./characteristics/characteristic[@name="Movement"]'))) {
-                                    var_dump('No characteristic for '.$name);
+                        if (0 == count($node->xpath('./characteristics/characteristic[@name="Movement"]'))) {
+                            var_dump('No characteristic for '.$name);
 
-                                    return;
-                                }
+                            return;
+                        }
 
-                                $monsters[(string) $node->attributes()->id] =
-                                [
-                                    /* 'name' */ $name,
-                                    /* "Movement"   */ (string) $node->xpath('./characteristics/characteristic[@name="Movement"]')[0],
-                                    /* "Weapon Skill"  */ (string) $node->xpath('./characteristics/characteristic[@name="Weapon Skill"]')[0],
-                                    /* "Ballistic Skill" */ (string) $node->xpath('./characteristics/characteristic[@name="Ballistic Skill"]')[0],
-                                    /* "Strength"  */ (string) $node->xpath('./characteristics/characteristic[@name="Strength"]')[0],
-                                    /* "Toughness"  */ (string) $node->xpath('./characteristics/characteristic[@name="Toughness"]')[0],
-                                   /*  "Wounds"   */ (string) $node->xpath('./characteristics/characteristic[@name="Wounds"]')[0],
-                                    /* "Initiative"  */ (string) $node->xpath('./characteristics/characteristic[@name="Initiative"]')[0],
-                                    /* "Attacks"   */ (string) $node->xpath('./characteristics/characteristic[@name="Attacks"]')[0],
-                                    /* "Leadership" */ (string) $node->xpath('./characteristics/characteristic[@name="Leadership"]')[0],
-                                    'equipments' => [],
-                                     'rules' => [],
-                                     'name' => $name,
-                                ];
-                            }
+                        $monsters[(string) $node->attributes()->id] =
+                        [
+                            /* 'name' */ $name,
+                            /* "Movement" */ (string) $node->xpath('./characteristics/characteristic[@name="Movement"]')[0],
+                            /* "Weapon Skill" */ (string) $node->xpath('./characteristics/characteristic[@name="Weapon Skill"]')[0],
+                            /* "Ballistic Skill" */ (string) $node->xpath('./characteristics/characteristic[@name="Ballistic Skill"]')[0],
+                            /* "Strength" */ (string) $node->xpath('./characteristics/characteristic[@name="Strength"]')[0],
+                            /* "Toughness" */ (string) $node->xpath('./characteristics/characteristic[@name="Toughness"]')[0],
+                            /*  "Wounds" */ (string) $node->xpath('./characteristics/characteristic[@name="Wounds"]')[0],
+                            /* "Initiative" */ (string) $node->xpath('./characteristics/characteristic[@name="Initiative"]')[0],
+                            /* "Attacks" */ (string) $node->xpath('./characteristics/characteristic[@name="Attacks"]')[0],
+                            /* "Leadership" */ (string) $node->xpath('./characteristics/characteristic[@name="Leadership"]')[0],
+                            'equipments' => [],
+                            'rules' => [],
+                            'name' => $name,
+                        ];
+                    }
                 );
                 $xmlParser->parse($filesystem->readStream($item->path()));
                 $nation = $nationRepository->find('MONSTER');
@@ -148,7 +153,9 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                 }
             }
         }
-        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {return $attributes->isFile(); });
+        $allFiles = $filesystem->listContents('/')->filter(function (StorageAttributes $attributes) {
+            return $attributes->isFile();
+        });
         foreach ($allFiles as $item) {
             if ($item->isFile() && 'cat' == pathinfo($item->path(), PATHINFO_EXTENSION)) {
                 $rootNode = null;
@@ -177,10 +184,18 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                             $version = trim($matches[1][0]);
                         } else {
                             switch (true) {
-                                case 2000 > $year: $version = 5; break;
-                                case 2000 <= $year && $year < 2006: $version = 6; break;
-                                case 2006 <= $year && $year < 2010: $version = 7; break;
-                                case 2010 <= $year: $version = 8; break;
+                                case 2000 > $year:
+                                    $version = 5;
+                                    break;
+                                case 2000 <= $year && $year < 2006:
+                                    $version = 6;
+                                    break;
+                                case 2006 <= $year && $year < 2010:
+                                    $version = 7;
+                                    break;
+                                case 2010 <= $year:
+                                    $version = 8;
+                                    break;
                             }
                         }
 
@@ -270,7 +285,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
 
                             $manager->persist($object);
 
-                            //var_dump($node->xpath('//profile'));
+                            // var_dump($node->xpath('//profile'));
                         }
                     }
                 );
@@ -326,7 +341,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
             }
         }
 
-        //var_dump($profile);
+        // var_dump($profile);
         return $profile;
     }
 
@@ -337,7 +352,6 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
 
     protected function getGameSystem($gameSystem)
     {
-
         if (!array_key_exists($gameSystem, $this->gameSystemCache)) {
             $gameSystemObject = $this->gameSystemRepository->find($gameSystem);
 
@@ -389,7 +403,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                     $manager->persist($rule);
                     $manager->flush();
 
-                    //throw new \Exception(sprintf('%s rule not found', $ruleName));
+                    // throw new \Exception(sprintf('%s rule not found', $ruleName));
                 }
 
                 $profile->addRule($rule);
@@ -398,7 +412,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
 
         switch (get_class($profile)) {
             case ProfileWFB9::class:
-                /* @var ProfileWFB9 $profile  */
+                /* @var ProfileWFB9 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])
@@ -412,7 +426,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                     ->setLeadership($profileData[9]);
 
             case ProfileWFB12::class:
-                /* @var ProfileWFB12 $profile  */
+                /* @var ProfileWFB12 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])
@@ -429,7 +443,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                     ->setWillPower($profileData[12]);
 
             case ProfileT9A12::class:
-                /* @var ProfileT9A12 $profile  */
+                /* @var ProfileT9A12 $profile */
                 return $profile
 
                     ->setGlobalAdvanceRate($profileData[1])
@@ -446,7 +460,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                     ->setOffensiveArmourPenetration($profileData[12]);
 
             case ProfileWHQ::class:
-                /* @var ProfileWHQ $profile  */
+                /* @var ProfileWHQ $profile */
                 return $profile
 
                     ->setBattleLevel($profileData[1])
@@ -466,7 +480,7 @@ class UnitWHFBFixtures extends Fixture implements DependentFixtureInterface
                     ->setEscapePinning($profileData[15]);
 
             case ProfileAOS4::class:
-                /* @var ProfileAOS4 $profile  */
+                /* @var ProfileAOS4 $profile */
                 return $profile
 
                     ->setMovement($profileData[1])

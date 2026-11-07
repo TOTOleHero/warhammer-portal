@@ -39,7 +39,7 @@ class EquipmentTypeFixtures extends Fixture
         foreach ($this->data as $data) {
             $object = new EquipmentType();
             $object->setName($data[1]);
-            //$object->setDescription($data[2]);
+            // $object->setDescription($data[2]);
             $object->setId($data[3]);
             $manager->persist($object);
         }
