@@ -1,3 +1,19 @@
+# ---------- Stage 1 : build des assets (Webpack Encore) ----------
+FROM node:20-alpine AS assets
+WORKDIR /app
+
+# Dependances d'abord (meilleur cache Docker)
+COPY sources/package.json sources/yarn.lock ./
+RUN yarn install --frozen-lockfile
+
+# Sources front + config
+COPY sources/webpack.config.js ./
+COPY sources/assets ./assets
+
+# Build de production -> /app/public/build
+RUN yarn encore production
+
+# ---------- Stage 2 : application PHP ----------
 FROM php:8-apache
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
@@ -30,7 +46,18 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 RUN sed -ri -e 's!</VirtualHost>!<Directory ${APACHE_DOCUMENT_ROOT}>\nAllowOverride None\nRequire all granted\nFallbackResource /index.php\n</Directory>\n</VirtualHost>!g' /etc/apache2/sites-available/*.conf
 
+RUN printf "PassEnv APP_ENV APP_DEBUG APP_SECRET DATABASE_URL MAILER_DSN TRUSTED_PROXIES\n" \
+      > /etc/apache2/conf-available/symfony-env.conf \
+    && a2enconf symfony-env
+
+
 COPY sources /var/www/html
+
+# Assets compiles (ecrase tout public/build existant, vide ou obsolete)
+RUN mkdir -p /var/www/html/var/cache /var/www/html/var/log /var/www/html/public/build \
+    && chown -R www-data:www-data /var/www/html/var /var/www/html/public/build
+COPY --from=assets /app/public/build /var/www/html/public/build
+
 RUN mkdir -p /var/www/html/var
 RUN chmod -R 755 /var/www/html \
     && chmod -R 777 /var/www/html/var
